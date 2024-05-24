@@ -20,9 +20,9 @@ class Save(models.Model):
     """
     Metadata for the Save model.
     """
-    verbose_name = "Save"
-    verbose_name_plural = "Saves"
+    verbose_name = "Favorite"
+    verbose_name_plural = "Favotites"
     unique_together = ['user', 'dog']
     
   def __str__(self):
-    return f"{self.user} saved {self.dog}"
+    return f"{self.user}'s favorite {self.dog.name}"
