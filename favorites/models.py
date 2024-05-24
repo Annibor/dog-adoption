@@ -3,7 +3,7 @@ from dogs.models import Dog
 from profiles.models import Profile
 
 # Create your models here.
-class Save(models.Model):
+class Favorites(models.Model):
   """
   Represents a user's favorite dog.
   
