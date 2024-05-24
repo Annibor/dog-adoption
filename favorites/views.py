@@ -10,7 +10,7 @@ from rest_framework import status
 # Create your views here.
 class FavoritesView(APIView):
   """
-  A view for displaying a user's favorite dogs.
+  A view for displaying adn updating a user's favorite dogs.
   """
   permission_classes = [IsAuthenticated]
   
@@ -23,3 +23,40 @@ class FavoritesView(APIView):
     serializer = FavoritesSerializer(favorites, many=True)
     return Response(serializer.data)
   
+  def post(self, request):
+    """
+    Create a new favorite or return existing one to avoid duplicates.
+    """
+    user = request.user.profile
+    dog = get_object_or_404(Dog, pk=request.data['dog'])
+    favorite, created = Favorites.objects.get_or_create(user=user, dog=dog)
+    if not created:
+      favorite.delete()
+      return Response(status=status.HTTP_204_NO_CONTENT)
+    return Response(status=status.HTTP_201_CREATED)
+
+  
+
+class FavoriteDetail(APIView):
+  """
+  A view for displaying a single favorite dog.
+  """
+  permission_classes = [IsAuthenticated]
+  
+  def get(self, request, pk):
+    """
+    Retrieve a single favorite dog.
+    """
+    user = request.user.profile
+    favorite = get_object_or_404(Favorites, user=user, dog=pk)
+    serializer = FavoritesSerializer(favorite)
+    return Response(serializer.data)
+  
+  def delete(self, request, pk):
+    """
+    Delete a favorite dog.
+    """
+    user = request.user.profile
+    favorite = get_object_or_404(Favorites, user=user, dog=pk)
+    favorite.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
