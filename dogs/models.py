@@ -17,12 +17,19 @@ class Dog(models.Model):
     good_with_other_dogs (BooleanField): True if the dog is known to be good with other dogs, False otherwise.
     adoption_status (CharField): The current adoption status of the dog, with choices of 'available', 'pending', or 'adopted'.
     """
+  TEMPERAMENT_CHOICES = [
+        ('calm', 'Calm'),
+        ('energetic', 'Energetic'),
+        ('aggressive', 'Aggressive'),
+    ]
+  
   name = models.CharField(max_length=80)
   breed = models.CharField(max_length=80)
   age = models.IntegerField()
   featured_image = CloudinaryField('image', default='placeholder')
   description = models.TextField()
   gender = models.CharField(max_length=10)
+  temperament = models.CharField(max_length=10, choices=TEMPERAMENT_CHOICES, default='calm')
   good_with_children = models.BooleanField(default=True)
   good_with_other_dogs = models.BooleanField(default=True)
   adoption_status = models.CharField(max_length=20, choices=[('available', 'Available'), ('pending', 'Pending'), ('adopted', 'Adopted')], default='available')
