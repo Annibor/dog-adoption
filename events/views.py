@@ -1,7 +1,8 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import generics, permissions
 from .models import AdoptionEvent, AdoptionEventRegistration
 from .serializers import AdoptionEventSerializer, AdoptionEventRegistrationSerializer
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser, IsAuthenticated
 from profiles.models import Profile
 
 
@@ -29,6 +30,29 @@ class AdoptionEventDetail(generics.RetrieveAPIView):
   serializer_class = AdoptionEventSerializer
 
 
+class EventRegistration(generics.RetrieveAPIView):
+  """
+  A view for listing and creating EventRegistration objects.
+  Only authenticated users can register for events.
+  """
+  serializer_class = AdoptionEventRegistrationSerializer
+  permission_classes = [IsAuthenticated]
+
+  def get_queryset(self):
+    return AdoptionEventRegistration.objects.filter(user=self.request.user)
+  
+  def perform_create(self, serializer):
+    event = get_object_or_404(AdoptionEvent, pk=self.kwargs['event_pk'])
+    serializer.save(user=self.request.user, event=event)
 
 
+class EventRegistrationDetail(generics.RetrieveAPIView):
+  """
+  A view for retrieving and deleting a single EventRegistration object.
+  Only the user who registered can delete their registration.
+  """
+  serializer_class = AdoptionEventRegistrationSerializer
+  permission_classes = [IsAuthenticated]
 
+  def get_queryset(self):
+    return AdoptionEventRegistration.objects.filter(user=self.request.user)
