@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'profiles',
     'dogs',
     'favorites',
+    'events',
 ]
 
 MIDDLEWARE = [
