@@ -46,3 +46,45 @@ class Dog(models.Model):
 
   def __str__(self):
      return self.name
+
+
+class AdoptionApplication(models.Model):
+  """
+  Application for adopting a dog.
+
+  Attributes:
+    user (ForeignKey): The user applying to adopt the dog.
+    dog (ForeignKey): The dog being applied for.
+    visit_date (DateTimeField):
+    The date and time the user plans to visit the dog.
+    status (CharField):
+    The status of the application, with choices of
+    'pending', 'approved', or 'rejected'.
+    created_at (DateTimeField):
+    The date and time the application was created.
+    updated_at (DateTimeField):
+    The date and time the application was last updated.
+  """
+  user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+  dog = models.ForeignKey(Dog, on_delete=models.CASCADE)
+  visit_date = models.DateTimeField()
+  status = models.CharField(
+    max_length=20, choices=[
+      ('pending', 'Pending'),
+      ('approved', 'Approved'),
+      ('rejected', 'Rejected')
+      ], default='pending')
+  created_at = models.DateTimeField(auto_now_add=True)
+  updated_at = models.DateTimeField(auto_now=True)
+
+  class Meta:
+    """
+    Metadata for the AdoptionApplicationModel model.
+    """
+    verbose_name = "Adoption Application"
+    verbose_name_plural = "Adoption Applications"
+    ordering = ["-created_at"]
+
+  def __str__(self):
+    return f"{self.user}'s application for {self.dog}."
+
