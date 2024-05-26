@@ -1,5 +1,6 @@
 from django.db import models
 from cloudinary.models import CloudinaryField
+from profiles.models import Profile
 
 # Create your models here.
 class Dog(models.Model):

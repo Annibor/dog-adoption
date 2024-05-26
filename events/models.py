@@ -32,7 +32,7 @@ class AdoptionEvent(models.Model):
     return self.title
   
 
-class AdotionEventRegistration(models.Model):
+class AdoptionEventRegistration(models.Model):
   """
   Represents a user's registration for an adoption event.
 
