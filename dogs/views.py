@@ -68,3 +68,25 @@ class AdoptionApplicationListCreatView(generics.ListCreateAPIView):
     Saves the current adoption application with the current user.
     """
     serializer.save(user=self.request.user.profile)
+
+
+class AdoptionApplicationDetailView(generics.RetrieveUpdateDestroyAPIView):
+  """
+  A view for retrieving, updating, and deleting a single adoption application.
+  Only the user who created the application can update or delete it.
+  """
+  queryset = AdoptionApplication.objects.all()
+  serializer_class = AdoptionApplicationSerializer
+  permission_classes = [IsAuthenticated]
+
+  def get_queryset(self):
+    """
+    Returns a list of applications to adopt dogs for the current user if logged in. If not logged in, returns an empty list.
+    Only the owner of the application or an admin can update or delete it.
+    """
+    user = self.request.user
+    if user.is_staff:
+      return AdoptionApplication.objects.all()
+    if user.is_authenticated:
+      return AdoptionApplication.objects.filter(user=user.profile)
+    return AdoptionApplication.objects.none()
