@@ -1,6 +1,7 @@
 from django.db import models
 from cloudinary.models import CloudinaryField
 from profiles.models import Profile
+from django.utils import timezone
 
 # Create your models here.
 class Dog(models.Model):
@@ -34,6 +35,8 @@ class Dog(models.Model):
   good_with_children = models.BooleanField(default=True)
   good_with_other_dogs = models.BooleanField(default=True)
   adoption_status = models.CharField(max_length=20, choices=[('available', 'Available'), ('pending', 'Pending'), ('adopted', 'Adopted')], default='available')
+  created_at = models.DateTimeField(auto_now_add=True)
+  updated_at = models.DateTimeField(auto_now=True)
 
 
   class Meta:
