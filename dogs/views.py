@@ -38,7 +38,7 @@ class DogDetailView(generics.RetrieveAPIView):
   """
   queryset = Dog.objects.all()
   serializer_class = DogSerializer
-  lookup_field = 'pk'  # This is the default and can be omitted unless you need a different field.
+  lookup_field = 'pk'
 
   def get(self, request, pk):
     dog = get_object_or_404(Dog, pk=pk)
