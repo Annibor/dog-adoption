@@ -44,3 +44,10 @@ class TestDogViews(APITestCase):
     self.assertEqual(response.status_code, status.HTTP_200_OK)
     self.assertEqual(len(response.data), 1)
     self.assertEqual(response.data[0]['name'], 'Hubbe')
+
+  
+  def test_search_dogs_by_gender(self):
+    response = self.client.get(reverse('dogs-list'), {'gender': 'female'})
+    self.assertEqual(response.status_code, status.HTTP_200_OK)
+    self.assertEqual(len(response.data), 1)
+    self.assertEqual(response.data[0]['name'], 'Hejsan')
