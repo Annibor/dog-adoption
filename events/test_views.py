@@ -77,3 +77,22 @@ class TestAdoptionEventDetailViews(APITestCase):
     url = reverse('event-detail', kwargs={'pk': self.event1.pk})
     response = self.client.get(url)
     self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+class TestEventRegistrationViews(APITestCase):
+  def setUp(self):
+    self.authenticated_client = APIClient()
+    self.user = User.objects.create_user(username='testuser', password='12345')
+    self.authenticated_client.force_authenticate(user=self.user)
+    self.event1 = AdoptionEvent.objects.create(
+      title='Test Event',
+      description='This is a test event',
+      date='2024-07-04',
+      location='Test Location'
+    )
+
+  def test_event_registration(self):
+    url = reverse('event-detail', kwargs={'pk': self.event1.pk})
+    response = self.client.get(url)
+    self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+    self.assertTrue(AdoptionEventRegistration.objects.filter(event=self.event, user=self.profile).exists())
