@@ -12,7 +12,7 @@ class AdoptionEventList(generics.ListCreateAPIView):
   A view for listing and creating AdoptionEvent objects.
   Only admins can create AdoptionEvent objects.
   """
-  queryset = AdoptionEvent.objects.all()
+  queryset = AdoptionEvent.objects.all().order_by('-created_at')
   serializer_class = AdoptionEventSerializer
   permission_classes = [IsAuthenticatedOrReadOnly]
 
@@ -30,7 +30,7 @@ class AdoptionEventDetail(generics.RetrieveAPIView):
   serializer_class = AdoptionEventSerializer
 
 
-class EventRegistration(generics.RetrieveAPIView):
+class EventRegistration(generics.CreateAPIView):
   """
   A view for listing and creating EventRegistration objects.
   Only authenticated users can register for events.
