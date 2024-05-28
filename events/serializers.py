@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import AdoptionEvent, AdoptionEventRegistration
 
 
-class AdoptionEventSerializer(serializers.Serializer):
+class AdoptionEventSerializer(serializers.ModelSerializer):
   """
   A serializer that serializes AdoptionEvent objects.
   """
@@ -11,7 +11,7 @@ class AdoptionEventSerializer(serializers.Serializer):
     fields = ['title', 'description', 'date', 'location', 'created_at']
 
 
-class AdoptionEventRegistrationSerializer(serializers.Serializer):
+class AdoptionEventRegistrationSerializer(serializers.ModelSerializer):
   """
   A serializer that serializes AdoptionEventRegistration objects.
   """
