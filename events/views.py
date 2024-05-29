@@ -1,9 +1,12 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import generics, permissions
+from rest_framework import generics
 from .models import AdoptionEvent, AdoptionEventRegistration
 from .serializers import AdoptionEventSerializer, AdoptionEventRegistrationSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser, IsAuthenticated
-from profiles.models import Profile
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
 
 
 # Create your views here.
@@ -30,29 +33,29 @@ class AdoptionEventDetail(generics.RetrieveAPIView):
   serializer_class = AdoptionEventSerializer
 
 
-class EventRegistration(generics.CreateAPIView):
+class EventRegistrationListCreateDelete(APIView):
   """
-  A view for listing and creating EventRegistration objects.
-  Only authenticated users can register for events.
+  View for listing, creating, and deleting event registrations.
   """
   serializer_class = AdoptionEventRegistrationSerializer
   permission_classes = [IsAuthenticated]
-
-  def get_queryset(self):
-    return AdoptionEventRegistration.objects.filter(user=self.request.user)
+  def get(self, request, pk):
+    registrations = AdoptionEventRegistration.objects.filter(user=request.user.profile, event_id=pk)
+    serializer = AdoptionEventRegistrationSerializer(registrations, many=True, context={"request": request})
+    return Response(serializer.data)
   
-  def perform_create(self, serializer):
-    event = get_object_or_404(AdoptionEvent, pk=self.kwargs['event_pk'])
-    serializer.save(user=self.request.user, event=event)
-
-
-class EventRegistrationDetail(generics.RetrieveAPIView):
-  """
-  A view for retrieving and deleting a single EventRegistration object.
-  Only the user who registered can delete their registration.
-  """
-  serializer_class = AdoptionEventRegistrationSerializer
-  permission_classes = [IsAuthenticated]
-
-  def get_queryset(self):
-    return AdoptionEventRegistration.objects.filter(user=self.request.user)
+  def post(self, request, pk):
+    event = get_object_or_404(AdoptionEvent, pk=pk)
+    if AdoptionEventRegistration.objects.filter(event=event, user=request.user.profile).exists():
+        return Response({"detail": "You have already registered for this event."},status=status.HTTP_400_BAD_REQUEST)
+    serializer = AdoptionEventRegistrationSerializer(data=request.data, context={"request": request})
+    if serializer.is_valid():
+        serializer.save(user=request.user.profile, event=event)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+  
+  def delete(self, request, pk):
+    registration = get_object_or_404(AdoptionEventRegistration, pk=pk)
+    self.check_object_permissions(request, registration)
+    registration.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
