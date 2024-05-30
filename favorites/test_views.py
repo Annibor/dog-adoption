@@ -42,3 +42,13 @@ class TestFavoritesView(TestCase):
     response = self.client.post('/favorites/', {'dog': self.dog2.id})
     self.assertEqual(response.status_code, status.HTTP_201_CREATED)
     self.assertTrue(Favorites.objects.filter(user=self.profile, dog=self.dog2).exists())
+
+  def test_logged_in_user_can_remove_dog_from_favorites(self):
+    """
+    Test to verify that a logged in user can remove a dog from their favorites.
+    """
+    self.client.login(username='testuser', password='12345')
+    Favorites.objects.create(user=self.profile, dog=self.dog1)
+    response = self.client.post('/favorites/', {'dog': self.dog1.id})
+    self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+    self.assertFalse(Favorites.objects.filter(user=self.profile, dog=self.dog1).exists())
