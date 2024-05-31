@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+from datetime import timedelta
 if os.path.isfile('env.py'):
     import env
 
@@ -48,12 +49,20 @@ INSTALLED_APPS = [
     'cloudinary',
     'rest_framework',
     'django_filters',
-    
+    'rest_framework.authtoken', 
+    'dj_rest_auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'dj_rest_auth.registration', 
     'profiles',
     'dogs',
     'favorites',
     'events',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -63,16 +72,39 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [(
+        'rest_framework.authentication.SessionAuthentication'
+        if 'DEV' in os.environ
+        else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
+    )],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend'
     ],
-    
+    'DEFAULT_PAGINATION_CLASS': [
+        'rest_framework.pagination.PageNumberPagination',
+    ],
+    'PAGE_SIZE': 10,
+}
+
+REST_AUTH = {
+    'USE_JWT': True,
+    'JWT_AUTH_SECURE': True,
+    'JWT_AUTH_COOKIE': 'my-app-auth',
+    'JWT_AUTH_REFRESH_COOKIE': 'my-refresh-token',
+    'JWT_AUTH_SAMESITE': 'None',
+    'USER_DETAILS_SERIALIZER': 'api_dog_adoption.serializers.CurrentProfileSerializer'
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
 }
 
 ROOT_URLCONF = "api_dog_adoption.urls"
@@ -99,16 +131,16 @@ WSGI_APPLICATION = "api_dog_adoption.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-#DATABASES = {
- #   'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
-#}
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
 
 
 # Password validation
