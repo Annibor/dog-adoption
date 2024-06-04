@@ -1,19 +1,31 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
+import Home from './pages/Home';
 import Dogs from './pages/Dogs'
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import PageNotFound from './pages/PageNotFound';
+import AppLayout from '../ui/AppLayout';
 
 const router = createBrowserRouter([
   {
-    path: '/dogs',
-    element: <Dogs />,
-  },
-  {
-    path: '/profile',
-    element: <Profile />,
+    element: <AppLayout />,
+    children: [
+      {
+        path: '/',
+        element: <Home />,
+      },
+      {
+        path: '/dogs',
+        element: <Dogs />,
+      },
+      {
+        path: '/profile',
+        element: <Profile />,
+      },
+
+    ]
   },
   {
     path: '/login',
