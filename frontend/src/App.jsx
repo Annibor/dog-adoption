@@ -1,4 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import './api/axiosDefaults';
 
 import Home from './pages/Home';
 import Dogs from './pages/Dogs'
