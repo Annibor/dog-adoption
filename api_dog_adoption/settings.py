@@ -31,6 +31,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = [
+   os.environ.get('ALLOWED_HOST'),
   '127.0.0.1',
   '.herokuapp.com',
 ]
@@ -55,7 +56,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'dj_rest_auth.registration', 
+    'dj_rest_auth.registration',
+    'corsheaders',
     'profiles',
     'dogs',
     'favorites',
@@ -64,7 +66,12 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
+CORS_ALLOWED_ORIGINS = [
+    os.environ.get('CLIENT_ORIGIN')
+]
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
