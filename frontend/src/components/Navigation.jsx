@@ -7,7 +7,7 @@ export default function Navigation() {
       <Container>
         <Navbar.Toggle aria-controls="basic-navbar" />
         <Navbar.Collapse id="basic-navbar">
-          <Nav className="me-auto">
+          <Nav className="m-auto">
             <NavLink to="/dogs" className="nav-link" activeClassName="active">Dogs</NavLink>
             <NavLink to="/profile" className="nav-link" activeClassName="active">Profile</NavLink>
             <NavLink to="/login" className="nav-link" activeClassName="active">Login</NavLink>
