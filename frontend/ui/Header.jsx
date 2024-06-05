@@ -1,9 +1,12 @@
-import { Link } from 'react-router-dom';
+
+import Navigation from '../src/components/Navigation';
+import Logo from '../src/components/Logo';
 
 function Header() {
   return (
     <header>
-      <Link to='/'>Dog Adoption</Link>
+        <Logo />
+        <Navigation />
     </header>
   )
 }
