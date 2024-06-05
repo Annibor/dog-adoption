@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import axios from "axios";
 import { Alert } from 'react-bootstrap';
@@ -129,6 +129,13 @@ function Register() {
             </Button>
           </Form>
         </Col>
+      </Row>
+      <Row className='mt-4 justify-content-center aligin-items-center'>
+        <Button>
+          <Link className='text-white' to="/login">
+            Already have an account? <span>Log in now!</span>
+          </Link>
+        </Button>
       </Row>
     </Container>
   )
