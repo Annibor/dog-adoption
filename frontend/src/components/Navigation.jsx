@@ -1,9 +1,11 @@
 import { NavLink } from 'react-router-dom';
+import Logo from './Logo';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 
 export default function Navigation() {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar expand="lg">
+      <Logo />
       <Container>
         <Navbar.Toggle aria-controls="basic-navbar" />
         <Navbar.Collapse id="basic-navbar">

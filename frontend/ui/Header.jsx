@@ -1,11 +1,10 @@
 
 import Navigation from '../src/components/Navigation';
-import Logo from '../src/components/Logo';
+import '../src/styling/index.css';
 
 function Header() {
   return (
     <header>
-        <Logo />
         <Navigation />
     </header>
   )
