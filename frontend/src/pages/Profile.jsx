@@ -1,6 +1,7 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import UserInfo from '../components/UserInfo';
 import LikedDogsCarousel from '../components/LikedDogsCarousel';
+import ProfileUpdateForm from '../components/ProfileUpdateForm';
 
 function Profile() {
   return (
@@ -18,7 +19,7 @@ function Profile() {
             <Row>
               <Col className='my-4 p-3 bg-danger'>
                 <div>
-                  Here user will be ablw to update user info.
+                  <ProfileUpdateForm />
                 </div>
               </Col>
             </Row>
