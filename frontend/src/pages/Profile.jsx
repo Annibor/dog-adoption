@@ -1,4 +1,5 @@
 import { Col, Container, Row } from 'react-bootstrap';
+import UserInfo from '../components/UserInfo';
 
 function Profile() {
   return (
@@ -23,7 +24,7 @@ function Profile() {
           </Col>
           <Col md={3} className='bg-primary' >
             <div>
-              Here will be user profile info
+              <UserInfo />
             </div>
           </Col>
         </Row>
