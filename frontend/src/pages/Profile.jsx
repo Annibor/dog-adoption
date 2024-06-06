@@ -1,5 +1,6 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import UserInfo from '../components/UserInfo';
+import LikedDogsCarousel from '../components/LikedDogsCarousel';
 
 function Profile() {
   return (
@@ -10,7 +11,7 @@ function Profile() {
             <Row>
               <Col className='my-4 p-3 bg-warning'>
                 <div>
-                  Here will be liked dogs
+                  <LikedDogsCarousel />
                 </div>
               </Col>
             </Row>
