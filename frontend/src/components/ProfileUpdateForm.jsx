@@ -21,7 +21,7 @@ function ProfileUpdateForm() {
     <div>
       <Form className='m-2'>
         <Row>
-          <Form.Group as={Col} controlId="FirstName">
+          <Form.Group as={Col} xs={12} md={6} controlId="FirstName">
             <Form.Label>First Name</Form.Label>
             <Form.Control 
               type="text"
@@ -31,7 +31,7 @@ function ProfileUpdateForm() {
               required
             />
           </Form.Group>
-          <Form.Group as={Col} controlId="LastName">
+          <Form.Group as={Col} xs={12} md={6}  controlId="LastName">
             <Form.Label>Last Name</Form.Label>
             <Form.Control 
               type="text"
@@ -43,7 +43,7 @@ function ProfileUpdateForm() {
           </Form.Group>
         </Row>
         <Row>
-          <Form.Group as={Col} controlId="Username">
+          <Form.Group as={Col} xs={12} md={6}   controlId="Username">
             <Form.Label>Username</Form.Label>
 
             <Form.Control 
@@ -54,7 +54,7 @@ function ProfileUpdateForm() {
               required
             />
           </Form.Group>
-          <Form.Group as={Col} controlId="Email">
+          <Form.Group as={Col} xs={12} md={6}   controlId="Email">
             <Form.Label>Email</Form.Label>
             <Form.Control 
               type="email"
@@ -64,7 +64,7 @@ function ProfileUpdateForm() {
               required
             />
           </Form.Group>
-          <Form.Group as={Col} controlId="Password">
+          <Form.Group as={Col} xs={12} md={6} controlId="Password">
             <Form.Label>Password</Form.Label>
             <Form.Control 
               type="password"
@@ -74,8 +74,18 @@ function ProfileUpdateForm() {
               required
             />
           </Form.Group>
+          <Form.Group as={Col} xs={12} md={6} controlId="ConfirmPassword">
+            <Form.Label>Confirm Password</Form.Label>
+            <Form.Control 
+              type="password"
+              placeholder="Confirm Password"
+              name='confirmPassword'
+              /*value={confirmPassword}*/
+              required
+            />
+          </Form.Group>
         </Row>
-        <Form.Group as={Col} controlId="Address">
+        <Form.Group as={Col} xs={12} controlId="Address">
           <Form.Label>Address</Form.Label>
           <Form.Control 
             type="text"
@@ -86,7 +96,7 @@ function ProfileUpdateForm() {
           />
         </Form.Group>
         <Row>
-          <Form.Group as={Col} controlId="City">
+          <Form.Group as={Col} xs={12} md={4} controlId="City">
             <Form.Label>City</Form.Label>
             <Form.Control 
               type="text"
@@ -96,7 +106,7 @@ function ProfileUpdateForm() {
               required
             />
           </Form.Group>
-          <Form.Group as={Col} controlId="State">
+          <Form.Group as={Col} xs={12} md={4} controlId="State">
             <Form.Label>State</Form.Label>
             <Form.Control 
               type="text"
@@ -106,7 +116,7 @@ function ProfileUpdateForm() {
               required
             />
           </Form.Group>
-          <Form.Group as={Col} controlId="Zip">
+          <Form.Group as={Col} xs={12} md={4} controlId="Zip">
             <Form.Label>Zip</Form.Label>
             <Form.Control 
               type="text"
@@ -116,7 +126,7 @@ function ProfileUpdateForm() {
               required
             />
           </Form.Group>
-          <Form.Group controlId="Phone">
+          <Form.Group as={Col} xs={12} controlId="Phone">
             <Form.Label>Phone</Form.Label>
             <Form.Control 
               type="text"
@@ -128,7 +138,7 @@ function ProfileUpdateForm() {
           </Form.Group>
         </Row>
         
-        <Form.Group controlId="HasCildren">
+        <Form.Group as={Col} xs={6} controlId="HasCildren">
           <Form.Check 
             type="checkbox"
             label="Has Children"
@@ -137,7 +147,7 @@ function ProfileUpdateForm() {
             required
           />
         </Form.Group>
-        <Form.Group controlId="HasPets">
+        <Form.Group as={Col} xs={6} controlId="HasPets">
           <Form.Check 
             type="checkbox"
             label="Has Pets"
