@@ -51,7 +51,6 @@
 
 body {
   background-color: var(--baby-powder);
-  color: var(--moonstone);
 }
 
 .navbar {
@@ -70,3 +69,4 @@ body {
   background-color: var(--moonstone);
   color: var(--baby-powder);
 }
+

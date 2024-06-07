@@ -1,13 +1,20 @@
-
+import {Card} from 'react-bootstrap';
+import '../styling/profile.css';
 function UserInfo() {
   return (
-    <div>
-      <h2>Username</h2>
-      Here will be userInformation
-      like namne
-      cnumber
-      ect
-    </div>
+    <Card className='user-info-card shadow-sm p-3 mb-5 rounded'>
+      <Card.Body>
+        <Card.Title>Username</Card.Title>
+        <Card.Text>
+        Here will be userInformation
+        like name
+        number
+        ect
+        </Card.Text>
+       
+      </Card.Body>
+      
+    </Card>
   )
 }
 
