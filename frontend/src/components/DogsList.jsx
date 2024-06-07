@@ -1,5 +1,7 @@
-import { Container, Row, Col, Card, Button, Alert } from 'react-bootstrap';
+// src/components/DogsList.js
+
 import { useEffect, useState } from 'react';
+import { Container, Row, Col, Card, Button, Alert } from 'react-bootstrap';
 import axios from 'axios';
 
 function DogsList() {
@@ -11,9 +13,9 @@ function DogsList() {
       try {
         const response = await axios.get('/dogs/');
         console.log('API response:', response);
-        if (Array.isArray(response.data)) {
-          setDogs(response.data);
-          console.log('Dogs data:', response.data);
+        if (Array.isArray(response.data.results)) {
+          setDogs(response.data.results);
+          console.log('Dogs data:', response.data.results);
         } else {
           setError('Unexpected response format');
         }

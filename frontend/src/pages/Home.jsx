@@ -1,4 +1,4 @@
-import { Container, Row, Button, Col } from 'react-bootstrap'
+import { Container, Row, Button, Col } from 'react-bootstrap';
 
 function Home() {
   return (
@@ -15,12 +15,12 @@ function Home() {
             </Button>
           </Col>
           <Col md={6} className="text-center">
-            <div>Will be an  img</div>
+            <div>Will be an img</div>
           </Col>
         </Row>
       </Container>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;

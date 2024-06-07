@@ -1,4 +1,4 @@
-import DogsList from "../components/DogsList"
+import DogsList from '../components/DogsList';
 
 function Dogs() {
   return (
@@ -8,7 +8,7 @@ function Dogs() {
         <DogsList />
       </div>
     </div>
-  )
+  );
 }
 
-export default Dogs
+export default Dogs;
