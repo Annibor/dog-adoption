@@ -1,4 +1,5 @@
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../src/styling/index.css';
 
 function Footer() {
@@ -10,7 +11,30 @@ function Footer() {
             Dog Adoption
           </Col>
           <Col xs={6} md={4}>
-            <div>Links to social media</div>
+            <div>
+            <div className="mb-4 footer-icons">
+              <Button
+                variant="link"
+                href="https://www.facebook.com/"
+                target="_blank"
+                title="Facebook"
+                className="text-light fs-3 m-1"
+                aria-label="link to facebook"
+              >
+                <i className="fab fa-facebook-f"></i>
+              </Button>
+              <Button
+                variant="link"
+                href="https://www.instagram.com/"
+                target="_blank"
+                title="Instagram"
+                className="text-light fs-3 m-1"
+                aria-label="link to instagram"
+              >
+                <i className="fab fa-instagram"></i>
+              </Button>
+            </div>
+            </div>
           </Col>
           <Col xs={6} md={4}>
             <div>Tex ttext </div>
