@@ -1,0 +1,33 @@
+.profile-page {
+  background-color: var(--baby-powder);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.profile-sidebar {
+  background-color: var(--light-cyan);
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.profile-section {
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.profile-liked-dogs {
+  background-color: var(--hunyadi-yellow-tint4);
+}
+
+.profile-update-form {
+  background-color: var(--hunyadi-yellow);
+}
+
+.user-info-card {
+  background-color: var(--light-cyan);
+}
+
+.profile-update-form-card {
+  background-color: var(--baby-powder);
+}

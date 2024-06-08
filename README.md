@@ -455,7 +455,7 @@ My link is: []()
 
 ## Bugs
 
-- 
+- When first trying to connect the frontend app to the api, and add a new user, I got an 404 error. This lead to a lot of googling the issues and error messages, for me to figure out what was wrong in the code, and what I had to do in order to fix it.
 
 ## Languages
 
