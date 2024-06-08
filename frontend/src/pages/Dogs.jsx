@@ -1,4 +1,4 @@
-import DogsList from '../components/DogsList';
+import DogsList from "../components/DogsList";
 
 function Dogs() {
   return (

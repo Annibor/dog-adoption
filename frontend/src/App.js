@@ -3,10 +3,10 @@ import './api/axiosDefaults';
 
 import Home from './pages/Home';
 import Dogs from './pages/Dogs'
-/*import Profile from './pages/Profile';
+import Profile from './pages/Profile'; 
 import Login from './pages/Login';
 import Register from './pages/Register';
-import PageNotFound from './pages/PageNotFound'; */
+import PageNotFound from './pages/PageNotFound'; 
 import AppLayout from './ui/AppLayout';
 
 const router = createBrowserRouter([
@@ -20,11 +20,11 @@ const router = createBrowserRouter([
       {
         path: '/dogs',
         element: <Dogs />,
-      },/*
+      },
       {
         path: '/profile',
         element: <Profile />,
-      },
+      }, 
       {
         path: '/login',
         element: <Login />,
@@ -36,13 +36,12 @@ const router = createBrowserRouter([
 
     ]
   },
-  {
+  { 
     path: '*',
     element: <PageNotFound />,
-  },*/
-  ]}
+  },
 
-])
+]);;
 
 
 function App() {
