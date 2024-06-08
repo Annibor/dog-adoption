@@ -7,49 +7,34 @@ function Register() {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
-    password: '',
-    confirmPassword: '',
+    password1: '',
+    password2: '',
   });
 
-  const { username, email, password, confirmPassword } = formData;
+  const { username, email, password1, password2 } = formData;
 
   const [error, setError] = useState({});
 
   const navigate = useNavigate();
 
   const handleChange = (event) => {
+    console.log('handleChange:', event.target.name, event.target.value);
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
     });
   };
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
-      const response = await axios.post('/dj-rest-auth/registration/', {
-        username,
-        email,
-        password,
-      });
-
-      if (response.status === 201) {
-        // Registration successful, navigate to another page (e.g., login)
-        navigate('/');
-      } else {
-        console.error('Unexpected response:', response);
-        setError({ non_field_errors: ['Registration failed, please try again!'] });
-      }
+      await axios.post("/dj-rest-auth/registration/", formData);
+      navigate("/login");
     } catch (err) {
-      // Capture and set specific error messages from the response
-      if (err.response && err.response.data) {
-        const errorData = err.response.data;
-        setError(errorData);
-      } else {
-        setError('An unknown error occurred, please try again!');
-      }
+      setError(err.response?.data);
     }
-  }
+  };
+  
 
   return (
     <Container className='p-5'>
@@ -91,13 +76,13 @@ function Register() {
               </Alert>
             ))}
 
-            <Form.Group controlId="Password">
+            <Form.Group controlId="Password1">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Password"
-                name='password'
-                value={password}
+                name='password1'
+                value={password1}
                 onChange={handleChange}
                 required
               />
@@ -108,13 +93,13 @@ function Register() {
               </Alert>
             ))}
 
-            <Form.Group controlId="ConfirmPassword">
+            <Form.Group controlId="password2">
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Confirm Password"
-                name='confirmPassword'
-                value={confirmPassword}
+                name='password2'
+                value={password2}
                 onChange={handleChange}
                 required
               />
