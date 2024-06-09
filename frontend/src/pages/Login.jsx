@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useSetCurrentUser } from '../contexts/CurrentUserContext';
 
 
 function Login() {
@@ -12,9 +13,8 @@ function Login() {
   });
 
   const { username, password } = formData;
-
+  const setCurrentUser = useSetCurrentUser();
   const [error, setError] = useState(null);
-
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -39,6 +39,7 @@ function Login() {
       console.log('handleSubmit: response:', response);
 
       if (response.status === 200) {
+        setCurrentUser(response.data.user);
         console.log('handleSubmit: Login successful, navigating to home.');
         navigate('/');
       } else {
