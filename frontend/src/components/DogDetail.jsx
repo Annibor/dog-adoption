@@ -57,7 +57,7 @@ const DogDetail = () => {
           )}
         </Col>
         <Col md={6}>
-          < AdoptionApplicationForm />
+          < AdoptionApplicationForm dogId={dog.id} dogName={dog.name}/>
         </Col>
       </Row>
     </Container>
