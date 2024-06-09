@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Button, Alert } from 'react-bootstrap';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function DogsList() {
   const [dogs, setDogs] = useState([]);
@@ -38,7 +39,7 @@ function DogsList() {
               <Card.Body>
                 <Card.Title>{dog.name}</Card.Title>
                 <Card.Text>{dog.breed} {dog.age} years old</Card.Text>
-                <Button>Read more about me!</Button>
+                <Button  as={Link} to={`/dogs/${dog.id}`}>Read more about me!</Button>
               </Card.Body>
             </Card>
           </Col>
