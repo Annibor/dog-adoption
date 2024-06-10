@@ -21,7 +21,7 @@ function AdoptionApplicationForm({ dogId, dogName }) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
-  const [submitted, setSubmitted] = useState(false)
+  const [submitted, setSubmitted] = useState(localStorage.getItem('applicationSubmitted') === 'true');
 
   useEffect(() => {
     if (currentUser) {
@@ -76,6 +76,7 @@ function AdoptionApplicationForm({ dogId, dogName }) {
       setSuccess('Application submitted successfully');
       setLoading(false);
       setSubmitted(true);
+      localStorage.setItem('applicationSubmitted', 'true');
     } catch (err) {
       console.error('Failed to submit application:', err.response?.data);
       setError('Failed to submit application');
