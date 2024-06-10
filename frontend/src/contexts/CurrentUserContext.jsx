@@ -5,13 +5,16 @@ import { axiosRes, axiosReq } from "../api/axiosDefaults";
 
 export const CurrentUserContext = createContext();
 export const SetCurrentUserContext = createContext();
+export const LogoutContext = createContext();
 
 
 export const useCurrentUser = () => useContext(CurrentUserContext);
 export const useSetCurrentUser = () => useContext(SetCurrentUserContext);
+export const useLogout = () => useContext(LogoutContext); 
 
 export const CurrentUserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [logoutMessage, setLogoutMessage] = useState("");
 
   
   const handleMount = async () => {
@@ -31,6 +34,8 @@ export const CurrentUserProvider = ({ children }) => {
   const handleLogout = useCallback(async () => {
     try {
       await axios.post('/dj-rest-auth/logout/');
+      setLogoutMessage("Bye, hope we see you soon!");
+      console.log('Logout message set:', "You have successfully logged out.");
     } catch (err) {
       console.error('Failed to log out:', err);
     } finally {
@@ -75,9 +80,11 @@ export const CurrentUserProvider = ({ children }) => {
   }, [currentUser, handleLogout]);
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={{ currentUser, logoutMessage }}>
       <SetCurrentUserContext.Provider value={setCurrentUser}>
-        {children}
+        <LogoutContext.Provider value={handleLogout}>
+          {children}
+        </LogoutContext.Provider>
       </SetCurrentUserContext.Provider>
     </CurrentUserContext.Provider>
   );

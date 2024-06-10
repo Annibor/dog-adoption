@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { useSetCurrentUser } from '../contexts/CurrentUserContext';
+import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
 
 
 function Login() {
+  const { logoutMessage } = useCurrentUser() || {};
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -62,6 +63,9 @@ function Login() {
       <Row className="justify-content-md-center">
         <Col md={6}>
           <h2>Login</h2>
+          {logoutMessage && (
+            <Alert variant="success">{logoutMessage}</Alert>
+          )}
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId='username'>
               <Form.Label>Username</Form.Label>

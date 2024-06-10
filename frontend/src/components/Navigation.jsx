@@ -1,19 +1,18 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import Logo from './Logo';
 import { Navbar, Nav, Container } from 'react-bootstrap';
-import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
-import axios from 'axios';
+import { useCurrentUser, useLogout} from '../contexts/CurrentUserContext';
+
 
 export default function Navigation() {
-  const currentUser = useCurrentUser();
-  const setCurrentUser = useSetCurrentUser();
+  const { currentUser } = useCurrentUser();
+  const handleLogout = useLogout();
   const navigate = useNavigate();
   console.log('Current User:', currentUser);
 
   const logout = async () => {
     try {
-      await axios.post('/dj-rest-auth/logout/');
-      setCurrentUser(null);
+      await handleLogout();
       navigate('/login');
     } catch (err) {
       console.error('Failed to log out:', err);
