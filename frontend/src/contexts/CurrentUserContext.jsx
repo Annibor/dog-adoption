@@ -28,8 +28,14 @@ export const CurrentUserProvider = ({ children }) => {
     handleMount();
   }, []);
 
-  const handleLogout = useCallback(() => {
-    setCurrentUser(null);
+  const handleLogout = useCallback(async () => {
+    try {
+      await axios.post('/dj-rest-auth/logout/');
+    } catch (err) {
+      console.error('Failed to log out:', err);
+    } finally {
+      setCurrentUser(null);
+    }
   }, []);
 
  
