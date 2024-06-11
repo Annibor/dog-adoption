@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, Alert, Spinner } from 'react-bootstrap';
 
 const AdoptionApplicationList = ({ applications, loading, error }) => {

@@ -60,7 +60,7 @@ function Profile() {
             </Row>
             <Row>
               <Col className='my-4 p-3 profile-section profile-adoption-applications'>
-                <div>
+                <div className='m-2 '>
                   <AdoptionApplicationList applications={applications} loading={loading} error={error} />
                 </div>
               </Col>
