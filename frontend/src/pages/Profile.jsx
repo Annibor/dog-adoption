@@ -1,11 +1,31 @@
+// src/components/Profile.js
+
+import { useState, useEffect } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import UserInfo from '../components/UserInfo';
 import ProfileUpdateForm from '../components/ProfileUpdateForm';
 import '../styling/profile.css';
 import '../styling/index.css';
 import LikedDogsCarousel from '../components/LikedDogCarousel';
+import axios from 'axios';
 
 function Profile() {
+  const [likedDogs, setLikedDogs] = useState([]);
+
+  useEffect(() => {
+    const fetchLikedDogs = async () => {
+      try {
+        const response = await axios.get('/favorites/');
+        console.log('Liked dogs fetched:', response.data); // Debug log
+        setLikedDogs(response.data);
+      } catch (err) {
+        console.error('Error fetching liked dogs:', err);
+      }
+    };
+
+    fetchLikedDogs();
+  }, []);
+
   return (
     <div className='profile-page'>
       <Container>
@@ -14,7 +34,7 @@ function Profile() {
             <Row>
               <Col className='my-4 p-3 profile-section profile-liked-dogs'>
                 <div>
-                  <LikedDogsCarousel />
+                  <LikedDogsCarousel likedDogs={likedDogs} />
                 </div>
               </Col>
             </Row>
@@ -26,16 +46,15 @@ function Profile() {
               </Col>
             </Row>
           </Col>
-          <Col md={3} className='profile-sidebar' >
+          <Col md={3} className='profile-sidebar'>
             <div>
               <UserInfo />
             </div>
           </Col>
         </Row>
-        
       </Container>
     </div>
   )
 }
 
-export default Profile
+export default Profile;
