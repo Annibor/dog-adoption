@@ -5,7 +5,7 @@ import axios from 'axios';
 import AdoptionApplicationForm from './AdoptionApplicationForm';
 import LikeButton from './LikeButton';
 
-const DogDetail = ({ dog, condensed }) => {
+const DogDetail = ({ dog, condensed, onDogUnlike }) => {
   const { id } = useParams();
   const [dogData, setDogData] = useState(dog || null);
   const [loading, setLoading] = useState(!dog);
@@ -59,7 +59,9 @@ const DogDetail = ({ dog, condensed }) => {
               <p>Created at: {dogInfo.created_at}</p>
               <p>Updated at: {dogInfo.updated_at}</p>
 
-              <LikeButton dogId={dogInfo.id} />
+              {dogInfo.id && (
+                <LikeButton dogId={dogInfo.id} onDogUnlike={onDogUnlike} />
+              )}
             </div>
           )}
         </Col>

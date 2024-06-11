@@ -1,9 +1,7 @@
-// src/components/LikedDogsCarousel.jsx
-
 import { Carousel } from 'react-bootstrap';
 import DogDetail from './DogDetail';
 
-const LikedDogsCarousel = ({ likedDogs }) => {
+const LikedDogsCarousel = ({ likedDogs, onDogUnlike }) => {
   if (!likedDogs || likedDogs.length === 0) {
     return <p>No liked dogs to display.</p>;
   }
@@ -16,7 +14,7 @@ const LikedDogsCarousel = ({ likedDogs }) => {
       <Carousel>
         {likedDogs.map((favorite, index) => (
           <Carousel.Item key={`${favorite.id}-${index}`}>
-            <DogDetail dog={favorite.dog} condensed={true} />
+            <DogDetail dog={favorite.dog} condensed={true} onDogUnlike={onDogUnlike} />
           </Carousel.Item>
         ))}
       </Carousel>

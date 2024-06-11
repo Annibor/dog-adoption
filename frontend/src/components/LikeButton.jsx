@@ -1,5 +1,3 @@
-// src/components/LikeButton.js
-
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
@@ -8,7 +6,7 @@ import axios from 'axios';
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 import '../styling/LikeButton.module.css';
 
-const LikeButton = ({ dogId }) => {
+const LikeButton = ({ dogId, onDogUnlike }) => {
   const { currentUser } = useCurrentUser();
   const [liked, setLiked] = useState(false);
 
@@ -16,14 +14,12 @@ const LikeButton = ({ dogId }) => {
     console.log('dogId:', dogId); // Debug log for dogId
     const fetchLikeStatus = async () => {
       try {
-        const response = await axios.get(`/favorites/${dogId}/`);
-        if (response.status === 200) {
-          setLiked(true);
-        }
+        const response = await axios.get('/favorites/');
+        const likedDogs = response.data;
+        const isLiked = likedDogs.some(favorite => favorite.dog.id === dogId);
+        setLiked(isLiked);
       } catch (err) {
-        if (err.response && err.response.status !== 404) {
-          console.error(err);
-        }
+        console.error(`Error fetching like status: ${err.message}`);
       }
     };
 
@@ -44,6 +40,7 @@ const LikeButton = ({ dogId }) => {
       if (liked) {
         const response = await axios.delete(`/favorites/${dogId}/`);
         console.log('Dog unliked:', response.data, 'for dogId:', dogId);
+        if (onDogUnlike) onDogUnlike(dogId); 
       } else {
         const response = await axios.post('/favorites/', { dog: dogId });
         console.log('Dog liked:', response.data, 'for dogId:', dogId);

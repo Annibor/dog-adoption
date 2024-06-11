@@ -1,5 +1,3 @@
-// src/components/Profile.js
-
 import { useState, useEffect } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import UserInfo from '../components/UserInfo';
@@ -26,6 +24,10 @@ function Profile() {
     fetchLikedDogs();
   }, []);
 
+  const handleDogUnlike = (dogId) => {
+    setLikedDogs((prevLikedDogs) => prevLikedDogs.filter((favorite) => favorite.dog.id !== dogId));
+  };
+
   return (
     <div className='profile-page'>
       <Container>
@@ -34,7 +36,7 @@ function Profile() {
             <Row>
               <Col className='my-4 p-3 profile-section profile-liked-dogs'>
                 <div>
-                  <LikedDogsCarousel likedDogs={likedDogs} />
+                  <LikedDogsCarousel likedDogs={likedDogs} onDogUnlike={handleDogUnlike} />
                 </div>
               </Col>
             </Row>
