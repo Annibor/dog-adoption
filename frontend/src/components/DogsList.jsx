@@ -1,13 +1,14 @@
 // src/components/DogsList.js
 
 import { useEffect, useState } from 'react';
-import { Container, Row, Col, Card, Button, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Alert, Form } from 'react-bootstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 function DogsList() {
   const [dogs, setDogs] = useState([]);
   const [error, setError] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const fetchDogs = async () => {
@@ -28,11 +29,33 @@ function DogsList() {
     fetchDogs();
   }, []);
 
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredDogs = dogs.filter(dog =>
+    dog.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    dog.breed.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    dog.age.toString().includes(searchQuery)
+  );
+
+
   return (
     <Container>
       {error && <Alert variant="danger">{error}</Alert>}
+      <Row className="mb-4">
+        <Col md={6} className="mx-auto">
+          <Form.Control
+            type="text"
+            placeholder="Search for dogs by name, age or breed"
+            value={searchQuery}
+            onChange={handleSearchChange}
+          />
+        </Col>
+      </Row>
+
       <Row>
-        {dogs.map((dog) => (
+        {filteredDogs.map((dog) => (
           <Col key={dog.id} md={4}>
             <Card className="mb-4">
               <div>Here will be img</div>
