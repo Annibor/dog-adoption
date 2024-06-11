@@ -56,6 +56,18 @@ function DogsList() {
     }));
   };
 
+  const handleClearFilters = () => {
+    setFilters({
+      name: '',
+      breed: '',
+      age: '',
+      gender: '',
+      temperament: '',
+      good_with_children: '',
+      good_with_other_dogs: '',
+    });
+  };
+
 
   return (
     <Container>
@@ -153,6 +165,9 @@ function DogsList() {
               <option value="false">No</option>
             </Form.Control>
           </Form.Group>
+          <Button variant="secondary" onClick={handleClearFilters} className="mt-3">
+            Clear Filters
+          </Button>
         </Col>
         {filteredDogs.map((dog) => (
           <Col key={dog.id} md={4}>
