@@ -4,7 +4,8 @@ import axios from 'axios';
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 
 function AdoptionApplicationForm({ dogId, dogName }) {
-  const currentUser = useCurrentUser();
+  const { currentUser } = useCurrentUser();
+  
   const [formData, setFormData] = useState({
     visit_date: '',
     reason: '',
@@ -21,7 +22,7 @@ function AdoptionApplicationForm({ dogId, dogName }) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
-  const [submitted, setSubmitted] = useState(localStorage.getItem('applicationSubmitted') === 'true');
+  const [submitted, setSubmitted] = useState(localStorage.getItem(`applicationSubmitted-${dogId}`) === 'true');
 
   useEffect(() => {
     if (currentUser) {
@@ -67,16 +68,15 @@ function AdoptionApplicationForm({ dogId, dogName }) {
     console.log('Submitting application with data:', formData);
 
     try {
-      const response = await axios.post('/adoption-applications/', {
+      await axios.post('/adoption-applications/', {
         ...formData,
         user: currentUser.profile_id,
         dog: dogId,
       });
-      console.log('Application submitted successfully:', response.data);
       setSuccess('Application submitted successfully');
       setLoading(false);
       setSubmitted(true);
-      localStorage.setItem('applicationSubmitted', 'true');
+      localStorage.setItem(`applicationSubmitted-${dogId}`, 'true');
     } catch (err) {
       console.error('Failed to submit application:', err.response?.data);
       setError('Failed to submit application');
@@ -85,9 +85,8 @@ function AdoptionApplicationForm({ dogId, dogName }) {
   };
 
   if (submitted) {
-    return <Alert variant="success"> Thank you for your application!</Alert>;
+    return <Alert variant="success">Thank you for your application!</Alert>;
   }
-
 
   return (
     <div>
@@ -96,8 +95,7 @@ function AdoptionApplicationForm({ dogId, dogName }) {
         {loading && <Spinner animation="border" variant="primary" />}
         {error && <Alert variant="danger">{error}</Alert>}
         {success && <Alert variant="success">{success}</Alert>}
-    
-    
+
         <Row>
           <Form.Group as={Col} controlId="visit_date">
             <Form.Label>Visit Date</Form.Label>
@@ -195,8 +193,8 @@ function AdoptionApplicationForm({ dogId, dogName }) {
           </Form.Group>
         </Row>
         <Row>
-        <Form.Group as={Col} xs={6} controlId="has_children">
-            <Form.Check 
+          <Form.Group as={Col} xs={6} controlId="has_children">
+            <Form.Check
               type="checkbox"
               label="Has Children"
               name="has_children"
@@ -205,7 +203,7 @@ function AdoptionApplicationForm({ dogId, dogName }) {
             />
           </Form.Group>
           <Form.Group as={Col} xs={6} controlId="has_other_pets">
-            <Form.Check 
+            <Form.Check
               type="checkbox"
               label="Has Other Pets"
               name='has_other_pets'
