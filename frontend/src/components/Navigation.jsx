@@ -28,6 +28,7 @@ export default function Navigation() {
         <Navbar.Collapse id="basic-navbar">
           <Nav className="m-auto">
             <NavLink to="/dogs" className="nav-link" >Dogs</NavLink>
+            <NavLink to="/events" className="nav-link">Events</NavLink>
             <NavLink to="/profile"className="nav-link" >Profile</NavLink>
             {currentUser ? (
               <>

@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import PageNotFound from './pages/PageNotFound'; 
 import AppLayout from './ui/AppLayout';
 import DogDetail from './components/DogDetail';
+import Events from './pages/Events';
 import { CurrentUserProvider } from './contexts/CurrentUserContext';
 
 const router = createBrowserRouter([
@@ -29,7 +30,11 @@ const router = createBrowserRouter([
       {
         path: '/profile',
         element: <Profile />,
-      }, 
+      },
+      {
+        path: '/events',
+        element: <Events />,
+      },
       {
         path: '/login',
         element: <Login />,
