@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Container, Row, Col, Image, Button, Spinner, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Spinner, Alert } from 'react-bootstrap';
 import axios from 'axios';
 import AdoptionApplicationForm from './AdoptionApplicationForm';
 import LikeButton from './LikeButton';
@@ -46,22 +46,27 @@ const DogDetail = ({ dog, condensed, onDogUnlike }) => {
         <Col md={6}>
           {dogInfo && (
             <div>
-              <Image src={dogInfo.image_url} fluid className="mb-4" />
-              <h2>{dogInfo.name}</h2>
-              <p><strong>Breed:</strong> {dogInfo.breed}</p>
-              <p><strong>Gender:</strong> {dogInfo.gender}</p>
-              <p><strong>Age:</strong> {dogInfo.age}</p>
-              <p><strong>Temperament:</strong> {dogInfo.temperament}</p>
-              <p><strong>Good With Children:</strong> {dogInfo.good_with_children}</p>
-              <p><strong>Good With Other Dogs:</strong> {dogInfo.good_with_other_dogs}</p>
-              <p><strong>Description:</strong> {dogInfo.description}</p>
-              <p><strong>Adoption Status:</strong> {dogInfo.adoption_status}</p>
-              <p>Created at: {dogInfo.created_at}</p>
-              <p>Updated at: {dogInfo.updated_at}</p>
-
-              {dogInfo.id && (
-                <LikeButton dogId={dogInfo.id} onDogUnlike={onDogUnlike} />
-              )}
+              <Card>
+              <Card.Img variant="top" src={dogInfo.image_url} />
+              <Card.Body>
+                <Card.Title className='text-uppercase'>{dogInfo.name}</Card.Title>
+                <Card.Text>
+                  <strong>Breed:</strong> {dogInfo.breed}<br />
+                  <strong>Gender:</strong> {dogInfo.gender}<br />
+                  <strong>Age:</strong> {dogInfo.age}<br />
+                  <strong>Temperament:</strong> {dogInfo.temperament}<br />
+                  <strong>Good With Children:</strong> {dogInfo.good_with_children ? "Yes" : "No"}<br />
+                  <strong>Good With Other Dogs:</strong> {dogInfo.good_with_other_dogs ? "Yes" : "No"}<br />
+                  <strong>Description:</strong> {dogInfo.description}<br />
+                  <strong>Adoption Status:</strong> {dogInfo.adoption_status}<br />
+                  <strong>Created at:</strong> {new Date(dogInfo.created_at).toLocaleDateString()}<br />
+                  <strong>Updated at:</strong> {new Date(dogInfo.updated_at).toLocaleDateString()}<br />
+                </Card.Text>
+                {dogInfo.id && (
+                  <LikeButton dogId={dogInfo.id} onDogUnlike={onDogUnlike} />
+                )}
+              </Card.Body>
+            </Card>
             </div>
           )}
         </Col>
