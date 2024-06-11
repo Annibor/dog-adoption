@@ -5,10 +5,14 @@ import ProfileUpdateForm from '../components/ProfileUpdateForm';
 import '../styling/profile.css';
 import '../styling/index.css';
 import LikedDogsCarousel from '../components/LikedDogCarousel';
+import AdoptionApplicationList from '../components/AdoptionApplicationList';
 import axios from 'axios';
 
 function Profile() {
   const [likedDogs, setLikedDogs] = useState([]);
+  const [applications, setApplications] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchLikedDogs = async () => {
@@ -21,7 +25,21 @@ function Profile() {
       }
     };
 
+    const fetchApplications = async () => {
+      try {
+        const response = await axios.get('/adoption-applications/');
+        console.log('Adoption applications fetched:', response.data); // Debug log
+        setApplications(Array.isArray(response.data.results) ? response.data.results : []);
+      } catch (err) {
+        console.error('Error fetching applications:', err);
+        setError('Error fetching applications');
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchLikedDogs();
+    fetchApplications();
   }, []);
 
   const handleDogUnlike = (dogId) => {
@@ -37,6 +55,13 @@ function Profile() {
               <Col className='my-4 p-3 profile-section profile-liked-dogs'>
                 <div>
                   <LikedDogsCarousel likedDogs={likedDogs} onDogUnlike={handleDogUnlike} />
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col className='my-4 p-3 profile-section profile-adoption-applications'>
+                <div>
+                  <AdoptionApplicationList applications={applications} loading={loading} error={error} />
                 </div>
               </Col>
             </Row>

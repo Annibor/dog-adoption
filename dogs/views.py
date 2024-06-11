@@ -58,7 +58,7 @@ class AdoptionApplicationListCreatView(generics.ListCreateAPIView):
     serializer_class = AdoptionApplicationSerializer
     permission_classes = [IsAuthenticated]
 
-    def get(self):
+    def get_queryset(self):
         """
         Returns a list of applications to adopt dogs
         for the current user if logged in.
