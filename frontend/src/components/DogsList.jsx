@@ -1,9 +1,12 @@
 // src/components/DogsList.js
 
 import { useEffect, useState } from 'react';
-import { Container, Row, Col, Card, Button, Alert, Form } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Alert, Form, Collapse } from 'react-bootstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
+
 
 function DogsList() {
   const [dogs, setDogs] = useState([]);
@@ -18,6 +21,8 @@ function DogsList() {
     good_with_children: '',
     good_with_other_dogs: '',
   });
+
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const fetchDogs = async () => {
@@ -83,91 +88,103 @@ function DogsList() {
         </Col>
       </Row>
       <Row>
-      <Col md={3}>
-          <h4>Filters</h4>
-          <Form.Group controlId="name">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="text"
-              name="name"
-              value={filters.name}
-              onChange={handleFilterChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="breed">
-            <Form.Label>Breed</Form.Label>
-            <Form.Control
-              type="text"
-              name="breed"
-              value={filters.breed}
-              onChange={handleFilterChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="age">
-            <Form.Label>Age</Form.Label>
-            <Form.Control
-              type="text"
-              name="age"
-              value={filters.age}
-              onChange={handleFilterChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="gender">
-            <Form.Label>Gender</Form.Label>
-            <Form.Control
-              as="select"
-              name="gender"
-              value={filters.gender}
-              onChange={handleFilterChange}
-            >
-              <option value="">All</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </Form.Control>
-          </Form.Group>
-          <Form.Group controlId="temperament">
-            <Form.Label>Temperament</Form.Label>
-            <Form.Control
-              as="select"
-              name="temperament"
-              value={filters.temperament}
-              onChange={handleFilterChange}
-            >
-              <option value="">All</option>
-              <option value="calm">Calm</option>
-              <option value="energetic">Energetic</option>
-              <option value="aggressive">Aggressive</option>
-            </Form.Control>
-          </Form.Group>
-          <Form.Group controlId="good_with_children">
-            <Form.Label>Good with Children</Form.Label>
-            <Form.Control
-              as="select"
-              name="good_with_children"
-              value={filters.good_with_children}
-              onChange={handleFilterChange}
-            >
-              <option value="">All</option>
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </Form.Control>
-          </Form.Group>
-          <Form.Group controlId="good_with_other_dogs">
-            <Form.Label>Good with Other Dogs</Form.Label>
-            <Form.Control
-              as="select"
-              name="good_with_other_dogs"
-              value={filters.good_with_other_dogs}
-              onChange={handleFilterChange}
-            >
-              <option value="">All</option>
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </Form.Control>
-          </Form.Group>
-          <Button variant="secondary" onClick={handleClearFilters} className="mt-3">
-            Clear Filters
+        <Col md={3}>
+          <Button
+            className="d-md-none mb-2"
+            onClick={() => setOpen(!open)}
+            aria-controls="filters"
+            aria-expanded={open}
+          >
+            <FontAwesomeIcon icon={faFilter} /> Filters
           </Button>
+          <Collapse in={open}>
+          <div className="d-none d-md-block">
+            <h4>Filters</h4>
+            <Form.Group controlId="name">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="name"
+                value={filters.name}
+                onChange={handleFilterChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="breed">
+              <Form.Label>Breed</Form.Label>
+              <Form.Control
+                type="text"
+                name="breed"
+                value={filters.breed}
+                onChange={handleFilterChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="age">
+              <Form.Label>Age</Form.Label>
+              <Form.Control
+                type="text"
+                name="age"
+                value={filters.age}
+                onChange={handleFilterChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="gender">
+              <Form.Label>Gender</Form.Label>
+              <Form.Control
+                as="select"
+                name="gender"
+                value={filters.gender}
+                onChange={handleFilterChange}
+              >
+                <option value="">All</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </Form.Control>
+            </Form.Group>
+            <Form.Group controlId="temperament">
+              <Form.Label>Temperament</Form.Label>
+              <Form.Control
+                as="select"
+                name="temperament"
+                value={filters.temperament}
+                onChange={handleFilterChange}
+              >
+                <option value="">All</option>
+                <option value="calm">Calm</option>
+                <option value="energetic">Energetic</option>
+                <option value="aggressive">Aggressive</option>
+              </Form.Control>
+            </Form.Group>
+            <Form.Group controlId="good_with_children">
+              <Form.Label>Good with Children</Form.Label>
+              <Form.Control
+                as="select"
+                name="good_with_children"
+                value={filters.good_with_children}
+                onChange={handleFilterChange}
+              >
+                <option value="">All</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </Form.Control>
+            </Form.Group>
+            <Form.Group controlId="good_with_other_dogs">
+              <Form.Label>Good with Other Dogs</Form.Label>
+              <Form.Control
+                as="select"
+                name="good_with_other_dogs"
+                value={filters.good_with_other_dogs}
+                onChange={handleFilterChange}
+              >
+                <option value="">All</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </Form.Control>
+            </Form.Group>
+            <Button variant="secondary" onClick={handleClearFilters} className="mt-3">
+              Clear Filters
+            </Button>
+          </div>
+          </Collapse>
         </Col>
         {filteredDogs.map((dog) => (
           <Col key={dog.id} md={4}>
