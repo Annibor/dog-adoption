@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Image, Button, Spinner, Alert } from 'react-bootstrap';
 import axios from 'axios';
 import AdoptionApplicationForm from './AdoptionApplicationForm';
@@ -9,6 +9,7 @@ const DogDetail = () => {
   const [dog, setDog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -33,6 +34,9 @@ const DogDetail = () => {
 
   return (
     <Container className='py-5'>
+<Button variant="secondary" onClick={() => navigate(-1)} className="mb-4"> 
+        &larr; Go Back
+      </Button>
       <Row className="justify-content-center">
         <Col md={6}>
           {dog && (
