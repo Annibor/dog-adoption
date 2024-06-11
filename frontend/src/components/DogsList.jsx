@@ -9,11 +9,20 @@ function DogsList() {
   const [dogs, setDogs] = useState([]);
   const [error, setError] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
+  const [filters, setFilters] = useState({
+    name:'',
+    breed: '',
+    age: '',
+    gender: '',
+    temperament: '',
+    good_with_children: '',
+    good_with_other_dogs: '',
+  });
 
   useEffect(() => {
     const fetchDogs = async () => {
       try {
-        const response = await axios.get('/dogs/');
+        const response = await axios.get('/dogs/', { params: filters });
         console.log('API response:', response);
         if (Array.isArray(response.data.results)) {
           setDogs(response.data.results);
@@ -27,7 +36,7 @@ function DogsList() {
     };
 
     fetchDogs();
-  }, []);
+  }, [filters]);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -38,6 +47,14 @@ function DogsList() {
     dog.breed.toLowerCase().includes(searchQuery.toLowerCase()) ||
     dog.age.toString().includes(searchQuery)
   );
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
 
   return (
@@ -53,8 +70,90 @@ function DogsList() {
           />
         </Col>
       </Row>
-
       <Row>
+      <Col md={3}>
+          <h4>Filters</h4>
+          <Form.Group controlId="name">
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              type="text"
+              name="name"
+              value={filters.name}
+              onChange={handleFilterChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="breed">
+            <Form.Label>Breed</Form.Label>
+            <Form.Control
+              type="text"
+              name="breed"
+              value={filters.breed}
+              onChange={handleFilterChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="age">
+            <Form.Label>Age</Form.Label>
+            <Form.Control
+              type="text"
+              name="age"
+              value={filters.age}
+              onChange={handleFilterChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="gender">
+            <Form.Label>Gender</Form.Label>
+            <Form.Control
+              as="select"
+              name="gender"
+              value={filters.gender}
+              onChange={handleFilterChange}
+            >
+              <option value="">All</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </Form.Control>
+          </Form.Group>
+          <Form.Group controlId="temperament">
+            <Form.Label>Temperament</Form.Label>
+            <Form.Control
+              as="select"
+              name="temperament"
+              value={filters.temperament}
+              onChange={handleFilterChange}
+            >
+              <option value="">All</option>
+              <option value="calm">Calm</option>
+              <option value="energetic">Energetic</option>
+              <option value="aggressive">Aggressive</option>
+            </Form.Control>
+          </Form.Group>
+          <Form.Group controlId="good_with_children">
+            <Form.Label>Good with Children</Form.Label>
+            <Form.Control
+              as="select"
+              name="good_with_children"
+              value={filters.good_with_children}
+              onChange={handleFilterChange}
+            >
+              <option value="">All</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </Form.Control>
+          </Form.Group>
+          <Form.Group controlId="good_with_other_dogs">
+            <Form.Label>Good with Other Dogs</Form.Label>
+            <Form.Control
+              as="select"
+              name="good_with_other_dogs"
+              value={filters.good_with_other_dogs}
+              onChange={handleFilterChange}
+            >
+              <option value="">All</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </Form.Control>
+          </Form.Group>
+        </Col>
         {filteredDogs.map((dog) => (
           <Col key={dog.id} md={4}>
             <Card className="mb-4">
