@@ -17,7 +17,7 @@ class AdoptionEventRegistrationSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = AdoptionEventRegistration
-        fields = ['id', 'title', 'description', 'date', 'location', 'created_at']
+        fields = ['id', 'event', 'user', 'created_at']
 
     def validate(self, data):
         event = data.get('event')

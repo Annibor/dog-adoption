@@ -1,7 +1,38 @@
-import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { useState } from 'react';
+import { Card, Button, Alert, Spinner } from 'react-bootstrap';
+import axios from 'axios';
+import { useCurrentUser } from '../contexts/CurrentUserContext';
 
 const EventDetail = ({ event }) => {
+  const { currentUser } = useCurrentUser();
+  const [applied, setApplied] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(null);
+  const [error, setError] = useState(null);
+
+  const handleApply = async () => {
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
+
+    try {
+      const requestData = {
+        event: event.id,
+        user: currentUser.profile_id,
+      };
+      console.log('Request Data:', requestData);
+      const response = await axios.post(`/events/registrations/${event.id}/`, requestData);
+      console.log('Response Data:', response.data);
+      setApplied(true);
+      setSuccess('Successfully applied for the event!');
+      setLoading(false);
+    } catch (err) {
+      console.error('Failed to apply for the event:', err.response?.data || err);
+      setError('Failed to apply for the event.');
+      setLoading(false);
+    }
+  };
+
   if (!event) return <div>Select an event to see details</div>;
 
   return (
@@ -11,7 +42,12 @@ const EventDetail = ({ event }) => {
         <Card.Text>{event.description}</Card.Text>
         <Card.Text>{new Date(event.date).toLocaleString()}</Card.Text>
         <Card.Text>{event.location}</Card.Text>
-        <Button onClick={() => alert(`Registered for ${event.title}`)}>Apply</Button>
+        {loading && <Spinner animation="border" variant="primary" />}
+        {error && <Alert variant="danger">{error}</Alert>}
+        {success && <Alert variant="success">{success}</Alert>}
+        <Button onClick={handleApply} disabled={applied || loading}>
+          {applied ? 'Applied' : 'Apply'}
+        </Button>
       </Card.Body>
     </Card>
   );
