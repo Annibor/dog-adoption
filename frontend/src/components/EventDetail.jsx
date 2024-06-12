@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, Button, Alert, Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import { useCurrentUser } from '../contexts/CurrentUserContext';
@@ -9,6 +9,16 @@ const EventDetail = ({ event }) => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (event) {
+      const appliedStatus = localStorage.getItem(`eventApplied-${event.id}`);
+      if (appliedStatus === 'true') {
+        setApplied(true);
+        setSuccess('Successfully applied for the event!');
+      }
+    }
+  }, [event]);
 
   const handleApply = async () => {
     setLoading(true);
@@ -26,6 +36,7 @@ const EventDetail = ({ event }) => {
       setApplied(true);
       setSuccess('Successfully applied for the event!');
       setLoading(false);
+      localStorage.setItem(`eventApplied-${event.id}`, 'true');
     } catch (err) {
       console.error('Failed to apply for the event:', err.response?.data || err);
       setError('Failed to apply for the event.');
@@ -34,6 +45,10 @@ const EventDetail = ({ event }) => {
   };
 
   if (!event) return <div>Select an event to see details</div>;
+
+  if (applied) {
+    return <Alert variant="success">Thank you for applying for the event!</Alert>;
+  }
 
   return (
     <Card className="mb-4">
@@ -45,8 +60,8 @@ const EventDetail = ({ event }) => {
         {loading && <Spinner animation="border" variant="primary" />}
         {error && <Alert variant="danger">{error}</Alert>}
         {success && <Alert variant="success">{success}</Alert>}
-        <Button onClick={handleApply} disabled={applied || loading}>
-          {applied ? 'Applied' : 'Apply'}
+        <Button onClick={handleApply} disabled={loading}>
+          Apply
         </Button>
       </Card.Body>
     </Card>
