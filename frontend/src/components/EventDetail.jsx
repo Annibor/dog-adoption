@@ -53,10 +53,10 @@ const EventDetail = ({ event }) => {
   return (
     <Card className="mb-4">
       <Card.Body>
-        <Card.Title>{event.title}</Card.Title>
-        <Card.Text>{event.description}</Card.Text>
-        <Card.Text>{new Date(event.date).toLocaleString()}</Card.Text>
-        <Card.Text>{event.location}</Card.Text>
+        <Card.Title className='my-3'>{event.title}</Card.Title>
+        <Card.Text className='mx-1 my-2'>{event.description}</Card.Text>
+        <Card.Text className='mx-1 mt-3'>{new Date(event.date).toLocaleString()}</Card.Text>
+        <Card.Text className="mx-1 mt-3">{event.location}</Card.Text>
         {loading && <Spinner animation="border" variant="primary" />}
         {error && <Alert variant="danger">{error}</Alert>}
         {success && <Alert variant="success">{success}</Alert>}
