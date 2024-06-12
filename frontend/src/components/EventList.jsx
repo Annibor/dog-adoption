@@ -14,8 +14,9 @@ const EventList = ({ events, setSelectedEvent }) => {
             key={event.id} 
             onClick={() => setSelectedEvent(event)}
             action
+            className="my-2 list-item"
           >
-            {event.title} - {new Date(event.date).toLocaleDateString()}
+            <strong>{event.title}</strong> - {new Date(event.date).toLocaleDateString()}
           </ListGroup.Item>
         ))}
       </ListGroup>

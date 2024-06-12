@@ -15,7 +15,7 @@ const Events = () => {
         const response = await axios.get('/events/');
         if (Array.isArray(response.data.results)) {
           setEvents(response.data.results);
-          setSelectedEvent(response.data.results[0]); 
+          setSelectedEvent(response.data.results[0]);
         } else {
           console.error('Unexpected response format:', response.data);
           setError('Unexpected response format');
@@ -32,15 +32,24 @@ const Events = () => {
   return (
     <Container>
       {error && <div>Error: {error}</div>}
-      <Row>
-        <Col md={8}>
-          <h1>Events</h1>
-          <EventList events={events} setSelectedEvent={setSelectedEvent} />
-        </Col>
-        <Col md={4}>
-          <EventDetail event={selectedEvent} />
-        </Col>
-      </Row>
+      <div className="content-wrapper">
+        <Row>
+          <Col md={7}>
+            <div className="p-2 content-div">
+              <div className="m-3">
+                <h1 className="pb-3">Events</h1>
+                <p>Join our events to meet and potentially adopt a loving dog. Here you can find all the   upcoming events. Click on an event to see more details and apply to participate.</p>
+                <EventList events={events} setSelectedEvent={setSelectedEvent} />
+              </div>
+              
+            </div>
+            
+          </Col>
+          <Col md={5}>
+            <EventDetail event={selectedEvent} />
+          </Col>
+        </Row>
+      </div>
     </Container>
   );
 };

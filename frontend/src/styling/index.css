@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lora:wght@400;700&family=Montserrat:wght@400;700&display=swap');
+
 :root {
   --orange-peel: #FF9F1C;
   --orange-peel-tint1: #FFA633;
@@ -47,25 +49,101 @@
   --moonstone-shade2: #3A8B9B;
   --moonstone-shade3: #327A85;
   --moonstone-shade4: #29696E;
+
+  --primary-light-blue: #B3D3EF;
+  --primary-dark-blue: #6699CC;
+  --primary-light-tint: #E6F0FA;
+  --contrast-coral: #FF6F61;
+  --contrast-dark-gray: #4A4A4A;
+
+  --main-bg-color: #E6F0FA; 
+  --content-bg-color: rgba(179, 211, 239, 0.8); 
+  --content-border-color: #6699CC; 
+
+  --contrast-purple: #6A1B9A;
+  
 }
 
 body {
-  background-color: var(--baby-powder);
+  background-color: var(--main-bg-color);
+  font-family: 'Roboto', sans-serif;
+  color: var(--primary-dark-blue);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lora', serif;
 }
 
 .navbar {
-  background-color: var(--orange-peel);
+  background-color: var(--primary-light-blue);
+  font-family: 'Montserrat', sans-serif;
 }
 
 .nav-link {
-  color: var(--baby-powder);
+  color: var(--main-bg-color);
 }
 
 .nav-link:hover {
-  color: var(--hunyadi-yellow-tint4);
+  color: var(--contrast-coral);
 }
 
 .footer {
-  background-color: var(--moonstone);
-  color: var(--baby-powder);
+  background-color: var(--primary-dark-blue);
+  color: var(--main-bg-color);
+}
+
+.container {
+  margin-top: 20px;
+}
+
+.content-wrapper {
+  background-color: var(--content-bg-color); /* Updated background color */
+  border: 1px solid var(--content-border-color);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+  border: none;
+  margin-bottom: 20px;
+}
+
+.card-title {
+  color: var(--primary-dark-blue);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.card-text {
+  color: var(--primary-dark-blue);
+}
+
+.btn {
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 1.1em;
+}
+
+.btn-primary {
+  background-color: var(--contrast-purple);
+  border-color: var(--contrast-purple);
+  font-family: 'Montserrat', sans-serif;
+  color: var(--main-bg-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--contrast-dark-gray);
+  border-color: var(--contrast-dark-gray);
+}
+
+.btn-secondary {
+  background-color: var(--primary-dark-blue);
+  border-color: var(--primary-dark-blue);
+  font-family: 'Montserrat', sans-serif;
+  color: var(--main-bg-color);
+}
+
+.btn-secondary:hover {
+  background-color: var(--primary-dark-blue);
+  border-color: var(--primary-dark-blue);
 }
