@@ -47,26 +47,30 @@ const DogDetail = ({ dog, condensed, onDogUnlike }) => {
           {dogInfo && (
             <div>
               <Card>
-              <Card.Img variant="top" src={dogInfo.image_url} />
-              <Card.Body>
-                <Card.Title className='text-uppercase'>{dogInfo.name}</Card.Title>
-                <Card.Text>
-                  <strong>Breed:</strong> {dogInfo.breed}<br />
-                  <strong>Gender:</strong> {dogInfo.gender}<br />
-                  <strong>Age:</strong> {dogInfo.age}<br />
-                  <strong>Temperament:</strong> {dogInfo.temperament}<br />
-                  <strong>Good With Children:</strong> {dogInfo.good_with_children ? "Yes" : "No"}<br />
-                  <strong>Good With Other Dogs:</strong> {dogInfo.good_with_other_dogs ? "Yes" : "No"}<br />
-                  <strong>Description:</strong> {dogInfo.description}<br />
-                  <strong>Adoption Status:</strong> {dogInfo.adoption_status}<br />
-                  <strong>Created at:</strong> {new Date(dogInfo.created_at).toLocaleDateString()}<br />
-                  <strong>Updated at:</strong> {new Date(dogInfo.updated_at).toLocaleDateString()}<br />
-                </Card.Text>
-                {dogInfo.id && (
-                  <LikeButton dogId={dogInfo.id} onDogUnlike={onDogUnlike} />
-                )}
-              </Card.Body>
-            </Card>
+                <Card.Img variant="top" src={dogInfo.image_url} />
+                <Card.Body>
+                  <Card.Title className='text-uppercase'>{dogInfo.name}</Card.Title>
+                  <Card.Text>
+                  {!condensed && (
+                    <>
+                      <strong>Breed:</strong> {dogInfo.breed}<br />
+                      <strong>Gender:</strong> {dogInfo.gender}<br />
+                      <strong>Age:</strong> {dogInfo.age}<br />
+                      <strong>Temperament:</strong> {dogInfo.temperament}<br />
+                      <strong>Good With Children:</strong> {dogInfo.good_with_children ? "Yes" : "No"}<br />
+                      <strong>Good With Other Dogs:</strong> {dogInfo.good_with_other_dogs ? "Yes" : "No"}  <br / >
+                      <strong>Description:</strong> {dogInfo.description}<br />
+                      <strong>Adoption Status:</strong> {dogInfo.adoption_status}<br />
+                      <strong>Created at:</strong> {new Date(dogInfo.created_at).toLocaleDateString()}<br />
+                      <strong>Updated at:</strong> {new Date(dogInfo.updated_at).toLocaleDateString()}<br />
+                    </>
+                  )}
+                  </Card.Text>
+                  {dogInfo.id && (
+                    <LikeButton dogId={dogInfo.id} onDogUnlike={onDogUnlike} />
+                  )}
+                </Card.Body>
+              </Card>
             </div>
           )}
         </Col>

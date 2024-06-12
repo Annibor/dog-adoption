@@ -49,23 +49,31 @@ function Profile() {
   return (
     <div className='profile-page'>
       <Container>
+        <Row className="flex ">
+          <h1>Your profile page</h1>
+          <div>
+            <p className="w-75 align-center">
+            This is where ypu can see your saved dogs, adoption applications you have done, events you have applied to adn you can update you profile information from here.
+            </p>
+          </div>
+        </Row>
         <Row>
           <Col md={9}>
-            <Row>
+            <Row className="mx-2">
               <Col className='my-4 p-3 profile-section profile-liked-dogs'>
                 <div>
                   <LikedDogsCarousel likedDogs={likedDogs} onDogUnlike={handleDogUnlike} />
                 </div>
               </Col>
             </Row>
-            <Row>
-              <Col className='my-4 p-3 profile-section profile-adoption-applications'>
+            <Row className="mx-2">
+              <Col className='my-4 p-3 profile-section profile-adoption-applicaitons'>
                 <div className='m-2 '>
                   <AdoptionApplicationList applications={applications} loading={loading} error={error} />
                 </div>
               </Col>
             </Row>
-            <Row>
+            <Row className="mx-2">
               <Col className='my-4 p-3 profile-section profile-update-form'>
                 <div>
                   <ProfileUpdateForm />

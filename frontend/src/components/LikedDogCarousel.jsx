@@ -10,7 +10,7 @@ const LikedDogsCarousel = ({ likedDogs, onDogUnlike }) => {
 
   return (
     <div>
-      <h2>Here are your saved dogs!</h2>
+      <h2 className="text-center">Your saved dogs!</h2>
       <Carousel>
         {likedDogs.map((favorite, index) => (
           <Carousel.Item key={`${favorite.id}-${index}`}>

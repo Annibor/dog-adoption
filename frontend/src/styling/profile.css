@@ -20,8 +20,12 @@
   background-color: var(--hunyadi-yellow-tint4);
 }
 
+.profile-adoption-applicaitons {
+  background-color: var(--primary-dark-blue);
+}
+
 .profile-update-form {
-  background-color: var(--hunyadi-yellow);
+  background-color: var(--hunyadi-yellow-tint4);
 }
 
 .user-info-card {
