@@ -1,11 +1,15 @@
 from rest_framework import serializers
 from .models import Favorites
+from dogs.models import Dog
+from dogs.serializers import DogSerializer
 
 
 class FavoritesSerializer(serializers.ModelSerializer):
     """
     A serializer that serializes Favorites objects.
     """
+    dog = DogSerializer(read_only=True)
+    
     class Meta:
         model = Favorites
         fields = "__all__"
