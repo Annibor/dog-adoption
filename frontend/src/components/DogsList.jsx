@@ -189,7 +189,7 @@ function DogsList() {
         {filteredDogs.map((dog) => (
           <Col key={dog.id} md={4}>
             <Card className="mb-4">
-              <div>Here will be img</div>
+            <Card.Img variant="top" src={dog.featured_image} />
               <Card.Body>
                 <Card.Title>{dog.name}</Card.Title>
                 <Card.Text>{dog.breed} {dog.age} years old</Card.Text>

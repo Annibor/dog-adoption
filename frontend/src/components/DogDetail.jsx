@@ -47,7 +47,7 @@ const DogDetail = ({ dog, condensed, onDogUnlike }) => {
           {dogInfo && (
             <div>
               <Card>
-                <Card.Img variant="top" src={dogInfo.image_url} />
+                <Card.Img variant="top" src={dogInfo.featured_image} />
                 <Card.Body>
                   <Card.Title className='text-uppercase'>{dogInfo.name}</Card.Title>
                   <Card.Text>
