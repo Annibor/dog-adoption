@@ -127,15 +127,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-primary {
-  background-color: var(--contrast-purple);
-  border-color: var(--contrast-purple);
+  background-color: rgba(106, 27, 154, 0.8);
+  border: none;
   font-family: 'Montserrat', sans-serif;
   color: var(--main-bg-color);
 }
 
 .btn-primary:hover {
   background-color: var(--contrast-dark-gray);
-  border-color: var(--contrast-dark-gray);
+  border: none;
+}
+
+.btn-primary:active {
+  transform: scale(1.05);
 }
 
 .btn-secondary {
@@ -148,4 +152,8 @@ h1, h2, h3, h4, h5, h6 {
 .btn-secondary:hover {
   background-color: var(--primary-dark-blue);
   border-color: var(--primary-dark-blue);
+}
+
+.btn-secondary:active {
+  transform: scale(1.05);
 }

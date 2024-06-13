@@ -7,7 +7,7 @@
 .profile-sidebar {
   background-color: var(--light-cyan);
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 3px;
 }
 
 .profile-section {
@@ -15,6 +15,19 @@
   padding: 20px;
   border-radius: 5px;
 }
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.section-icon {
+  color: var(--dark-blue);
+  margin-right: 10px;
+}
+
 
 .profile-liked-dogs {
   background-color: var(--hunyadi-yellow-tint4);

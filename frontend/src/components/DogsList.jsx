@@ -4,8 +4,7 @@ import { useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Button, Alert, Form, Collapse } from 'react-bootstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import { FaFilter } from 'react-icons/fa';
 
 
 function DogsList() {
@@ -90,15 +89,16 @@ function DogsList() {
       <Row>
         <Col md={3}>
           <Button
-            className="d-md-none mb-2"
+            className="mb-2"
             onClick={() => setOpen(!open)}
             aria-controls="filters"
             aria-expanded={open}
+            variant="secondary"
           >
-            <FontAwesomeIcon icon={faFilter} /> Filters
+            <FaFilter /> Filters
           </Button>
           <Collapse in={open}>
-          <div className="d-none d-md-block">
+          <div>
             <h4>Filters</h4>
             <Form.Group controlId="name">
               <Form.Label>Name</Form.Label>
