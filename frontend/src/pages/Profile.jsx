@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Col, Container, Row, Button, Collapse } from 'react-bootstrap';
+import { Col, Container, Row, Collapse } from 'react-bootstrap';
 import { FaDog, FaHeart, FaUserEdit, FaPaw } from 'react-icons/fa';
 import UserInfo from '../components/UserInfo';
 import ProfileUpdateForm from '../components/ProfileUpdateForm';
@@ -7,11 +7,13 @@ import '../styling/profile.css';
 import '../styling/index.css';
 import LikedDogsCarousel from '../components/LikedDogCarousel';
 import AdoptionApplicationList from '../components/AdoptionApplicationList';
+import EventApplicationList from '../components/EventApplicationList';
 import axios from 'axios';
 
 function Profile() {
   const [likedDogs, setLikedDogs] = useState([]);
   const [applications, setApplications] = useState([]);
+  const [eventApplications, setEventApplications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
@@ -46,8 +48,23 @@ function Profile() {
       }
     };
 
+    const fetchEventApplications = async () => {
+      try {
+        const response = await axios.get('/events/registrations/');
+        setEventApplications(Array.isArray(response.data) ? response.data : []);
+      } catch (err) {
+        console.error('Error fetching event applications:', err);
+        setError('Error fetching event applications');
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchLikedDogs();
     fetchApplications();
+    fetchEventApplications();
+    setLoading(false);
+
   }, []);
 
   const handleDogUnlike = (dogId) => {
@@ -93,7 +110,7 @@ function Profile() {
               </div>
               <Collapse in={showEventApplications}>
                 <div id="event-applications-section">
-                  Here will be events list
+                  <EventApplicationList eventApplications={eventApplications} loading={loading} error={error} />
                 </div>
               </Collapse>
             </Col>
