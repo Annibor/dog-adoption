@@ -1,0 +1,49 @@
+.protected-route-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+}
+
+.protected-route-card {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.protected-route-card h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.protected-route-card p.lead {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: #555;
+}
+
+.protected-route-card .btn {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  padding: 0.5rem 1.5rem;
+}
+
+.protected-route-card .btn-primary {
+  background-color: var(--primary-dark-blue);
+  border-color: var(--primary-dark-blue);
+}
+
+.protected-route-card .btn-secondary {
+  background-color: var(--primary-light-blue);
+  border-color: var(--primary-light-blue);
+  color: #fff;
+}
+
+.protected-route-card .btn-primary:hover,
+.protected-route-card .btn-secondary:hover {
+  opacity: 0.9;
+}

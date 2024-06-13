@@ -10,6 +10,7 @@ import AppLayout from './ui/AppLayout';
 import DogDetail from './components/DogDetail';
 import Events from './pages/Events';
 import { CurrentUserProvider } from './contexts/CurrentUserContext';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -21,15 +22,15 @@ const router = createBrowserRouter([
       },
       {
         path: '/dogs',
-        element: <Dogs />,
+        element: <ProtectedRoute element={<Dogs />}  />,
       },
       {
         path: '/dogs/:id',
-        element: <DogDetail />,
+        element: <ProtectedRoute element={<DogDetail />} />,
       },
       {
         path: '/profile',
-        element: <Profile />,
+        element: <ProtectedRoute element={<Profile />} />,
       },
       {
         path: '/events',
