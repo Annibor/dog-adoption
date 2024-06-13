@@ -34,6 +34,21 @@ class AdoptionEventDetail(generics.RetrieveAPIView):
     serializer_class = AdoptionEventSerializer
 
 
+class UserEventRegistrations(APIView):
+    """
+    View to list all event registrations for the current user.
+    """
+    serializer_class = AdoptionEventRegistrationSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        registrations = (AdoptionEventRegistration.
+                         objects.filter(user=request.user.profile))
+        serializer = (AdoptionEventRegistrationSerializer
+                      (registrations, many=True))
+        return Response(serializer.data)
+
+
 class EventRegistrationListCreateDelete(APIView):
     """
     View for listing, creating, and deleting event registrations.
