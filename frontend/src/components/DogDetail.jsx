@@ -49,6 +49,7 @@ const DogDetail = ({ dog, condensed, onDogUnlike }) => {
             <div>
               <Card className="mb-4">
               <Card.Img
+                    className="card-img-custom"
                     variant="top"
                     src={dogInfo.featured_image}
                   />

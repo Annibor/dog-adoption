@@ -186,6 +186,7 @@ function DogsList() {
           <Col key={dog.id} md={4}>
             <Card className={`mb-4 ${dog.adoption_status === 'adopted' ? 'adopted-card' : ''}`}>
               <Card.Img
+                 className={`card-img-custom ${dog.adoption_status === 'adopted' ? 'adopted-card-img' : ''}`}
                 variant="top"
                 src={dog.featured_image}
               />
@@ -199,7 +200,7 @@ function DogsList() {
                   className={dog.adoption_status === 'adopted' ? 'adopted-button' : ''}
                   disabled={dog.adoption_status === 'adopted'}
                 >
-                  Read more about me!
+                  {dog.adoption_status === 'adopted' ? 'Found new home' : 'Read more about me'}
                 </Button>
               </Card.Body>
             </Card>

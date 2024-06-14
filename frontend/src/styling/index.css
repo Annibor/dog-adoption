@@ -60,10 +60,22 @@
   --content-bg-color: rgba(179, 211, 239, 0.8); 
 
   --contrast-purple: #6A1B9A;
-  
+
+  --primary-light-blue: #B3D3EF;
+  --primary-white: #FFFFFF;
+  --light-gray: #F7F7F7;
+
+
+  --primary-light-blue: #B3D3EF;
+  --primary-dark-blue: #4A4A4A;
+  --main-bg-color: #FFFFFF;
+  --light-gray: #F7F7F7;
+
+  --content-bg-color: #FFFFFF;
+  --content-border-color: #E0E0E0;
+  /* #99c7e6;*/
 }
 
-/* Font size scaling */
 html {
   font-size: 50%;
   overflow-x: hidden;
@@ -123,16 +135,19 @@ h3 {
 }
 
 .content-wrapper {
-  background-color: var(--content-bg-color); /* Updated background color */
+  background-color: var(--content-bg-color);
   border: 1px solid var(--content-border-color);
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 0.8rem;
+  padding: 2rem;
+  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
 }
 
 .card {
-  border: none;
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--light-gray);
+  border-radius: 8px;
   margin-bottom: 20px;
+  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
 }
 
 .card-title {
@@ -146,23 +161,35 @@ h3 {
   color: var(--primary-dark-blue);
 }
 
+.card-img-top {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 10px;
+  background-color: var(--light-gray);
+}
+
+.card-body {
+  padding: 20px;
+}
+
 .btn {
   width: 100%;
-  padding: 10px 20px;
+  padding: 1rem 2rem;
   font-size: 1.6rem;
   letter-spacing: 1px;
   text-transform: uppercase;
+  border-radius: 4px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .btn-primary {
-  background-color: rgba(106, 27, 154, 0.8);
+  background-color: var(--primary-light-blue);
   border: none;
-  font-family: 'Montserrat', sans-serif;
-  color: var(--main-bg-color);
+  color: var(--primary-dark-blue);
 }
 
 .btn-primary:hover {
-  background-color: var(--contrast-dark-gray);
+  background-color: #99c7e6;
   border: none;
 }
 
@@ -172,19 +199,19 @@ h3 {
 
 .btn-secondary {
   background-color: var(--primary-dark-blue);
-  border-color: var(--primary-dark-blue);
-  font-family: 'Montserrat', sans-serif;
+  border: none;
   color: var(--main-bg-color);
 }
 
 .btn-secondary:hover {
-  background-color: var(--primary-dark-blue);
-  border-color: var(--primary-dark-blue);
+  background-color: #404040;
+  border: none;
 }
 
 .btn-secondary:active {
   transform: scale(1.05);
 }
+
 
 /* Responsive text scaling */
 @media (min-width: 34rem) {
