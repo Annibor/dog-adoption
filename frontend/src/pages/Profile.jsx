@@ -68,6 +68,15 @@ function Profile() {
     setLikedDogs((prevLikedDogs) => prevLikedDogs.filter((favorite) => favorite.dog.id !== dogId));
   };
 
+  const handleUnapplyAdoption = async (applicationId) => {
+    try {
+      await axios.delete(`/adoption-applications/${applicationId}/`);
+      setApplications((prevApplications) => prevApplications.filter((application) => application.id !== applicationId));
+    } catch (err) {
+      console.error('Error unapplying adoption application:', err);
+      setError('Error unapplying adoption application');
+    }
+  };
 
   const handleUnapplyEvent = async (eventId) => {
     try {
@@ -105,7 +114,7 @@ function Profile() {
                 </div>
                 <Collapse in={showApplications}>
                   <div id="applications-section">
-                  <AdoptionApplicationList applications={applications} loading={loading} error={error} />
+                    <AdoptionApplicationList applications={applications} loading={loading} error={error} onUnapply={handleUnapplyAdoption} />
                   </div>
                 </Collapse>
               </Col>
