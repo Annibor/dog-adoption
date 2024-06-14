@@ -4,6 +4,8 @@ import { Container, Row, Col, Card, Button, Spinner, Alert } from 'react-bootstr
 import axios from 'axios';
 import AdoptionApplicationForm from './AdoptionApplicationForm';
 import LikeButton from './LikeButton';
+import "../styling/dogs.css"
+import "../styling/index.css"
 
 const DogDetail = ({ dog, condensed, onDogUnlike }) => {
   const { id } = useParams();
@@ -13,7 +15,7 @@ const DogDetail = ({ dog, condensed, onDogUnlike }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!dog) { 
+    if (!dog) {
       const fetchDog = async () => {
         try {
           const response = await axios.get(`/dogs/${id}/`);
@@ -33,11 +35,10 @@ const DogDetail = ({ dog, condensed, onDogUnlike }) => {
   if (error) return <Alert variant="danger">{error}</Alert>;
 
   const dogInfo = dogData || dog;
-  console.log('dogInfo:', dogInfo);
 
   return (
     <Container className={`py-5 ${condensed ? 'condensed' : ''}`}>
-      {!condensed && ( 
+      {!condensed && (
         <Button variant="secondary" onClick={() => navigate(-1)} className="mb-4">
           &larr; Go Back
         </Button>
@@ -46,25 +47,25 @@ const DogDetail = ({ dog, condensed, onDogUnlike }) => {
         <Col md={6}>
           {dogInfo && (
             <div>
-              <Card>
-                <Card.Img variant="top" src={dogInfo.image_url} />
+              <Card className="mb-4">
+                <Card.Img variant="top" src={dogInfo.featured_image} />
                 <Card.Body>
                   <Card.Title className='text-uppercase'>{dogInfo.name}</Card.Title>
                   <Card.Text>
-                  {!condensed && (
-                    <>
-                      <strong>Breed:</strong> {dogInfo.breed}<br />
-                      <strong>Gender:</strong> {dogInfo.gender}<br />
-                      <strong>Age:</strong> {dogInfo.age}<br />
-                      <strong>Temperament:</strong> {dogInfo.temperament}<br />
-                      <strong>Good With Children:</strong> {dogInfo.good_with_children ? "Yes" : "No"}<br />
-                      <strong>Good With Other Dogs:</strong> {dogInfo.good_with_other_dogs ? "Yes" : "No"}  <br / >
-                      <strong>Description:</strong> {dogInfo.description}<br />
-                      <strong>Adoption Status:</strong> {dogInfo.adoption_status}<br />
-                      <strong>Created at:</strong> {new Date(dogInfo.created_at).toLocaleDateString()}<br />
-                      <strong>Updated at:</strong> {new Date(dogInfo.updated_at).toLocaleDateString()}<br />
-                    </>
-                  )}
+                    {!condensed && (
+                      <>
+                        <strong>Breed:</strong> {dogInfo.breed}<br />
+                        <strong>Gender:</strong> {dogInfo.gender}<br />
+                        <strong>Age:</strong> {dogInfo.age}<br />
+                        <strong>Temperament:</strong> {dogInfo.temperament}<br />
+                        <strong>Good With Children:</strong> {dogInfo.good_with_children ? "Yes" : "No"}<br />
+                        <strong>Good With Other Dogs:</strong> {dogInfo.good_with_other_dogs ? "Yes" : "No"}<br />
+                        <strong>Description:</strong> {dogInfo.description}<br />
+                        <strong>Adoption Status:</strong> {dogInfo.adoption_status}<br />
+                        <strong>Created at:</strong> {new Date(dogInfo.created_at).toLocaleDateString()}<br />
+                        <strong>Updated at:</strong> {new Date(dogInfo.updated_at).toLocaleDateString()}<br />
+                      </>
+                    )}
                   </Card.Text>
                   {dogInfo.id && (
                     <LikeButton dogId={dogInfo.id} onDogUnlike={onDogUnlike} />
@@ -74,9 +75,15 @@ const DogDetail = ({ dog, condensed, onDogUnlike }) => {
             </div>
           )}
         </Col>
-        {!condensed && dogInfo && ( 
+        {!condensed && dogInfo && (
           <Col md={6}>
-            <AdoptionApplicationForm dogId={dogInfo.id} dogName={dogInfo.name} />
+            {dogInfo.adoption_status === 'adopted' ? (
+              <div className="adopted-overlay">
+                <h3>Found new home</h3>
+              </div>
+            ) : (
+              <AdoptionApplicationForm dogId={dogInfo.id} dogName={dogInfo.name} />
+            )}
           </Col>
         )}
       </Row>
