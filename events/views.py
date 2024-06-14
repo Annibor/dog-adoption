@@ -82,6 +82,7 @@ class EventRegistrationListCreateDelete(APIView):
 
     def delete(self, request, pk):
         registration = get_object_or_404(AdoptionEventRegistration, pk=pk)
-        self.check_object_permissions(request, registration)
-        registration.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        if registration.user == request.user.profile:
+            registration.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_403_FORBIDDEN)

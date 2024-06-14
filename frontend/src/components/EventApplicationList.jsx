@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Alert, Spinner } from 'react-bootstrap';
+import { Card, Alert, Spinner, Button } from 'react-bootstrap';
 import axios from 'axios';
 
-const EventApplicationList = ({ eventApplications, loading, error }) => {
+const EventApplicationList = ({ eventApplications, loading, error, onUnapply }) => {
   const [eventsDetails, setEventsDetails] = useState({});
 
   useEffect(() => {
@@ -56,6 +56,7 @@ const EventApplicationList = ({ eventApplications, loading, error }) => {
               <Card.Text>
                 <strong>Status:</strong> {application.status}
               </Card.Text>
+              <Button variant="danger" onClick={() => onUnapply(application.id)}>Unapply</Button>
             </Card.Body>
           </Card>
         );
