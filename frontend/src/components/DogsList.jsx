@@ -185,7 +185,10 @@ function DogsList() {
         {filteredDogs.map((dog) => (
           <Col key={dog.id} md={4}>
             <Card className={`mb-4 ${dog.adoption_status === 'adopted' ? 'adopted-card' : ''}`}>
-              <Card.Img variant="top" src= {'https://res.cloudinary.com/dhdaogqnd/' + dog.featured_image} />
+              <Card.Img
+                variant="top"
+                src={dog.featured_image}
+              />
               <Card.Body>
                 <Card.Title>{dog.name}</Card.Title>
                 <Card.Text>{dog.breed} {dog.age} years old</Card.Text>
