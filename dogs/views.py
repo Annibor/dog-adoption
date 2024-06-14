@@ -34,6 +34,9 @@ class DogListView(generics.ListAPIView):
                      'temperament',
                      'good_with_children',
                      'good_with_other_dogs']
+    
+    def get_serializer_context(self):
+        return {'request': self.request}
 
 
 class DogDetailView(generics.RetrieveAPIView):

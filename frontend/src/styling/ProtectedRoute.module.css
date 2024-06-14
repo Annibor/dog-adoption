@@ -7,9 +7,9 @@
 
 .protected-route-card {
   background-color: #f8f9fa;
-  border-radius: 8px;
+  border-radius: 0.8rem;
   padding: 2rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
 }
 
 .protected-route-card h2 {

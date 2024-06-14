@@ -35,7 +35,8 @@ class Dog(models.Model):
     name = models.CharField(max_length=80)
     breed = models.CharField(max_length=80)
     age = models.IntegerField()
-    featured_image = CloudinaryField('image', default='placeholder')
+    featured_image = CloudinaryField('image',
+                                     default='../defaultdogimg')
     description = models.TextField()
     gender = models.CharField(max_length=10)
     temperament = models.CharField(max_length=10,

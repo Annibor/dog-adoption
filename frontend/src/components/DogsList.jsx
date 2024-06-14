@@ -83,7 +83,7 @@ function DogsList() {
         </Col>
       </Row>
       <Row>
-        <Col md={3}>
+        <Col md={12}>
           <Button
             className="mb-2"
             onClick={() => setOpen(!open)}
@@ -185,7 +185,11 @@ function DogsList() {
         {filteredDogs.map((dog) => (
           <Col key={dog.id} md={4}>
             <Card className={`mb-4 ${dog.adoption_status === 'adopted' ? 'adopted-card' : ''}`}>
-              <Card.Img variant="top" src={dog.featured_image} />
+              <Card.Img
+                 className={`card-img-custom ${dog.adoption_status === 'adopted' ? 'adopted-card-img' : ''}`}
+                variant="top"
+                src={dog.featured_image}
+              />
               <Card.Body>
                 <Card.Title>{dog.name}</Card.Title>
                 <Card.Text>{dog.breed} {dog.age} years old</Card.Text>
@@ -196,7 +200,7 @@ function DogsList() {
                   className={dog.adoption_status === 'adopted' ? 'adopted-button' : ''}
                   disabled={dog.adoption_status === 'adopted'}
                 >
-                  Read more about me!
+                  {dog.adoption_status === 'adopted' ? 'Found new home' : 'Read more about me'}
                 </Button>
               </Card.Body>
             </Card>

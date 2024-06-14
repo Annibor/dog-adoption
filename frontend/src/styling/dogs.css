@@ -29,3 +29,14 @@
   background-color: grey !important;
   border-color: grey !important;
 }
+
+.adopted-card-img {
+  filter: grayscale(100%);
+}
+
+.card-img-custom{
+
+  border-radius: 0.3rem;
+  padding: 1rem;
+  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
+}
