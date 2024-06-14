@@ -48,7 +48,7 @@ const DogDetail = ({ dog, condensed, onDogUnlike }) => {
           {dogInfo && (
             <div>
               <Card className="mb-4">
-                <Card.Img variant="top" src={dogInfo.featured_image} />
+                <Card.Img variant="top" src={'https://res.cloudinary.com/dhdaogqnd/' + dogInfo.featured_image} />
                 <Card.Body>
                   <Card.Title className='text-uppercase'>{dogInfo.name}</Card.Title>
                   <Card.Text>
