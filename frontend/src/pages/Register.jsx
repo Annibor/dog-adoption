@@ -18,7 +18,6 @@ function Register() {
   const navigate = useNavigate();
 
   const handleChange = (event) => {
-    console.log('handleChange:', event.target.name, event.target.value);
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
@@ -31,10 +30,9 @@ function Register() {
       await axios.post("/dj-rest-auth/registration/", formData);
       navigate("/login");
     } catch (err) {
-      setError(err.response?.data);
+      setError(err.response?.data || {});
     }
   };
-  
 
   return (
     <Container className='p-5'>
@@ -87,13 +85,13 @@ function Register() {
                 required
               />
             </Form.Group>
-            {error.password?.map((message, idx) => (
+            {error.password1?.map((message, idx) => (
               <Alert variant='warning' key={idx}>
                 {message}
               </Alert>
             ))}
 
-            <Form.Group controlId="password2">
+            <Form.Group controlId="Password2">
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control
                 type="password"
@@ -104,7 +102,7 @@ function Register() {
                 required
               />
             </Form.Group>
-            {error.confirmPassword?.map((message, idx) => (
+            {error.password2?.map((message, idx) => (
               <Alert variant='warning' key={idx}>
                 {message}
               </Alert>
