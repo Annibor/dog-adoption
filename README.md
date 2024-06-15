@@ -1,4 +1,4 @@
-# Dog Rescue Center
+# PawPal
 
 []()
 
@@ -10,7 +10,7 @@
 
 ## Table of Content
 
-- [**Dog rescue center**](#Dog-rescue-center>)
+- [**PawPal**](#PawPal>)
   - [**Introduction**](#introduction)
   - [**Table of Content**](#table-of-content)
   - [**Planning & Development**](#planning--development)
@@ -67,11 +67,11 @@
 
 ## Agile Planning
 
-The development of *Dog rescue center* was meticulously planned and executed following agile methodologies. This section outlines the user stories and epics that guided the development process, ensuring that each feature not only meets the users' expectations but also enriches their interaction with the app.
+The development of *PawPal* was meticulously planned and executed following agile methodologies. This section outlines the user stories and epics that guided the development process, ensuring that each feature not only meets the users' expectations but also enriches their interaction with the app.
 
 ### Structuring Development with User Stories
 
-At the heart of my agile planning were the User Stories - the narratives that captured the essence of what the users, both general visitors and registered members, sought from *Dog rescue center*. These stories facilitated a deep understanding of the audience's needs, guiding the development process from a user-centric perspective.
+At the heart of my agile planning were the User Stories - the narratives that captured the essence of what the users, both general visitors and registered members, sought from *PawPal*. These stories facilitated a deep understanding of the audience's needs, guiding the development process from a user-centric perspective.
 
 ### Task Breakdown and Epic Creation
 
@@ -93,12 +93,8 @@ My project board can be found here:
 
 ### Project Goals
 
-The primary goal of *Dog rescue center* is to :
-
-
-
-
-
+The primary goal of *PawPal* is to :
+-  create a user-friendly platform where individuals can view, search, and apply for adopting dogs, while ensuring that the website is accessible, responsive, and easy to navigate.
 
 - [Back to Top](#table-of-content)
 
@@ -106,63 +102,89 @@ The primary goal of *Dog rescue center* is to :
 
 **As a Visitor or Registered User:**
 
-- **Access the Home Page**: 
+- **Access the Home Page**: As a user and visitor, I want to easily access the homepage and understand the purpose of the site.
+- **View Dog Listings**: As a user, I want to browse through the list of available dogs to find one that I might be interested in adopting.
+- **Filter Dogs by Breed and Age**: As a user, I want to filter dogs by breed and age to narrow down my search.
+- **View Dog Details**: As a user, I want to click on a dog to view more detailed information about it.
+- **View Event Details**: As a user, I want to browse through the events to find one that I want to apply to.
+- **View Event and adoption Applications**: As a user, I want to be able to view all my applied events and adoptionapplications on my profile page in order to have a overview of them.
+
 
 - [Back to top](#table-of-content)
 
 #### As a General user
 
-As a registered User:
+**As a General User:**
 
-I want to 
-I want to 
-I need to 
+- As a general user, I want to see information about the rescue center and their dogs.
+- As a general user, I want to be able to apply for adoption and events, like dogs, unlike dogs and unapply from events and adoptionapplications.
+- As a general user, I want to be able to update my profiel with my address, pgone number and name.
+
 
 - [Back to Top](#table-of-content)
 
 #### As a New User
 
-- As a New User:
+**As a New User:**
 
-I need to quickly understand how to navigate the app to start searching and save/like dogs.
+- As a new user, I need to quickly understand how to navigate the app to start searching and save/like dogs.
+- As a new user, I want to register and create a profile so I can save my favorite dogs and apply for adoption.
+
 
 - [Back to Top](#table-of-content)
 
 ### Epic Breakdowns
 
-**Epic 1: **
+**Epic 1: Pages**
+- *Must Have*: Good layout for the pages so that visitors and users can easily navigate and understand what they need to do.
+- **Tasks Included:**
+  - Create home page structure with components.
+  - Create dogs page with components.
+  - Create profile page with components.
+  - Create login page with components.
+  - Create register page with components.
 
-- *Must Have*: 
-  
-**Tasks Included:**
-  - 
+**Epic 2: Writing Tests**
+- *Should Have*: Write tests for the code to ensure functionality.
+- **Tasks Included:**
+  - Write tests for frontend code.
+  - Write tests for backend code.
 
-**Epic 2:**
+**Epic 3: Health Records**
+- *Should Have*: Manage health records for each dog, making them viewable to registered users.
+- **Tasks Included:**
+  - Frontend: View a health records list for each dog on their page.
+  - Backend: Users can retrieve health records for a specific dog. Admin can create, update, and delete health records.
 
-- *Should Have*:
-  
-**Tasks Included:**
-  -
+**Epic 4: Adoption Events**
+- *Should Have*: Allow users to view and list adoption events.
+- **Tasks Included:**
+  - Frontend: Display a list of adoption events.
+  - Backend: Allow admins to create, update, and delete events.
 
-**Epic 3:**
+**Epic 5: Documentation**
+- *Must Have*: Document the backend API development and frontend development of the app.
+- **Tasks Included:**
+  - Document the backend API.
+  - Document the frontend components and design.
 
-- *Must Have*: 
-  
-**Tasks Included:**
-  - 
+**Epic 6: Adoption Application**
+- *Must Have*: Create an adoption application form for users to book visits with potential adoption dogs.
+- **Tasks Included:**
+  - Backend: Create a model for the adoption form.
+  - Frontend: Create an adoption form that auto-fills user information from their profile.
 
-**Epic 4:**
+**Epic 7: Profiles**
+- *Must Have*: Comprehensive management system for users to manage profiles and show liked/saved dogs.
+- **Tasks Included:**
+  - Backend: Establish secure and scalable API endpoints for profile-related operations.
+  - Frontend: Design user-friendly interfaces for profile management and displaying liked/saved dogs.
 
-- *Should Have*: 
-  
-**Tasks Included:**
-  - 
-
-**Epic 5: Website Styling and Responsiveness**
-
-- *Could Have*: 
-  
-**Tasks Included:**
+**Epic 8: Basic Dogs Management**
+- *Must Have*: Core functionality for listing dogs available for adoption.
+- **Tasks Included:**
+  - Frontend: Design components for displaying dogs and allowing users to add dogs to their save list.
+  - Backend: Create a dog model and add filtering and search functionality.
   
 
   - [Back to Top](#table-of-content)
