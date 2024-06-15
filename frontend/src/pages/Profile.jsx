@@ -8,7 +8,7 @@ import '../styling/index.css';
 import LikedDogsCarousel from '../components/LikedDogCarousel';
 import AdoptionApplicationList from '../components/AdoptionApplicationList';
 import EventApplicationList from '../components/EventApplicationList';
-import axios from 'axios';
+import { axiosReq } from '../api/axiosDefaults';
 
 function Profile() {
   const [likedDogs, setLikedDogs] = useState([]);
@@ -25,7 +25,7 @@ function Profile() {
   useEffect(() => {
     const fetchLikedDogs = async () => {
       try {
-        const response = await axios.get('/favorites/');
+        const response = await axiosReq.get('/favorites/');
         console.log('Liked dogs fetched:', response.data);
         setLikedDogs(response.data);
       } catch (err) {
@@ -35,7 +35,7 @@ function Profile() {
 
     const fetchApplications = async () => {
       try {
-        const response = await axios.get('/adoption-applications/');
+        const response = await axiosReq.get('/adoption-applications/');
         console.log('Adoption applications fetched:', response.data);
         setApplications(Array.isArray(response.data.results) ? response.data.results : []);
       } catch (err) {
@@ -48,7 +48,8 @@ function Profile() {
 
     const fetchEventApplications = async () => {
       try {
-        const response = await axios.get('/events/registrations/');
+        const response = await axiosReq.get('/events/registrations/');
+        console.log('Event applications fetched:', response.data);
         setEventApplications(Array.isArray(response.data) ? response.data : []);
       } catch (err) {
         console.error('Error fetching event applications:', err);
@@ -61,7 +62,6 @@ function Profile() {
     fetchLikedDogs();
     fetchApplications();
     fetchEventApplications();
-    setLoading(false);
   }, []);
 
   const handleDogUnlike = (dogId) => {
@@ -70,7 +70,7 @@ function Profile() {
 
   const handleUnapplyAdoption = async (applicationId) => {
     try {
-      await axios.delete(`/adoption-applications/${applicationId}/`);
+      await axiosReq.delete(`/adoption-applications/${applicationId}/`);
       setApplications((prevApplications) => prevApplications.filter((application) => application.id !== applicationId));
     } catch (err) {
       console.error('Error unapplying adoption application:', err);
@@ -78,10 +78,11 @@ function Profile() {
     }
   };
 
-  const handleUnapplyEvent = async (eventId) => {
+  const handleUnapplyEvent = async (applicationId, eventId) => {
     try {
-      await axios.delete(`/events/registrations/${eventId}/`);
-      setEventApplications((prevEventApplications) => prevEventApplications.filter((application) => application.id !== eventId));
+      await axiosReq.delete(`/events/registrations/${applicationId}/`);
+      setEventApplications((prevEventApplications) => prevEventApplications.filter((application) => application.id !== applicationId));
+      localStorage.removeItem(`eventApplied-${eventId}`); // Update local storage
     } catch (err) {
       console.error('Error unapplying event application:', err);
       setError('Error unapplying event application');

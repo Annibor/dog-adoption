@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Button, Spinner, Alert } from 'react-bootstrap';
-import axios from 'axios';
+import { axiosReq } from '../api/axiosDefaults'; // Import axiosReq instance
 import AdoptionApplicationForm from './AdoptionApplicationForm';
 import LikeButton from './LikeButton';
-import "../styling/dogs.css"
-import "../styling/index.css"
+import "../styling/dogs.css";
+import "../styling/index.css";
 
 const DogDetail = ({ dog, condensed, onDogUnlike }) => {
   const { id } = useParams();
@@ -18,7 +18,7 @@ const DogDetail = ({ dog, condensed, onDogUnlike }) => {
     if (!dog) {
       const fetchDog = async () => {
         try {
-          const response = await axios.get(`/dogs/${id}/`);
+          const response = await axiosReq.get(`/dogs/${id}/`); // Use axiosReq
           setDogData(response.data);
           setLoading(false);
         } catch (err) {
@@ -48,11 +48,11 @@ const DogDetail = ({ dog, condensed, onDogUnlike }) => {
           {dogInfo && (
             <div>
               <Card className="mb-4">
-              <Card.Img
-                    className="card-img-custom"
-                    variant="top"
-                    src={dogInfo.featured_image}
-                  />
+                <Card.Img
+                  className="card-img-custom"
+                  variant="top"
+                  src={dogInfo.featured_image}
+                />
                 <Card.Body>
                   <Card.Title className='text-uppercase'>{dogInfo.name}</Card.Title>
                   <Card.Text>

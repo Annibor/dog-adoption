@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Card, Button, Alert, Spinner } from 'react-bootstrap';
-import axios from 'axios';
+import { axiosReq } from '../api/axiosDefaults';
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 
 const EventDetail = ({ event }) => {
@@ -16,6 +16,9 @@ const EventDetail = ({ event }) => {
       if (appliedStatus === 'true') {
         setApplied(true);
         setSuccess('Successfully applied for the event!');
+      } else {
+        setApplied(false);
+        setSuccess(null);
       }
     }
   }, [event]);
@@ -30,25 +33,23 @@ const EventDetail = ({ event }) => {
         event: event.id,
         user: currentUser.profile_id,
       };
-      console.log('Request Data:', requestData);
-      const response = await axios.post(`/events/registrations/${event.id}/`, requestData);
-      console.log('Response Data:', response.data);
+      await axiosReq.post(`/events/registrations/${event.id}/`, requestData);
       setApplied(true);
       setSuccess('Successfully applied for the event!');
-      setLoading(false);
       localStorage.setItem(`eventApplied-${event.id}`, 'true');
+      setLoading(false);
     } catch (err) {
-      console.error('Failed to apply for the event:', err.response?.data || err);
-      setError('Failed to apply for the event.');
+      if (err.response && err.response.status === 400 && err.response.data.detail === "You have already registered for this event.") {
+        setApplied(true);
+        setError('You have already applied for this event.');
+      } else {
+        setError('Failed to apply for the event.');
+      }
       setLoading(false);
     }
   };
 
   if (!event) return <div>Select an event to see details</div>;
-
-  if (applied) {
-    return <Alert variant="success">Thank you for applying for the event!</Alert>;
-  }
 
   return (
     <Card className="mb-4">
@@ -60,8 +61,8 @@ const EventDetail = ({ event }) => {
         {loading && <Spinner animation="border" variant="primary" />}
         {error && <Alert variant="danger">{error}</Alert>}
         {success && <Alert variant="success">{success}</Alert>}
-        <Button onClick={handleApply} disabled={loading}>
-          Apply
+        <Button onClick={handleApply} disabled={loading || applied}>
+          {applied ? 'Already Applied' : 'Apply'}
         </Button>
       </Card.Body>
     </Card>
