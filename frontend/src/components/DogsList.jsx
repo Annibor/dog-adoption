@@ -5,6 +5,8 @@ import { Container, Row, Col, Card, Button, Alert, Form, Collapse } from 'react-
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { FaFilter } from 'react-icons/fa';
+import "../styling/dogs.css"
+import "../styling/index.css"
 
 
 function DogsList() {
@@ -188,12 +190,24 @@ function DogsList() {
         </Col>
         {filteredDogs.map((dog) => (
           <Col key={dog.id} md={4}>
-            <Card className="mb-4">
-            <Card.Img variant="top" src={dog.featured_image} />
+            <Card className={`mb-4 ${dog.adoption_status === 'adopted' ? 'adopted-card' : ''}`}>
+            <Card.Img
+                 className={`card-img-custom ${dog.adoption_status === 'adopted' ? 'adopted-card-img' : ''}`}
+                variant="top"
+                src={dog.featured_image}
+              />
               <Card.Body>
                 <Card.Title>{dog.name}</Card.Title>
                 <Card.Text>{dog.breed} {dog.age} years old</Card.Text>
-                <Button  as={Link} to={`/dogs/${dog.id}`}>Read more about me!</Button>
+                <Button
+                  as={Link}
+                  to={`/dogs/${dog.id}`}
+                  variant={dog.adoption_status === 'adopted' ? 'secondary' : 'primary'}
+                  className={dog.adoption_status === 'adopted' ? 'adopted-button' : ''}
+                  disabled={dog.adoption_status === 'adopted'}
+                >
+                  {dog.adoption_status === 'adopted' ? 'Found new home' : 'Read more about me'}
+                </Button>
               </Card.Body>
             </Card>
           </Col>
