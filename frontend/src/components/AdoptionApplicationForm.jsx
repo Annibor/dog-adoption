@@ -16,6 +16,7 @@ function AdoptionApplicationForm({ dogId, dogName }) {
     phone: '',
     has_children: false,
     has_other_pets: false,
+    dog: dogId,
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -69,7 +70,9 @@ function AdoptionApplicationForm({ dogId, dogName }) {
     setSuccess(null);
 
     try {
-      await axiosReq.post('/adoption-applications/', { ...formData, dog: dogId });
+      const applicationData = { ...formData, dog: dogId, user: currentUser.profile_id };
+      console.log("Submitting form data:", applicationData);
+      await axiosReq.post('/adoption-applications/', applicationData);
       setSuccess('Application submitted successfully!');
       if (currentUser) {
         localStorage.setItem(`applied_${dogId}_${currentUser.id}`, 'true');
