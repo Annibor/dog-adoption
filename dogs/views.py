@@ -73,14 +73,14 @@ class AdoptionApplicationListCreatView(generics.ListCreateAPIView):
             return AdoptionApplication.objects.filter(user=user.profile)
         return AdoptionApplication.objects.none()
 
+
     def perform_create(self, serializer):
         """
         Saves the current adoption application with the current user.
         """
-        print("Request Data:", self.request.data)
         profile = Profile.objects.filter(owner=self.request.user).first()
-        print('in perform_create')
-        print(profile)
+        print('Received data:', self.request.data)
+        print('Profile:', profile)
         serializer.save(user=profile)
 
 

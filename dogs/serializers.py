@@ -19,7 +19,6 @@ class DogSerializer(serializers.ModelSerializer):
 
 
 class AdoptionApplicationSerializer(serializers.ModelSerializer):
-    dog = DogSerializer(read_only=True)
 
     class Meta:
         model = AdoptionApplication
