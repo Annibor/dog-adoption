@@ -22,7 +22,9 @@ const AdoptionApplicationList = ({ applications, loading, error, onUnapply }) =>
             </Card.Text>
             <Button
               variant="danger"
-              onClick={() => onUnapply(application.id)}
+              onClick={() => {
+                console.log(`Unapplying application id: ${application.id}`);
+                onUnapply(application.id, application.dog, application.user)}}
             >
               Unapply
             </Button>

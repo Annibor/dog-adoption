@@ -12,6 +12,7 @@ const DogDetail = ({ dog, condensed, onDogUnlike }) => {
   const [dogData, setDogData] = useState(dog || null);
   const [loading, setLoading] = useState(!dog);
   const [error, setError] = useState(null);
+  const [resetForm, setResetForm] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,10 +32,16 @@ const DogDetail = ({ dog, condensed, onDogUnlike }) => {
     }
   }, [id, dog]);
 
+
   if (loading) return <Spinner animation="border" variant="primary" />;
   if (error) return <Alert variant="danger">{error}</Alert>;
 
   const dogInfo = dogData || dog;
+
+  const handleFormReset = () => {
+    setResetForm(!resetForm);
+    console.log('Form reset in DogDetail');
+  };
 
   return (
     <Container className={`py-5 ${condensed ? 'condensed' : ''}`}>
@@ -86,7 +93,7 @@ const DogDetail = ({ dog, condensed, onDogUnlike }) => {
                 <h3>Found new home</h3>
               </div>
             ) : (
-              <AdoptionApplicationForm dogId={dogInfo.id} dogName={dogInfo.name} />
+              <AdoptionApplicationForm dogId={dogInfo.id} dogName={dogInfo.name} onReset={handleFormReset} key={resetForm} />
             )}
           </Col>
         )}

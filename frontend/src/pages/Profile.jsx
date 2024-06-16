@@ -10,12 +10,14 @@ import AdoptionApplicationList from '../components/AdoptionApplicationList';
 import EventApplicationList from '../components/EventApplicationList';
 import { axiosReq } from '../api/axiosDefaults';
 
+
 function Profile() {
   const [likedDogs, setLikedDogs] = useState([]);
   const [applications, setApplications] = useState([]);
   const [eventApplications, setEventApplications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [resetForm, setResetForm] = useState(false);
 
   const [showLikedDogs, setShowLikedDogs] = useState(false);
   const [showApplications, setShowApplications] = useState(false);
@@ -68,11 +70,13 @@ function Profile() {
     setLikedDogs((prevLikedDogs) => prevLikedDogs.filter((favorite) => favorite.dog.id !== dogId));
   };
 
-  const handleUnapplyAdoption = async (applicationId) => {
+  const handleUnapplyAdoption = async (applicationId, dogId, currentUser) => {
     try {
       await axiosReq.delete(`/adoption-applications/${applicationId}/`);
       console.log('Unapplied from adoption application id:', applicationId);
       setApplications((prevApplications) => prevApplications.filter((application) => application.id !== applicationId));
+      localStorage.removeItem(`applied_${dogId}_${currentUser.id}`);
+      setTimeout(() => setResetForm(false), 0);
     } catch (err) {
       console.error('Error unapplying adoption application:', err);
       setError('Error unapplying adoption application');
@@ -117,7 +121,7 @@ function Profile() {
                 </div>
                 <Collapse in={showApplications}>
                   <div id="applications-section">
-                    <AdoptionApplicationList applications={applications} loading={loading} error={error} onUnapply={handleUnapplyAdoption} />
+                  <AdoptionApplicationList applications={applications} loading={loading} error={error} onUnapply={(applicationId) => handleUnapplyAdoption(applicationId, applications.find(app => app.id === applicationId).dog, applications.find(app => app.id === applicationId).user)} resetForm={resetForm} />
                   </div>
                 </Collapse>
               </Col>

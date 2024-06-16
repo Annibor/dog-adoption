@@ -3,7 +3,7 @@ import { Form, Button, Col, Row, Alert, Spinner } from 'react-bootstrap';
 import { axiosReq } from '../api/axiosDefaults';
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 
-function AdoptionApplicationForm({ dogId, dogName }) {
+function AdoptionApplicationForm({ dogId, dogName, onReset }) {
   const { currentUser } = useCurrentUser(); // Get current user
   const [formData, setFormData] = useState({
     visit_date: '',
@@ -85,8 +85,35 @@ function AdoptionApplicationForm({ dogId, dogName }) {
     }
   };
 
+  const handleReset = () => {
+    setSubmitted(false);
+    setSuccess(null);
+    setError(null);
+    localStorage.removeItem(`applied_${dogId}_${currentUser.id}`);
+    setFormData({
+      visit_date: '',
+      first_name: '',
+      last_name: '',
+      address: '',
+      city: '',
+      state: '',
+      zip_code: '',
+      phone: '',
+      has_children: false,
+      has_other_pets: false,
+      dog: dogId,
+    });
+    if (onReset) onReset();
+    console.log('Form reset in AdoptionApplicationForm');
+  };
+
   if (submitted) {
-    return <Alert variant="success">You have already applied for this dog.</Alert>;
+    return (
+      <Alert variant="success">
+        You have already applied for this dog.
+        <Button onClick={handleReset} variant="link">Unapply</Button>
+      </Alert>
+    );
   }
 
   return (
