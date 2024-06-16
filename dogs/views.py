@@ -76,7 +76,7 @@ class AdoptionApplicationListCreatView(generics.ListCreateAPIView):
         """
         Saves the current adoption application with the current user.
         """
-        serializer.save(user=self.request.user.profile)
+        serializer.save(user=self.request.user.profile, dog_id=self.request.data.get('dog_id'))
 
 
 class AdoptionApplicationDetailView(generics.RetrieveUpdateDestroyAPIView):
