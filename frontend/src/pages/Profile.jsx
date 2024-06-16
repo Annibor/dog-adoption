@@ -8,7 +8,7 @@ import '../styling/index.css';
 import LikedDogsCarousel from '../components/LikedDogCarousel';
 import AdoptionApplicationList from '../components/AdoptionApplicationList';
 import EventApplicationList from '../components/EventApplicationList';
-import axios from 'axios';
+import {  axiosReq } from "../api/axiosDefaults";
 
 function Profile() {
   const [likedDogs, setLikedDogs] = useState([]);
@@ -27,7 +27,7 @@ function Profile() {
   useEffect(() => {
     const fetchLikedDogs = async () => {
       try {
-        const response = await axios.get('/favorites/');
+        const response = await axiosReq.get('/favorites/');
         console.log('Liked dogs fetched:', response.data); // Debug log
         setLikedDogs(response.data);
       } catch (err) {
@@ -37,7 +37,7 @@ function Profile() {
 
     const fetchApplications = async () => {
       try {
-        const response = await axios.get('/adoption-applications/');
+        const response = await axiosReq.get('/adoption-applications/');
         console.log('Adoption applications fetched:', response.data); // Debug log
         setApplications(Array.isArray(response.data.results) ? response.data.results : []);
       } catch (err) {
@@ -50,7 +50,7 @@ function Profile() {
 
     const fetchEventApplications = async () => {
       try {
-        const response = await axios.get('/events/registrations/');
+        const response = await axiosReq.get('/events/registrations/');
         setEventApplications(Array.isArray(response.data) ? response.data : []);
       } catch (err) {
         console.error('Error fetching event applications:', err);
@@ -69,6 +69,28 @@ function Profile() {
 
   const handleDogUnlike = (dogId) => {
     setLikedDogs((prevLikedDogs) => prevLikedDogs.filter((favorite) => favorite.dog.id !== dogId));
+  };
+
+  const handleUnapplyAdoption = async (applicationId) => {
+    try {
+      await axiosReq.delete(`/adoption-applications/${applicationId}/`);
+      setApplications((prevApplications) => prevApplications.filter((application) => application.id !== applicationId));
+      localStorage.removeItem(`Applied-${applicationId}`);
+    } catch (err) {
+      console.error('Error unapplying adoption application:', err);
+      setError('Error unapplying adoption application');
+    }
+  };
+
+  const handleUnapplyEvent = async (applicationId, eventId) => {
+    try {
+      await axiosReq.delete(`/events/registrations/${applicationId}/`);
+      setEventApplications((prevEventApplications) => prevEventApplications.filter((application) => application.id !== applicationId));
+      localStorage.removeItem(`eventApplied-${eventId}`); // Update local storage
+    } catch (err) {
+      console.error('Error unapplying event application:', err);
+      setError('Error unapplying event application');
+    }
   };
 
   return (
@@ -97,7 +119,7 @@ function Profile() {
               </div>
               <Collapse in={showApplications}>
                 <div id="applications-section">
-                  <AdoptionApplicationList applications={applications} loading={loading} error={error} />
+                <AdoptionApplicationList applications={applications} loading={loading} error={error} onUnapply={handleUnapplyAdoption} />
                 </div>
               </Collapse>
             </Col>
@@ -110,7 +132,7 @@ function Profile() {
               </div>
               <Collapse in={showEventApplications}>
                 <div id="event-applications-section">
-                  <EventApplicationList eventApplications={eventApplications} loading={loading} error={error} />
+                <EventApplicationList eventApplications={eventApplications} loading={loading} error={error} onUnapply={handleUnapplyEvent} />
                 </div>
               </Collapse>
             </Col>

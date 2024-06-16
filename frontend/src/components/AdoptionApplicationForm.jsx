@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Form, Button, Col, Row, Alert, Spinner } from 'react-bootstrap';
-import axios from 'axios';
+import {  axiosReq } from "../api/axiosDefaults";
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 
 function AdoptionApplicationForm({ dogId, dogName }) {
@@ -22,13 +22,13 @@ function AdoptionApplicationForm({ dogId, dogName }) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
-  const [submitted, setSubmitted] = useState(localStorage.getItem(`applicationSubmitted-${dogId}`) === 'true');
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     if (currentUser) {
       const fetchUserData = async () => {
         try {
-          const response = await axios.get(`/profile/${currentUser.profile_id}/`);
+          const response = await axiosReq.get(`/profile/${currentUser.profile_id}/`);
           const { first_name, last_name, address, city, state, zip_code, phone, has_children, has_other_pets } = response.data;
           setFormData((prevData) => ({
             ...prevData,
@@ -57,7 +57,6 @@ function AdoptionApplicationForm({ dogId, dogName }) {
       ...formData,
       [name]: type === 'checkbox' ? checked : value,
     });
-    console.log(`Field ${name} updated to ${type === 'checkbox' ? checked : value}`);
   };
 
   const handleSubmit = async (e) => {
@@ -65,10 +64,9 @@ function AdoptionApplicationForm({ dogId, dogName }) {
     setLoading(true);
     setError(null);
     setSuccess(null);
-    console.log('Submitting application with data:', formData);
 
     try {
-      await axios.post('/adoption-applications/', {
+      await axiosReq.post('/adoption-applications/', {
         ...formData,
         user: currentUser.profile_id,
         dog: dogId,
@@ -76,7 +74,6 @@ function AdoptionApplicationForm({ dogId, dogName }) {
       setSuccess('Application submitted successfully');
       setLoading(false);
       setSubmitted(true);
-      localStorage.setItem(`applicationSubmitted-${dogId}`, 'true');
     } catch (err) {
       console.error('Failed to submit application:', err.response?.data);
       setError('Failed to submit application');

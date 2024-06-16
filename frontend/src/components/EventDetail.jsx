@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Card, Button, Alert, Spinner } from 'react-bootstrap';
-import axios from 'axios';
+import {  axiosReq } from "../api/axiosDefaults";
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 
 const EventDetail = ({ event }) => {
@@ -31,7 +31,7 @@ const EventDetail = ({ event }) => {
         user: currentUser.profile_id,
       };
       console.log('Request Data:', requestData);
-      const response = await axios.post(`/events/registrations/${event.id}/`, requestData);
+      const response = await axiosReq.post(`/events/registrations/${event.id}/`, requestData);
       console.log('Response Data:', response.data);
       setApplied(true);
       setSuccess('Successfully applied for the event!');
