@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser, I
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import AdoptionEvent, AdoptionEventRegistration
+from profiles.models import Profile
 from .serializers import AdoptionEventSerializer, AdoptionEventRegistrationSerializer
 import logging
 

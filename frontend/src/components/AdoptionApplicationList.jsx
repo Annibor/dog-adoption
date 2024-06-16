@@ -1,30 +1,28 @@
-
 import { Card, Button, Alert, Spinner } from 'react-bootstrap';
 
-
-const EventApplicationList = ({ eventApplications, loading, error, onUnapply }) => {
+const AdoptionApplicationList = ({ applications, loading, error, onUnapply }) => {
   if (loading) return <Spinner animation="border" variant="primary" />;
   if (error) return <Alert variant="danger">{error}</Alert>;
-  if (!eventApplications || eventApplications.length === 0) {
-    return <Alert variant="info">No event applications to display.</Alert>;
+  if (!applications || applications.length === 0) {
+    return <Alert variant="info">No adoption applications to display.</Alert>;
   }
 
   return (
     <div>
-      <h2>Your Event Applications</h2>
-      {eventApplications.map(application => (
+      <h2>Your Adoption Applications</h2>
+      {applications.map(application => (
         <Card key={application.id} className="mb-3">
           <Card.Body>
-            <Card.Title>{application.event.title}</Card.Title>
+            <Card.Title>{application.dog.name}</Card.Title>
             <Card.Text>
-              <strong>Date:</strong> {new Date(application.event.date).toLocaleString()}
+              <strong>Date:</strong> {new Date(application.visit_date).toLocaleString()}
             </Card.Text>
             <Card.Text>
-              <strong>Location:</strong> {application.event.location}
+              <strong>Status:</strong> {application.status}
             </Card.Text>
             <Button
               variant="danger"
-              onClick={() => onUnapply(application.id, application.event.id)}
+              onClick={() => onUnapply(application.id)}
             >
               Unapply
             </Button>
@@ -35,4 +33,4 @@ const EventApplicationList = ({ eventApplications, loading, error, onUnapply }) 
   );
 };
 
-export default EventApplicationList;
+export default AdoptionApplicationList;

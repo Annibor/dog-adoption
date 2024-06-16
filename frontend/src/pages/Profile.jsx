@@ -71,6 +71,7 @@ function Profile() {
   const handleUnapplyAdoption = async (applicationId) => {
     try {
       await axiosReq.delete(`/adoption-applications/${applicationId}/`);
+      console.log('Unapplied from adoption application id:', applicationId);
       setApplications((prevApplications) => prevApplications.filter((application) => application.id !== applicationId));
     } catch (err) {
       console.error('Error unapplying adoption application:', err);
@@ -82,7 +83,8 @@ function Profile() {
     try {
       await axiosReq.delete(`/events/registrations/${applicationId}/`);
       setEventApplications((prevEventApplications) => prevEventApplications.filter((application) => application.id !== applicationId));
-      localStorage.removeItem(`eventApplied-${eventId}`); // Update local storage
+      localStorage.removeItem(`eventApplied-${eventId}`);
+      console.log('Event application unapplied, applicationId');
     } catch (err) {
       console.error('Error unapplying event application:', err);
       setError('Error unapplying event application');
