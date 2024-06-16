@@ -27,6 +27,29 @@ function AdoptionApplicationForm({ dogId, dogName }) {
       const applied = localStorage.getItem(`applied_${dogId}_${currentUser.id}`);
       if (applied) {
         setSubmitted(true);
+      } else {
+        // Fetch user profile details to prefill the form
+        const fetchUserProfile = async () => {
+          try {
+            const { data } = await axiosReq.get(`/profile/${currentUser.profile_id}/`);
+            setFormData((prevFormData) => ({
+              ...prevFormData,
+              first_name: data.first_name || '',
+              last_name: data.last_name || '',
+              address: data.address || '',
+              city: data.city || '',
+              state: data.state || '',
+              zip_code: data.zip_code || '',
+              phone: data.phone || '',
+              has_children: data.has_children || false,
+              has_other_pets: data.has_other_pets || false,
+            }));
+          } catch (err) {
+            console.error('Failed to fetch user profile:', err);
+          }
+        };
+
+        fetchUserProfile();
       }
     }
   }, [dogId, currentUser]);
@@ -35,7 +58,7 @@ function AdoptionApplicationForm({ dogId, dogName }) {
     const { name, value, checked, type } = event.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === 'checkbox' ? checked : value || '',
     }));
   };
 
@@ -49,7 +72,7 @@ function AdoptionApplicationForm({ dogId, dogName }) {
       await axiosReq.post('/adoption-applications/', { ...formData, dog: dogId });
       setSuccess('Application submitted successfully!');
       if (currentUser) {
-        localStorage.setItem(`applied_${dogId}_${currentUser.id}`, true);
+        localStorage.setItem(`applied_${dogId}_${currentUser.id}`, 'true');
         setSubmitted(true);
       }
     } catch (err) {
