@@ -22,7 +22,12 @@ function Home() {
             </p>
           </Col>
           <Col md={6} className="text-center">
-            <img src={homeImage} alt="Dog Adoption" className="img-fluid rounded" />
+            <img
+            src={homeImage}
+            alt="Two dogs happily runnign with eachother"
+            aria-label="Image showing two dogs happily running"
+            className="img-fluid rounded"
+            />
           </Col>
         </Row>
         <Row className="justify-content-center mt-5">

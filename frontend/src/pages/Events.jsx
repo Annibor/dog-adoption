@@ -3,6 +3,7 @@ import EventList from '../components/EventList';
 import EventDetail from '../components/EventDetail';
 import { Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
+import eventImage from '../images/event-page-img.jpg';
 
 const Events = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -39,6 +40,11 @@ const Events = () => {
               <div className="m-3">
                 <h1 className="pb-3">Events</h1>
                 <p>Join our events to meet and potentially adopt a loving dog. Here you can find all the   upcoming events. Click on an event to see more details and apply to participate.</p>
+                <img 
+                src={eventImage}
+                alt="A group of people and dogs at an adoption event"
+                aria-label="Image showing a group of people and dogs at an adoption event"
+                className="img-fluid rounded mb-4" />
                 <EventList events={events} setSelectedEvent={setSelectedEvent} />
               </div>
               
