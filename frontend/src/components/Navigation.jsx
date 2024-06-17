@@ -8,7 +8,6 @@ export default function Navigation() {
   const { currentUser } = useCurrentUser();
   const handleLogout = useLogout();
   const navigate = useNavigate();
-  console.log('Current User:', currentUser);
 
   const logout = async () => {
     try {

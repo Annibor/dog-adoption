@@ -29,7 +29,6 @@ function Profile() {
     const fetchLikedDogs = async () => {
       try {
         const response = await axiosReq.get('/favorites/');
-        console.log('Liked dogs fetched:', response.data);
         setLikedDogs(response.data);
       } catch (err) {
         console.error('Error fetching liked dogs:', err);
@@ -39,7 +38,6 @@ function Profile() {
     const fetchApplications = async () => {
       try {
         const response = await axiosReq.get('/adoption-applications/');
-        console.log('Adoption applications fetched:', response.data);
         setApplications(Array.isArray(response.data.results) ? response.data.results : []);
       } catch (err) {
         console.error('Error fetching applications:', err);
@@ -74,7 +72,6 @@ function Profile() {
   const handleUnapplyAdoption = async (applicationId, dogId, currentUser) => {
     try {
       await axiosReq.delete(`/adoption-applications/${applicationId}/`);
-      console.log('Unapplied from adoption application id:', applicationId);
       setApplications((prevApplications) => prevApplications.filter((application) => application.id !== applicationId));
       localStorage.removeItem(`applied_${dogId}_${currentUser.id}`);
       setFormResetSignal(prev => !prev);
@@ -90,7 +87,6 @@ function Profile() {
       setEventApplications((prevEventApplications) => prevEventApplications.filter((application) => application.id !== eventApplicationId));
       localStorage.removeItem(`eventApplied_${eventId}_${currentUser.id}`);
       setEventResetSignal(prev => !prev);
-      console.log('Event application unapplied, eventApplicationId');
     } catch (err) {
       console.error('Error unapplying event application:', err);
       setError('Error unapplying event application');

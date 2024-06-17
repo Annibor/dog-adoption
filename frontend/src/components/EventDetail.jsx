@@ -56,7 +56,6 @@ const EventDetail = ({ event, eventResetSignal, onReset }) => {
       setError(null);
       localStorage.removeItem(`eventApplied_${event.id}_${currentUser.id}`);
       if (onReset) onReset();
-      console.log('Form reset in EventDetail');
     }
   }, [eventResetSignal, event, currentUser, onReset]);
 

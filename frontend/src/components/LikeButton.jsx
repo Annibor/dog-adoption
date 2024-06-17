@@ -11,7 +11,6 @@ const LikeButton = ({ dogId, onDogUnlike }) => {
   const [liked, setLiked] = useState(false);
 
   useEffect(() => {
-    console.log('dogId:', dogId); // Debug log for dogId
     const fetchLikeStatus = async () => {
       try {
         const response = await axios.get('/favorites/');
@@ -33,8 +32,6 @@ const LikeButton = ({ dogId, onDogUnlike }) => {
       alert('You need to be logged in to like a dog.');
       return;
     }
-
-    console.log('dogId before request:', dogId); 
 
     try {
       if (liked) {

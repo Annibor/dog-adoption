@@ -28,9 +28,7 @@ const ProfileUpdateForm = () => {
     if (currentUser) {
       const fetchUserData = async () => {
         try {
-          console.log('Fetching user data for profile ID:', currentUser.profile_id);
           const response = await axios.get(`/profile/${currentUser.profile_id}/`);
-          console.log('User data fetched:', response.data);
           const {
             first_name,
             last_name,
@@ -70,7 +68,6 @@ const ProfileUpdateForm = () => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    console.log(`Updating field ${name} to ${type === 'checkbox' ? checked : value}`);
     setFormData({
       ...formData,
       [name]: type === 'checkbox' ? checked : value,
@@ -90,9 +87,7 @@ const ProfileUpdateForm = () => {
     }
 
     try {
-      console.log('Updating profile:', formData);
       await axios.put(`/profile/${currentUser.profile_id}/`, formData);
-      console.log('Profile updated successfully');
       setSuccess('Profile updated successfully');
       setLoading(false);
     } catch (err) {

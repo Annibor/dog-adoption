@@ -40,7 +40,6 @@ const DogDetail = ({ dog, condensed, onDogUnlike }) => {
 
   const handleFormReset = () => {
     setResetForm(!resetForm);
-    console.log('Form reset in DogDetail');
   };
 
   return (

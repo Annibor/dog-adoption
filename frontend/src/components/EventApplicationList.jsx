@@ -24,7 +24,6 @@ const EventApplicationList = ({ eventApplications, loading, error, onUnapply }) 
             <Button
               variant="danger"
               onClick={() => {
-                console.log(`Unapplying event application id: ${application.id}`);
                 onUnapply(application.id, application.event.id);
               }}
             >

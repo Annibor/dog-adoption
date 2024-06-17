@@ -40,7 +40,6 @@ export const CurrentUserProvider = ({ children }) => {
       const response = await axios.post('/dj-rest-auth/login/', { username, password });
       const userData = response.data.user;
       setCurrentUser(userData);
-      console.log('Login successful: User ID:', userData.id);
       return response;
     } catch (error) {
       console.error("Error during login:", error.response ? error.response.data : error.message);
@@ -52,7 +51,6 @@ export const CurrentUserProvider = ({ children }) => {
     try {
       await axios.post('/dj-rest-auth/logout/');
       setLogoutMessage("Bye, hope we see you soon!");
-      console.log('Logout message set:', "You have successfully logged out.");
     } catch (err) {
       console.error('Failed to log out:', err.response ? err.response.data : err.message);
     } finally {
@@ -66,11 +64,9 @@ export const CurrentUserProvider = ({ children }) => {
         const csrfToken = getCookie('csrftoken');
         if (csrfToken) {
           config.headers['X-CSRFToken'] = csrfToken;
-          console.log('CSRF token set:', csrfToken);
         } else {
           console.error('CSRF token not found in cookies.');
         }
-        console.log('Request config with credentials:', config);
         return config;
       },
       (err) => {
@@ -86,11 +82,9 @@ export const CurrentUserProvider = ({ children }) => {
           try {
             const refreshToken = getCookie('refreshToken');
             if (refreshToken) {
-              console.log('Attempting to refresh token...');
               const response = await axios.post("/dj-rest-auth/token/refresh/", { refresh: refreshToken });
               const newAccessToken = response.data.access;
               err.config.headers.Authorization = `Bearer ${newAccessToken}`;
-              console.log('Token refreshed successfully.');
               return axios(err.config);
             } else {
               console.error('No refresh token found.');
