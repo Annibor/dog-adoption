@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
 from .models import Dog, AdoptionApplication
+from profiles.models import Profile
 from .serializers import DogSerializer, AdoptionApplicationSerializer
 
 # Create your views here.
@@ -72,11 +73,15 @@ class AdoptionApplicationListCreatView(generics.ListCreateAPIView):
             return AdoptionApplication.objects.filter(user=user.profile)
         return AdoptionApplication.objects.none()
 
+
     def perform_create(self, serializer):
         """
         Saves the current adoption application with the current user.
         """
-        serializer.save(user=self.request.user.profile)
+        profile = Profile.objects.filter(owner=self.request.user).first()
+        print('Received data:', self.request.data)
+        print('Profile:', profile)
+        serializer.save(user=profile)
 
 
 class AdoptionApplicationDetailView(generics.RetrieveUpdateDestroyAPIView):

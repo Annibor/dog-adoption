@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Alert, Spinner } from 'react-bootstrap';
-import axios from 'axios';
+import { Card, Alert, Spinner, Button } from 'react-bootstrap';
+import { axiosReq } from '../api/axiosDefaults';
 
 const EventApplicationList = ({ eventApplications, loading, error }) => {
   const [eventsDetails, setEventsDetails] = useState({});
+  const [applications, setApplications] = useState(eventApplications);
 
   useEffect(() => {
     const fetchEventDetails = async (eventId) => {
       try {
-        const response = await axios.get(`/events/${eventId}/`);
+        const response = await axiosReq.get(`/events/${eventId}/`);
         return response.data;
       } catch (err) {
         console.error('Error fetching event details:', err);
@@ -31,6 +32,16 @@ const EventApplicationList = ({ eventApplications, loading, error }) => {
 
     loadEventDetails();
   }, [eventApplications]);
+
+  const handleUnapply = async (eventId, applicationId) => {
+    try {
+      await axiosReq.delete(`/events/registrations/${applicationId}/`);
+      localStorage.removeItem(`eventApplied-${eventId}`);
+      setApplications(applications.filter(app => app.event !== eventId));
+    } catch (err) {
+      console.error('Failed to unapply from the event:', err);
+    }
+  };
 
   if (loading) return <Spinner animation="border" variant="primary" />;
   if (error) return <Alert variant="danger">{error}</Alert>;
@@ -56,6 +67,9 @@ const EventApplicationList = ({ eventApplications, loading, error }) => {
               <Card.Text>
                 <strong>Status:</strong> {application.status}
               </Card.Text>
+              <Button variant="danger" onClick={() => handleUnapply(application.id)}>
+                Unapply
+              </Button>
             </Card.Body>
           </Card>
         );

@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Form, Button, Col, Row, Alert, Spinner } from 'react-bootstrap';
-import axios from 'axios';
+import { axiosReq } from '../api/axiosDefaults';
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 
-function AdoptionApplicationForm({ dogId, dogName }) {
-  const { currentUser } = useCurrentUser();
-  
+function AdoptionApplicationForm({ dogId, dogName, onReset, formResetSignal }) {
+  const { currentUser } = useCurrentUser(); // Get current user
   const [formData, setFormData] = useState({
     visit_date: '',
-    reason: '',
     first_name: '',
     last_name: '',
     address: '',
@@ -18,74 +16,105 @@ function AdoptionApplicationForm({ dogId, dogName }) {
     phone: '',
     has_children: false,
     has_other_pets: false,
+    dog: dogId,
   });
+  const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
-  const [submitted, setSubmitted] = useState(localStorage.getItem(`applicationSubmitted-${dogId}`) === 'true');
+  const [success, setSuccess] = useState(null);
 
   useEffect(() => {
     if (currentUser) {
-      const fetchUserData = async () => {
-        try {
-          const response = await axios.get(`/profile/${currentUser.profile_id}/`);
-          const { first_name, last_name, address, city, state, zip_code, phone, has_children, has_other_pets } = response.data;
-          setFormData((prevData) => ({
-            ...prevData,
-            first_name: first_name || '',
-            last_name: last_name || '',
-            address: address || '',
-            city: city || '',
-            state: state || '',
-            zip_code: zip_code || '',
-            phone: phone || '',
-            has_children: has_children || false,
-            has_other_pets: has_other_pets || false,
-          }));
-        } catch (err) {
-          console.error('Failed to fetch user data:', err);
-        }
-      };
+      const applied = localStorage.getItem(`applied_${dogId}_${currentUser.id}`);
+      if (applied) {
+        setSubmitted(true);
+      } else {
+        // Fetch user profile details to prefill the form
+        const fetchUserProfile = async () => {
+          try {
+            const { data } = await axiosReq.get(`/profile/${currentUser.profile_id}/`);
+            setFormData((prevFormData) => ({
+              ...prevFormData,
+              first_name: data.first_name || '',
+              last_name: data.last_name || '',
+              address: data.address || '',
+              city: data.city || '',
+              state: data.state || '',
+              zip_code: data.zip_code || '',
+              phone: data.phone || '',
+              has_children: data.has_children || false,
+              has_other_pets: data.has_other_pets || false,
+            }));
+          } catch (err) {
+            console.error('Failed to fetch user profile:', err);
+          }
+        };
 
-      fetchUserData();
+        fetchUserProfile();
+      }
     }
-  }, [currentUser]);
+  }, [dogId, currentUser]);
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : value,
-    });
-    console.log(`Field ${name} updated to ${type === 'checkbox' ? checked : value}`);
+  const handleChange = (event) => {
+    const { name, value, checked, type } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: type === 'checkbox' ? checked : value || '',
+    }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     setLoading(true);
     setError(null);
     setSuccess(null);
-    console.log('Submitting application with data:', formData);
 
     try {
-      await axios.post('/adoption-applications/', {
-        ...formData,
-        user: currentUser.profile_id,
-        dog: dogId,
-      });
-      setSuccess('Application submitted successfully');
-      setLoading(false);
-      setSubmitted(true);
-      localStorage.setItem(`applicationSubmitted-${dogId}`, 'true');
+      const applicationData = { ...formData, dog: dogId, user: currentUser.profile_id };
+      console.log("Submitting form data:", applicationData);
+      await axiosReq.post('/adoption-applications/', applicationData);
+      setSuccess('Application submitted successfully!');
+      if (currentUser) {
+        localStorage.setItem(`applied_${dogId}_${currentUser.id}`, 'true');
+        setSubmitted(true);
+      }
     } catch (err) {
-      console.error('Failed to submit application:', err.response?.data);
-      setError('Failed to submit application');
+      setError(err.response?.data?.detail || 'Failed to submit the application');
+    } finally {
       setLoading(false);
     }
   };
 
+  useEffect(() => {
+    if (formResetSignal) {
+      setSubmitted(false);
+      setSuccess(null);
+      setError(null);
+      localStorage.removeItem(`applied_${dogId}_${currentUser.id}`);
+      setFormData({
+        visit_date: '',
+        first_name: '',
+        last_name: '',
+        address: '',
+        city: '',
+        state: '',
+        zip_code: '',
+        phone: '',
+        has_children: false,
+        has_other_pets: false,
+        dog: dogId,
+      });
+      if (onReset) onReset();
+      console.log('Form reset in AdoptionApplicationForm');
+    }
+  }, [formResetSignal, dogId, currentUser, onReset]);
+
   if (submitted) {
-    return <Alert variant="success">Thank you for your application!</Alert>;
+    return (
+      <Alert variant="success">
+        Thanks for your application!
+      </Alert>
+    );
   }
 
   return (

@@ -29,7 +29,7 @@ class Profile(models.Model):
       has_children (BooleanField): Indicates whether
       the user has children.
     """
-    owner = models.OneToOneField(User, on_delete=models.CASCADE)
+    owner = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     username = models.CharField(max_length=50, blank=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=70)

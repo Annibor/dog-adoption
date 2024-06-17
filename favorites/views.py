@@ -7,11 +7,9 @@ from dogs.models import Dog
 from .serializers import FavoritesSerializer
 from rest_framework import status
 
-
-# Create your views here.
 class FavoritesView(APIView):
     """
-    A view for displaying adn updating a user's favorite dogs.
+    A view for displaying and updating a user's favorite dogs.
     """
     permission_classes = [IsAuthenticated]
 
@@ -34,7 +32,7 @@ class FavoritesView(APIView):
         if not created:
             favorite.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
-        return Response(status=status.HTTP_201_CREATED)
+        return Response(FavoritesSerializer(favorite).data, status=status.HTTP_201_CREATED)
 
 
 class FavoriteDetail(APIView):

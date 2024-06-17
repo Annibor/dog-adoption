@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Button, Alert, Form, Collapse } from 'react-bootstrap';
-import axios from 'axios';
+import { axiosReq } from '../api/axiosDefaults'; // Import axiosReq instance
 import { Link } from 'react-router-dom';
 import { FaFilter } from 'react-icons/fa';
-import "../styling/dogs.css"
-import "../styling/index.css"
+import "../styling/dogs.css";
+import "../styling/index.css";
 
 function DogsList() {
   const [dogs, setDogs] = useState([]);
@@ -25,7 +25,7 @@ function DogsList() {
   useEffect(() => {
     const fetchDogs = async () => {
       try {
-        const response = await axios.get('/dogs/', { params: filters });
+        const response = await axiosReq.get('/dogs/', { params: filters });
         if (Array.isArray(response.data.results)) {
           setDogs(response.data.results);
         } else {

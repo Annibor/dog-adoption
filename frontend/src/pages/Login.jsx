@@ -1,62 +1,48 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
-
+import { useCurrentUser } from '../contexts/CurrentUserContext';
 
 function Login() {
-  const { logoutMessage } = useCurrentUser() || {};
+  const { logoutMessage, handleLogin } = useCurrentUser() || {};
   const [formData, setFormData] = useState({
     username: '',
     password: '',
   });
 
   const { username, password } = formData;
-  const setCurrentUser = useSetCurrentUser();
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleChange = (event) => {
-    console.log('handleChange:', event.target.name, event.target.value);
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
     });
   };
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
-    console.log('handleSubmit: formData:', formData);
 
     try {
-      const response = await axios.post('/dj-rest-auth/login/', {
-        username,
-        password,
-      });
-
-      console.log('handleSubmit: response:', response);
+      const response = await handleLogin({ username, password });
 
       if (response.status === 200) {
-        setCurrentUser(response.data.user);
-        console.log('handleSubmit: Login successful, navigating to home.');
         navigate('/');
+        console.log('Login successful! User ID:', response.data.user.id);
       } else {
-        console.error('handleSubmit: Unexpected response:', response);
         setError('Login failed, please try again!');
       }
     } catch (err) {
-      console.error('handleSubmit: Error during login:', err);
       if (err.response && err.response.data) {
-        console.error('handleSubmit: errorData:', err.response.data);
         setError(err.response.data.detail || 'An unknown error occurred, please try again!');
       } else {
         setError('An unknown error occurred, please try again!');
       }
     }
-  }
+  };
 
   return (
     <Container className='p-5'>

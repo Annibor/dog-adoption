@@ -1,10 +1,10 @@
-import { Card, Alert, Spinner } from 'react-bootstrap';
+import { Card, Button, Alert, Spinner } from 'react-bootstrap';
 
-const AdoptionApplicationList = ({ applications, loading, error }) => {
+const AdoptionApplicationList = ({ applications, loading, error, onUnapply }) => {
   if (loading) return <Spinner animation="border" variant="primary" />;
   if (error) return <Alert variant="danger">{error}</Alert>;
   if (!applications || applications.length === 0) {
-    return <Alert variant="info">No applications to display.</Alert>;
+    return <Alert variant="info">No adoption applications to display.</Alert>;
   }
 
   return (
@@ -15,11 +15,19 @@ const AdoptionApplicationList = ({ applications, loading, error }) => {
           <Card.Body>
             <Card.Title>{application.dog.name}</Card.Title>
             <Card.Text>
-              <strong>Status:</strong> {application.status}
+              <strong>Date:</strong> {new Date(application.visit_date).toLocaleString()}
             </Card.Text>
             <Card.Text>
-              <strong>Visit Date:</strong> {new Date(application.visit_date).toLocaleString()}
+              <strong>Status:</strong> {application.status}
             </Card.Text>
+            <Button
+              variant="danger"
+              onClick={() => {
+                console.log(`Unapplying application id: ${application.id}`);
+                onUnapply(application.id, application.dog, application.user)}}
+            >
+              Unapply
+            </Button>
           </Card.Body>
         </Card>
       ))}
