@@ -85,33 +85,34 @@ function AdoptionApplicationForm({ dogId, dogName, onReset, formResetSignal }) {
     }
   };
 
-  const handleReset = () => {
-    setSubmitted(false);
-    setSuccess(null);
-    setError(null);
-    localStorage.removeItem(`applied_${dogId}_${currentUser.id}`);
-    setFormData({
-      visit_date: '',
-      first_name: '',
-      last_name: '',
-      address: '',
-      city: '',
-      state: '',
-      zip_code: '',
-      phone: '',
-      has_children: false,
-      has_other_pets: false,
-      dog: dogId,
-    });
-    if (onReset) onReset();
-    console.log('Form reset in AdoptionApplicationForm');
-  };
+  useEffect(() => {
+    if (formResetSignal) {
+      setSubmitted(false);
+      setSuccess(null);
+      setError(null);
+      localStorage.removeItem(`applied_${dogId}_${currentUser.id}`);
+      setFormData({
+        visit_date: '',
+        first_name: '',
+        last_name: '',
+        address: '',
+        city: '',
+        state: '',
+        zip_code: '',
+        phone: '',
+        has_children: false,
+        has_other_pets: false,
+        dog: dogId,
+      });
+      if (onReset) onReset();
+      console.log('Form reset in AdoptionApplicationForm');
+    }
+  }, [formResetSignal, dogId, currentUser, onReset]);
 
   if (submitted) {
     return (
       <Alert variant="success">
-        You have already applied for this dog.
-        <Button onClick={handleReset} variant="link">Unapply</Button>
+        
       </Alert>
     );
   }
