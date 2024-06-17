@@ -23,7 +23,6 @@ const AdoptionApplicationList = ({ applications, loading, error, onUnapply }) =>
             <Button
               variant="danger"
               onClick={() => {
-                console.log(`Unapplying application id: ${application.id}`);
                 onUnapply(application.id, application.dog, application.user)}}
             >
               Unapply

@@ -31,7 +31,6 @@ function Login() {
 
       if (response.status === 200) {
         navigate('/');
-        console.log('Login successful! User ID:', response.data.user.id);
       } else {
         setError('Login failed, please try again!');
       }

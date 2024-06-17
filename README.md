@@ -221,89 +221,24 @@ The primary goal of *PawPal* is to :
 - [Back to Top](#table-of-content)
 
 ### User Stories images
-Here are the user stories and epics connected to the project:
+[UserStories](https://github.com/users/Annibor/projects/11/views/1)
 
 ![User stories 1]()
 
 ### Database schema
 - **User Model (Django AllAuth)**: Serves as the central model, linking to other models like posts, comments, and likes for comprehensive user interaction within the platform.
 
-
+[Flowchartdatabasemodel](/documentation/images/flowchartdatabasemodel/)
 
 - ![Database schema]()
 
 ### Wireframes
 
-I've created my wireframes for the website by using [Balsamiq](https://balsamiq.com/). I created one wireframe for mobile, tablet and desktop on each page of the website.
+I've created my wireframes for the website by using Paint. I created one wireframe for mobil and desktop on each page of the website.
 
-#### **Home page**
-- ![Homepage mobile]()
-- ![Homepage tablet]()
-- ![Homepage desktop]()
-
-- [Back to Top](#table-of-content)
-
-
-- [Back to Top](#table-of-content)
-
-#### **Not logged in**
-- ![Not logged in mobile]()
-- ![Not logged in tablet]()
-- ![Not logged in tablet]()
-
-- [Back to Top](#table-of-content)
-
-#### **Login**
-
-- ![Login page mobile]()
-- ![Login page tablet]()
-- ![Login page desktop]()
-
-- [Back to Top](#table-of-content)
-
-#### **Register**
-
-- ![Register page]()
-
-- [Back to Top](#table-of-content)
-
-#### **Logout**
-
-- ![Logout page mobile]()
-- ![Logout page tablet]()
-- ![Logout page desktop]()
-
-- [Back to Top](#table-of-content)
-
-### Design Philosophy/ Features
-
-
-- [Back to Top](#table-of-content)
-
-#### **Responsive Design**
-- Fluid Layouts:
-
-
-- [Back to Top](#table-of-content)
-
-#### **Minimalistic Layout**
-- Clutter-Free Interface: 
-
-- [Back to Top](#table-of-content)
-
-#### **Usability Enhancements**
-- Navigation and Accessibility: 
-
-Interactive Elements: 
-
-
-- [Back to Top](#table-of-content)
-
-#### **Future-Proof and Scalable**
-- Built to Evolve: 
-
-
-- [Back to Top](#table-of-content)
+#### **Pages**
+- ![ mobile](/documentation/images/pawpalmobile.jpg)
+- ![Desktop](/documentation/images/pawpalmobile.jpg)
 
 ### Fonts
 **Typography and Colors**
@@ -314,6 +249,33 @@ Interactive Elements:
 ### Colors
 - Palette Choices:
 
+  --baby-powder: #FFFBF6;
+
+  --primary-light-blue: #B3D3EF;
+  --primary-dark-blue: #6699CC;
+  --primary-light-tint: #E6F0FA;
+  --contrast-coral: #FF6F61;
+  --contrast-dark-gray: #4A4A4A;
+
+  --main-bg-color: #E6F0FA; 
+  --content-bg-color: rgba(179, 211, 239, 0.8); 
+
+  --contrast-purple: #6A1B9A;
+
+  --primary-light-blue: #B3D3EF;
+  --primary-white: #FFFFFF;
+  --light-gray: #F7F7F7;
+
+
+  --primary-light-blue: #B3D3EF;
+  --primary-dark-blue: #4A4A4A;
+  --main-bg-color: #FFFFFF;
+  --light-gray: #F7F7F7;
+
+  --content-bg-color: #FFFFFF;
+  --content-border-color: #E0E0E0;
+
+- Less is more was my intention
 
 - [Back to Top](#table-of-content)
 
@@ -354,7 +316,7 @@ Planned enhancements for the website to further enrich user experience include:
 
 ### Wc3
 
-- Homepage
+[Wc3](/documentation/w3c/)
 
 - [Back to Top](#table-of-content)
 
@@ -383,7 +345,6 @@ Planned enhancements for the website to further enrich user experience include:
 - CI Python Linter tests are all okey
 
 
-
 ### Jigsaw
 
 - Jigsaw testing is clear
@@ -408,20 +369,50 @@ I tested the website manualy throughout the whole developing progress. The websi
  </thead>
   <tbody>
   <tr>
-     <th></th>
-     <th></th>
+     <th>Test adding adotpionapplication</th>
+     <th>sucessful adding</th>
      <th>As expected</th>
      <th>Pass</th>
    </tr>
   <tr>
-     <td></td>
-     <td></td>
+     <td>Deleting adoption applicaiton</td>
+     <td>Application to be deleted</td>
      <th>As expected</th>
      <th>Pass</th>
    </tr>
    <tr>
-     <td></td>
-     <td></td>
+     <td>Applyting to events</td>
+     <td>Appling works</td>
+     <th>As expected</th>
+     <th>Pass</th>
+   </tr>
+      <tr>
+     <td>Updating profile information</td>
+     <td>Profile information should be updated</td>
+     <th>As expected</th>
+     <th>Pass</th>
+   </tr>
+      <tr>
+     <td>Login</td>
+     <td>Registered user can login</td>
+     <th>As expected</th>
+     <th>Pass</th>
+   </tr>
+      <tr>
+     <td>Visitor cant view pages except home</td>
+     <td>Get directed to login or registered</td>
+     <th>As expected</th>
+     <th>Pass</th>
+   </tr>
+      <tr>
+     <td>Logout</td>
+     <td>Logged in user can logut</td>
+     <th>As expected</th>
+     <th>Pass</th>
+   </tr>
+      <tr>
+     <td>Navbar collapse</td>
+     <td>Smaller screens navbarcollapse into burger icon</td>
      <th>As expected</th>
      <th>Pass</th>
    </tr>
@@ -557,18 +548,62 @@ This project showcases a full-stack web development approach, leveraging the str
 
 - [Back to Top](#table-of-content)
 
-## Credits
+# Credits
+
+## Tutorial Videos and Articles
+
+- **Code Institute**:
+  - Various tutorial videos for foundational knowledge and project guidance.
+  
+- **Pale Blue Apps**:
+  - Rock and Null: [Creating a User Profile model in Django](https://www.paleblueapps.com/rockandnull/django-user-profile/), by Mike Yerou.
+
+## Search Bar Backend
+
+- **YouTube | Django World**:
+  - [Search Filter in Django Rest Framework](https://www.youtube.com/watch?v=7uqDuQPnwJs)
+  
+- **YouTube | Very Academy**:
+  - [Django Rest Framework Series - Filters and Search features - Part-6](https://www.youtube.com/watch?v=3Qdy-FvUEcY)
+  
+- **Django REST Framework Documentation**:
+  - [Filtering - Django REST framework](https://www.django-rest-framework.org/api-guide/filtering/)
+
+## Authentication
+
+- **dj-rest-auth Documentation**:
+  - [Installation Guide](https://dj-rest-auth.readthedocs.io/en/latest/installation.html)
+
+## Profile User
+
+- **YouTube**:
+  - [Profile User Implementation](https://www.youtube.com/watch?v=BTdcjOzfwCA)
+
+## Timezone and Models
+
+- **Stack Overflow**:
+  - [How Django Time Zone Works with Model Fields (auto_now_add)](https://stackoverflow.com/questions/11262828/how-django-time-zone-works-with-model-fields-auto-now-add)
+
+## Map and Axios Fetch
+
+- **Advanced Web**:
+  - [How to use async functions with Array.map in JavaScript](https://advancedweb.hu/how-to-use-async-functions-with-array-map-in-javascript/)
+
+## General Inspiration and Guidance
+
+- Stack Overflow: For troubleshooting and problem-solving across various issues.
+- Medium: For detailed articles and in-depth discussions on Django and JavaScript.
+- Various YouTube Channels: For practical video tutorials and code walkthroughs.
 
 ### Content
 
-- This README is based upon three sourses for guidance: one by Davis Calikes, available at [GitHub](https://github.com/davidcalikes/portfolio-project-one#readme), one by Victoria Traynor, avaliable at [Github](https://github.com/VictoriaT87/P4-Aventine-Wellness/blob/main/README.md), and another authored by me, available at [GitHub](https://github.com/Annibor/EarthEcho-Studios/blob/main/README.md)
-- Usage, Modification, Distrubition, Private Use and Liability Content: The guidelines pertaining to usage, modification, distribution, private use, and liability are directly derived from my project, accessible at [GitHub](https://github.com/Annibor/EarthEcho-Studios/blob/main/README.md)
-- This project is inspired by the I Think Before I Blog form code institue. 
+- This README is based upon three sources for guidance: one by Davis Calikes, available at [GitHub](https://github.com/davidcalikes/portfolio-project-one#readme), one by Victoria Traynor, available at [GitHub](https://github.com/VictoriaT87/P4-Aventine-Wellness/blob/main/README.md), and another authored by me, available at [GitHub](https://github.com/Annibor/EarthEcho-Studios/blob/main/README.md).
+- Usage, Modification, Distribution, Private Use, and Liability Content: The guidelines pertaining to usage, modification, distribution, private use, and liability are directly derived from my project, accessible at [GitHub](https://github.com/Annibor/EarthEcho-Studios/blob/main/README.md).
+- This project is inspired by the I Think Before I Blog form code institute.
 
 - [Back to Top](#table-of-content)
 
 ### General Credits
-
 
 - [Back to Top](#table-of-content)
 
@@ -577,14 +612,13 @@ This project showcases a full-stack web development approach, leveraging the str
 I would like to express my gratitude to the following individuals who have made a meaningful impact on this project:
 
 - **Michel**: My wonderful boyfriend, whose unwavering support and encouragement have been my constant motivation.
+
 - [Back to Top](#table-of-content)
 
 ## What I've Learned
 
-
 In developing this project, I've embarked on a journey that was both challenging and immensely rewarding. Here are some reflections on what I've learned along the way:
 
 - **Problems**:
-
-
-- **Adaptability in Problem-Solving**: 
+There are a lot of bugs in the project, like the events when apllied, they wont show in the profiel page. 
+Sometimes the database gived bugs aswell.

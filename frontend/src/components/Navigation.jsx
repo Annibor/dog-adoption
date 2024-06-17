@@ -8,7 +8,6 @@ export default function Navigation() {
   const { currentUser } = useCurrentUser();
   const handleLogout = useLogout();
   const navigate = useNavigate();
-  console.log('Current User:', currentUser);
 
   const logout = async () => {
     try {
@@ -22,8 +21,9 @@ export default function Navigation() {
 
   return (
     <Navbar expand="lg">
-      <Logo />
+      
       <Container>
+      <Logo />
         <Navbar.Toggle aria-controls="basic-navbar" />
         <Navbar.Collapse id="basic-navbar">
           <Nav className="m-auto">

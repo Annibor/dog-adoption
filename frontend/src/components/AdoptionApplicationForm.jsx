@@ -71,7 +71,6 @@ function AdoptionApplicationForm({ dogId, dogName, onReset, formResetSignal }) {
 
     try {
       const applicationData = { ...formData, dog: dogId, user: currentUser.profile_id };
-      console.log("Submitting form data:", applicationData);
       await axiosReq.post('/adoption-applications/', applicationData);
       setSuccess('Application submitted successfully!');
       if (currentUser) {
@@ -105,7 +104,6 @@ function AdoptionApplicationForm({ dogId, dogName, onReset, formResetSignal }) {
         dog: dogId,
       });
       if (onReset) onReset();
-      console.log('Form reset in AdoptionApplicationForm');
     }
   }, [formResetSignal, dogId, currentUser, onReset]);
 

@@ -1,5 +1,6 @@
 import { Container, Row, Button, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import homeImage from '../images/homeimage.jpg'
 
 function Home() {
   const pages = [
@@ -21,7 +22,12 @@ function Home() {
             </p>
           </Col>
           <Col md={6} className="text-center">
-            <div>Will be an img</div>
+            <img
+            src={homeImage}
+            alt="Two dogs happily runnign with eachother"
+            aria-label="Image showing two dogs happily running"
+            className="img-fluid rounded"
+            />
           </Col>
         </Row>
         <Row className="justify-content-center mt-5">

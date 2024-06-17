@@ -1,54 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lora:wght@400;700&family=Montserrat:wght@400;700&display=swap');
 
 :root {
-  --orange-peel: #FF9F1C;
-  --orange-peel-tint1: #FFA633;
-  --orange-peel-tint2: #FFAD4A;
-  --orange-peel-tint3: #FFB461;
-  --orange-peel-tint4: #FFBB78;
-  --orange-peel-shade1: #E68F1B;
-  --orange-peel-shade2: #CC7F18;
-  --orange-peel-shade3: #B36F16;
-  --orange-peel-shade4: #996014;
-
-  --hunyadi-yellow: #FFBF69;
-  --hunyadi-yellow-tint1: #FFC47B;
-  --hunyadi-yellow-tint2: #FFC98E;
-  --hunyadi-yellow-tint3: #FFCEA0;
-  --hunyadi-yellow-tint4: #FFD4B2;
-  --hunyadi-yellow-shade1: #E6AB5E;
-  --hunyadi-yellow-shade2: #CC974E;
-  --hunyadi-yellow-shade3: #B38443;
-  --hunyadi-yellow-shade4: #997038;
 
   --baby-powder: #FFFBF6;
-  --baby-powder-tint1: #FFFDF8;
-  --baby-powder-tint2: #FFFEFB;
-  --baby-powder-tint3: #FFFFFF;
-  --baby-powder-shade1: #E6E2E0;
-  --baby-powder-shade2: #CCCACB;
-  --baby-powder-shade3: #B3B1B2;
-  --baby-powder-shade4: #99989A;
-
-  --light-cyan: #CBE8F2;
-  --light-cyan-tint1: #D1ECF4;
-  --light-cyan-tint2: #D7F0F6;
-  --light-cyan-tint3: #DDF4F8;
-  --light-cyan-tint4: #E3F8FB;
-  --light-cyan-shade1: #B3D2DA;
-  --light-cyan-shade2: #9CBCC3;
-  --light-cyan-shade3: #84A6AC;
-  --light-cyan-shade4: #6D9096;
-
-  --moonstone: #4CAEC9;
-  --moonstone-tint1: #66B7D2;
-  --moonstone-tint2: #80C0DC;
-  --moonstone-tint3: #99C9E5;
-  --moonstone-tint4: #B3D3EF;
-  --moonstone-shade1: #439DB2;
-  --moonstone-shade2: #3A8B9B;
-  --moonstone-shade3: #327A85;
-  --moonstone-shade4: #29696E;
 
   --primary-light-blue: #B3D3EF;
   --primary-dark-blue: #6699CC;

@@ -6,8 +6,6 @@ const LikedDogsCarousel = ({ likedDogs, onDogUnlike }) => {
     return <p>No liked dogs to display.</p>;
   }
 
-  console.log('likedDogs:', likedDogs); // Debug log
-
   return (
     <div>
       <h2 className="text-center">Your saved dogs!</h2>

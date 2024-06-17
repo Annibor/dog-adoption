@@ -18,6 +18,7 @@ function Profile() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [formResetSignal, setFormResetSignal] = useState(false);
+  const [eventResetSignal, setEventResetSignal] = useState(false);
 
   const [showLikedDogs, setShowLikedDogs] = useState(false);
   const [showApplications, setShowApplications] = useState(false);
@@ -28,7 +29,6 @@ function Profile() {
     const fetchLikedDogs = async () => {
       try {
         const response = await axiosReq.get('/favorites/');
-        console.log('Liked dogs fetched:', response.data);
         setLikedDogs(response.data);
       } catch (err) {
         console.error('Error fetching liked dogs:', err);
@@ -38,7 +38,6 @@ function Profile() {
     const fetchApplications = async () => {
       try {
         const response = await axiosReq.get('/adoption-applications/');
-        console.log('Adoption applications fetched:', response.data);
         setApplications(Array.isArray(response.data.results) ? response.data.results : []);
       } catch (err) {
         console.error('Error fetching applications:', err);
@@ -52,7 +51,7 @@ function Profile() {
       try {
         const response = await axiosReq.get('/events/registrations/');
         console.log('Event applications fetched:', response.data);
-        setEventApplications(Array.isArray(response.data) ? response.data : []);
+        setEventApplications(Array.isArray(response.data.results) ? response.data.results : []);
       } catch (err) {
         console.error('Error fetching event applications:', err);
         setError('Error fetching event applications');
@@ -73,7 +72,6 @@ function Profile() {
   const handleUnapplyAdoption = async (applicationId, dogId, currentUser) => {
     try {
       await axiosReq.delete(`/adoption-applications/${applicationId}/`);
-      console.log('Unapplied from adoption application id:', applicationId);
       setApplications((prevApplications) => prevApplications.filter((application) => application.id !== applicationId));
       localStorage.removeItem(`applied_${dogId}_${currentUser.id}`);
       setFormResetSignal(prev => !prev);
@@ -83,17 +81,18 @@ function Profile() {
     }
   };
 
-  const handleUnapplyEvent = async (applicationId, eventId) => {
+  const handleUnapplyEvent = async (eventApplicationId, eventId, currentUser) => {
     try {
-      await axiosReq.delete(`/events/registrations/${applicationId}/`);
-      setEventApplications((prevEventApplications) => prevEventApplications.filter((application) => application.id !== applicationId));
-      localStorage.removeItem(`eventApplied-${eventId}`);
-      console.log('Event application unapplied, applicationId');
+      await axiosReq.delete(`/events/registrations/${eventApplicationId}/`);
+      setEventApplications((prevEventApplications) => prevEventApplications.filter((application) => application.id !== eventApplicationId));
+      localStorage.removeItem(`eventApplied_${eventId}_${currentUser.id}`);
+      setEventResetSignal(prev => !prev);
     } catch (err) {
       console.error('Error unapplying event application:', err);
       setError('Error unapplying event application');
     }
   };
+
 
   return (
     <div className='profile-page'>
@@ -139,7 +138,14 @@ function Profile() {
                 </div>
                 <Collapse in={showEventApplications}>
                   <div id="event-applications-section">
-                    <EventApplicationList eventApplications={eventApplications} loading={loading} error={error} onUnapply={handleUnapplyEvent} />
+                  <EventApplicationList 
+                      eventApplications={eventApplications} 
+                      loading={loading} 
+                      error={error} 
+                      onUnapply={(applicationId) => handleUnapplyEvent(applicationId, eventApplications.find(app => app.id === applicationId).event)}
+                      eventResetSignal={eventResetSignal} 
+                    />
+
                   </div>
                 </Collapse>
               </Col>
