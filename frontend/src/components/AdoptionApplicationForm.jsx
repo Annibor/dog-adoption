@@ -112,7 +112,7 @@ function AdoptionApplicationForm({ dogId, dogName, onReset, formResetSignal }) {
   if (submitted) {
     return (
       <Alert variant="success">
-        
+        Thanks for your application!
       </Alert>
     );
   }
