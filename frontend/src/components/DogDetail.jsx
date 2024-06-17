@@ -93,7 +93,7 @@ const DogDetail = ({ dog, condensed, onDogUnlike }) => {
                 <h3>Found new home</h3>
               </div>
             ) : (
-              <AdoptionApplicationForm dogId={dogInfo.id} dogName={dogInfo.name} onReset={handleFormReset} key={resetForm} />
+              <AdoptionApplicationForm dogId={dogInfo.id} dogName={dogInfo.name} onReset={handleFormReset} formResetSignal={resetForm} key={resetForm} />
             )}
           </Col>
         )}

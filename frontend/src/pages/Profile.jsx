@@ -17,7 +17,7 @@ function Profile() {
   const [eventApplications, setEventApplications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [resetForm, setResetForm] = useState(false);
+  const [formResetSignal, setFormResetSignal] = useState(false);
 
   const [showLikedDogs, setShowLikedDogs] = useState(false);
   const [showApplications, setShowApplications] = useState(false);
@@ -76,7 +76,7 @@ function Profile() {
       console.log('Unapplied from adoption application id:', applicationId);
       setApplications((prevApplications) => prevApplications.filter((application) => application.id !== applicationId));
       localStorage.removeItem(`applied_${dogId}_${currentUser.id}`);
-      setTimeout(() => setResetForm(false), 0);
+      setFormResetSignal(prev => !prev);
     } catch (err) {
       console.error('Error unapplying adoption application:', err);
       setError('Error unapplying adoption application');
@@ -121,7 +121,12 @@ function Profile() {
                 </div>
                 <Collapse in={showApplications}>
                   <div id="applications-section">
-                  <AdoptionApplicationList applications={applications} loading={loading} error={error} onUnapply={(applicationId) => handleUnapplyAdoption(applicationId, applications.find(app => app.id === applicationId).dog, applications.find(app => app.id === applicationId).user)} resetForm={resetForm} />
+                  <AdoptionApplicationList 
+                    applications={applications}
+                    loading={loading}
+                    error={error}
+                    onUnapply={(applicationId) => handleUnapplyAdoption(applicationId, applications.find(app => app.id === applicationId).dog, applications.find(app => app.id === applicationId).user)} 
+                    formResetSignal={formResetSignal} />
                   </div>
                 </Collapse>
               </Col>

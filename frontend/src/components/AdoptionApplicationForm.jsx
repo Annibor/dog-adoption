@@ -3,7 +3,7 @@ import { Form, Button, Col, Row, Alert, Spinner } from 'react-bootstrap';
 import { axiosReq } from '../api/axiosDefaults';
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 
-function AdoptionApplicationForm({ dogId, dogName, onReset }) {
+function AdoptionApplicationForm({ dogId, dogName, onReset, formResetSignal }) {
   const { currentUser } = useCurrentUser(); // Get current user
   const [formData, setFormData] = useState({
     visit_date: '',
