@@ -1,48 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Card, Alert, Spinner, Button } from 'react-bootstrap';
-import { axiosReq } from '../api/axiosDefaults';
+import React from 'react';
+import { Card, Button, Alert, Spinner } from 'react-bootstrap';
 
-const EventApplicationList = ({ eventApplications, loading, error }) => {
-  const [eventsDetails, setEventsDetails] = useState({});
-  const [applications, setApplications] = useState(eventApplications);
-
-  useEffect(() => {
-    const fetchEventDetails = async (eventId) => {
-      try {
-        const response = await axiosReq.get(`/events/${eventId}/`);
-        return response.data;
-      } catch (err) {
-        console.error('Error fetching event details:', err);
-        return null;
-      }
-    };
-
-    const loadEventDetails = async () => {
-      const details = {};
-      for (const application of eventApplications) {
-        if (!details[application.event]) {
-          const eventDetail = await fetchEventDetails(application.event);
-          if (eventDetail) {
-            details[application.event] = eventDetail;
-          }
-        }
-      }
-      setEventsDetails(details);
-    };
-
-    loadEventDetails();
-  }, [eventApplications]);
-
-  const handleUnapply = async (eventId, applicationId) => {
-    try {
-      await axiosReq.delete(`/events/registrations/${applicationId}/`);
-      localStorage.removeItem(`eventApplied-${eventId}`);
-      setApplications(applications.filter(app => app.event !== eventId));
-    } catch (err) {
-      console.error('Failed to unapply from the event:', err);
-    }
-  };
-
+const EventApplicationList = ({ eventApplications, loading, error, onUnapply }) => {
   if (loading) return <Spinner animation="border" variant="primary" />;
   if (error) return <Alert variant="danger">{error}</Alert>;
   if (!eventApplications || eventApplications.length === 0) {
@@ -52,28 +11,28 @@ const EventApplicationList = ({ eventApplications, loading, error }) => {
   return (
     <div>
       <h2>Your Event Applications</h2>
-      {eventApplications.map(application => {
-        const event = eventsDetails[application.event] || {};
-        return (
-          <Card key={application.id} className="mb-3">
-            <Card.Body>
-              <Card.Title>{event.title || 'No title available'}</Card.Title>
-              <Card.Text>
-                <strong>Date:</strong> {event.date ? new Date(event.date).toLocaleString() : 'No date available'}
-              </Card.Text>
-              <Card.Text>
-                <strong>Location:</strong> {event.location || 'No location available'}
-              </Card.Text>
-              <Card.Text>
-                <strong>Status:</strong> {application.status}
-              </Card.Text>
-              <Button variant="danger" onClick={() => handleUnapply(application.id)}>
-                Unapply
-              </Button>
-            </Card.Body>
-          </Card>
-        );
-      })}
+      {eventApplications.map(application => (
+        <Card key={application.id} className="mb-3">
+          <Card.Body>
+            <Card.Title>{application.event.title}</Card.Title>
+            <Card.Text>
+              <strong>Date:</strong> {new Date(application.event.date).toLocaleString()}
+            </Card.Text>
+            <Card.Text>
+              <strong>Status:</strong> {application.status}
+            </Card.Text>
+            <Button
+              variant="danger"
+              onClick={() => {
+                console.log(`Unapplying event application id: ${application.id}`);
+                onUnapply(application.id, application.event.id);
+              }}
+            >
+              Unapply
+            </Button>
+          </Card.Body>
+        </Card>
+      ))}
     </div>
   );
 };

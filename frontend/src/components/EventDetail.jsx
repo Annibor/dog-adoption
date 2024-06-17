@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Button, Alert, Spinner } from 'react-bootstrap';
 import { axiosReq } from '../api/axiosDefaults';
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 
-const EventDetail = ({ event }) => {
+const EventDetail = ({ event, eventResetSignal, onReset }) => {
   const { currentUser } = useCurrentUser();
   const [applied, setApplied] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -12,8 +12,8 @@ const EventDetail = ({ event }) => {
 
   useEffect(() => {
     if (event) {
-      const appliedStatus = localStorage.getItem(`eventApplied-${event.id}`);
-      if (appliedStatus === 'true') {
+      const appliedStatus = localStorage.getItem(`eventApplied_${event.id}_${currentUser.id}`);
+      if (appliedStatus) {
         setApplied(true);
         setSuccess('Successfully applied for the event!');
       } else {
@@ -21,7 +21,7 @@ const EventDetail = ({ event }) => {
         setSuccess(null);
       }
     }
-  }, [event]);
+  }, [event, currentUser]);
 
   const handleApply = async () => {
     setLoading(true);
@@ -36,7 +36,7 @@ const EventDetail = ({ event }) => {
       await axiosReq.post(`/events/registrations/${event.id}/`, requestData);
       setApplied(true);
       setSuccess('Successfully applied for the event!');
-      localStorage.setItem(`eventApplied-${event.id}`, 'true');
+      localStorage.setItem(`eventApplied_${event.id}_${currentUser.id}`, 'true');
       setLoading(false);
     } catch (err) {
       if (err.response && err.response.status === 400 && err.response.data.detail === "You have already registered for this event.") {
@@ -48,6 +48,17 @@ const EventDetail = ({ event }) => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (eventResetSignal) {
+      setApplied(false);
+      setSuccess(null);
+      setError(null);
+      localStorage.removeItem(`eventApplied_${event.id}_${currentUser.id}`);
+      if (onReset) onReset();
+      console.log('Form reset in EventDetail');
+    }
+  }, [eventResetSignal, event, currentUser, onReset]);
 
   if (!event) return <div>Select an event to see details</div>;
 
