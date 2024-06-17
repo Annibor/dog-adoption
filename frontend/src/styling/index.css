@@ -1,25 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lora:wght@400;700&family=Montserrat:wght@400;700&display=swap');
 
 :root {
-  --orange-peel: #FF9F1C;
-  --orange-peel-tint1: #FFA633;
-  --orange-peel-tint2: #FFAD4A;
-  --orange-peel-tint3: #FFB461;
-  --orange-peel-tint4: #FFBB78;
-  --orange-peel-shade1: #E68F1B;
-  --orange-peel-shade2: #CC7F18;
-  --orange-peel-shade3: #B36F16;
-  --orange-peel-shade4: #996014;
-
-  --hunyadi-yellow: #FFBF69;
-  --hunyadi-yellow-tint1: #FFC47B;
-  --hunyadi-yellow-tint2: #FFC98E;
-  --hunyadi-yellow-tint3: #FFCEA0;
-  --hunyadi-yellow-tint4: #FFD4B2;
-  --hunyadi-yellow-shade1: #E6AB5E;
-  --hunyadi-yellow-shade2: #CC974E;
-  --hunyadi-yellow-shade3: #B38443;
-  --hunyadi-yellow-shade4: #997038;
 
   --baby-powder: #FFFBF6;
   --baby-powder-tint1: #FFFDF8;

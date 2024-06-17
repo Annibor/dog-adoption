@@ -22,8 +22,9 @@ export default function Navigation() {
 
   return (
     <Navbar expand="lg">
-      <Logo />
+      
       <Container>
+      <Logo />
         <Navbar.Toggle aria-controls="basic-navbar" />
         <Navbar.Collapse id="basic-navbar">
           <Nav className="m-auto">
