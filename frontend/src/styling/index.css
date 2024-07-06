@@ -1,32 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lora:wght@400;700&family=Montserrat:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lora:wght@400;700&family=Montserrat:wght@400;700&display=swap");
 
 :root {
+  --baby-powder: #fffbf6;
 
-  --baby-powder: #FFFBF6;
+  --primary-light-blue: #b3d3ef;
+  --primary-dark-blue: #6699cc;
+  --primary-light-tint: #e6f0fa;
+  --contrast-coral: #ff6f61;
+  --contrast-dark-gray: #4a4a4a;
 
-  --primary-light-blue: #B3D3EF;
-  --primary-dark-blue: #6699CC;
-  --primary-light-tint: #E6F0FA;
-  --contrast-coral: #FF6F61;
-  --contrast-dark-gray: #4A4A4A;
+  --main-bg-color: #e6f0fa;
+  --content-bg-color: rgba(179, 211, 239, 0.8);
 
-  --main-bg-color: #E6F0FA; 
-  --content-bg-color: rgba(179, 211, 239, 0.8); 
+  --contrast-purple: #6a1b9a;
 
-  --contrast-purple: #6A1B9A;
+  --primary-light-blue: #b3d3ef;
+  --primary-white: #ffffff;
+  --light-gray: #f7f7f7;
 
-  --primary-light-blue: #B3D3EF;
-  --primary-white: #FFFFFF;
-  --light-gray: #F7F7F7;
+  --primary-light-blue: #b3d3ef;
+  --primary-dark-blue: #4a4a4a;
+  --main-bg-color: #ffffff;
+  --light-gray: #f7f7f7;
 
-
-  --primary-light-blue: #B3D3EF;
-  --primary-dark-blue: #4A4A4A;
-  --main-bg-color: #FFFFFF;
-  --light-gray: #F7F7F7;
-
-  --content-bg-color: #FFFFFF;
-  --content-border-color: #E0E0E0;
+  --content-bg-color: #ffffff;
+  --content-border-color: #e0e0e0;
   /* #99c7e6;*/
 }
 
@@ -37,15 +35,20 @@ html {
 
 body {
   background-color: var(--main-bg-color);
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: var(--primary-dark-blue);
   min-height: 100vh;
   overflow-x: hidden;
   font-size: 1.6rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Lora', serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Lora", serif;
 }
 
 h1 {
@@ -68,7 +71,7 @@ h3 {
 
 .navbar {
   background-color: var(--primary-light-blue);
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .nav-link {
@@ -106,7 +109,7 @@ h3 {
 
 .card-title {
   color: var(--primary-dark-blue);
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.8rem;
   text-shadow: 0rem 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
 }
@@ -133,7 +136,7 @@ h3 {
   letter-spacing: 1px;
   text-transform: uppercase;
   border-radius: 4px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .btn-primary {
@@ -165,7 +168,6 @@ h3 {
 .btn-secondary:active {
   transform: scale(1.05);
 }
-
 
 /* Responsive text scaling */
 @media (min-width: 34rem) {
