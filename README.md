@@ -410,12 +410,109 @@ I tested the website manualy throughout the whole developing progress. The websi
      <th>As expected</th>
      <th>Pass</th>
    </tr>
+   <tr>
+     <td>Navbar collapse</td>
+     <td>Smaller screens navbarcollapse into burger icon</td>
+     <th>As expected</th>
+     <th>Pass</th>
+   </tr>
       <tr>
      <td>Navbar collapse</td>
      <td>Smaller screens navbarcollapse into burger icon</td>
      <th>As expected</th>
      <th>Pass</th>
    </tr>
+      <tr>
+     <td>Admin can add new dog</td>
+     <td>A new dog gets added to the webpage</td>
+     <th>As expected</th>
+     <th>Pass</th>
+   </tr>
+      <tr>
+     <td>Admin can see adoption applicaiton</td>
+     <td>A list of adoption applications is showed on adminpage.</td>
+     <th>As expected</th>
+     <th>Pass</th>
+   </tr>
+         <tr>
+     <td>Admin can see which dog the adoption appliccation is connected to.</td>
+     <td>The list of applications shows the dogs thats conneected to the applications.</td>
+     <th>As expected</th>
+     <th>Pass</th>
+   </tr>
+         <tr>
+     <td>Admin can see wich user th athave made the application</td>
+     <td>The list of applications shows the users that made the applications.</td>
+     <th>As expected</th>
+     <th>Pass</th>
+   </tr>
+         <tr>
+     <td>Admin can create events.</td>
+     <td>Admin can create events.</td>
+     <th>As expected</th>
+     <th>Pass</th>
+   </tr>
+         <tr>
+     <td>Admin can view list of events</td>
+     <td>A list of events shows on admin page.</td>
+     <th>As expected</th>
+     <th>Pass</th>
+   </tr>
+         <tr>
+     <td>Admin can see users that have registered for events.</td>
+     <td>A list of users that have registered for events is showed on adminpage.</td>
+     <th>As expected</th>
+     <th>Pass</th>
+   </tr>
+         <tr>
+     <td>Admin can see list of liked dogs and users that have liked them.</td>
+     <td>A list of liked dogs and users that have liked them.</td>
+     <th>As expected</th>
+     <th>Pass</th>
+   </tr>
+   <tr>
+     <td>Admin can see a list of users</td>
+     <td>A list of users shows on admin page.</td>
+     <th>As expected</th>
+     <th>Pass</th>
+   </tr>
+   <tr>
+     <td>Admin can see users information</td>
+     <td>Users information like name, last name and address can be seen form admin page.</td>
+     <th>As expected</th>
+     <th>Pass</th>
+   </tr>
+   <tr>
+     <td>Admin can delete events</td>
+     <td>Events can be deleted from the webpage.</td>
+     <th>As expected</th>
+     <th>Pass</th>
+   </tr>
+   <tr>
+     <td>Admin can change a dogs adoption status</td>
+     <td>A dogs adoptions status can be changed by admin</td>
+     <th>As expected</th>
+     <th>Pass</th>
+   </tr>
+   <tr>
+     <td>Admin can change status of adoption applicaitons</td>
+     <td>Admin can change status of adoption applications.</td>
+     <th>As expected</th>
+     <th>Pass</th>
+   </tr>
+   <tr>
+     <td>Admin can seea  list of users</td>
+     <td>A list of users shows on admin page.</td>
+     <th>As expected</th>
+     <th>Pass</th>
+   </tr>
+   <tr>
+     <td>Admin can seea  list of users</td>
+     <td>A list of users shows on admin page.</td>
+     <th>As expected</th>
+     <th>Pass</th>
+   </tr>
+
    
   </tbody>
 </table>
