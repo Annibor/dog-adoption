@@ -98,8 +98,13 @@ function Profile() {
     <div className='profile-page'>
       <Container>
         <Row>
-          <Col md={9}>
-            <Row className='my-4 p-3 profile-section'>
+        <Col md = {4} className='profile-sidebar'>
+              <div>
+                <UserInfo />
+              </div>
+            </Col>
+          <Col md={8} className='mt-3'>
+            <Row className='my-4 p-2 profile-section'>
               <Col>
                 <div className="section-header" onClick={() => setShowLikedDogs(!showLikedDogs)} aria-controls="liked-dogs-section" aria-expanded={showLikedDogs}>
                   <FaHeart size={32} className="section-icon" />
@@ -163,11 +168,6 @@ function Profile() {
                 </Collapse>
               </Col>
             </Row>
-          </Col>
-          <Col md={3} className='profile-sidebar'>
-            <div>
-              <UserInfo />
-            </div>
           </Col>
         </Row>
       </Container>
