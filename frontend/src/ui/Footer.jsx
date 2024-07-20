@@ -8,10 +8,10 @@ function Footer() {
     <footer className="footer">
       <Container className="p-4 text-center">
         <Row>
-          <Col xs={6} md={4}>
+          <Col xs={12} md={4}>
             Dog Adoption
           </Col>
-          <Col xs={6} md={4}>
+          <Col xs={12} md={4}>
             <div>
               <div className="mb-4 footer-icons">
                 <Button
@@ -37,7 +37,7 @@ function Footer() {
               </div>
             </div>
           </Col>
-          <Col xs={6} md={4}>
+          <Col xs={12} md={4}>
             <div>Tex ttext </div>
           </Col>
         </Row>
