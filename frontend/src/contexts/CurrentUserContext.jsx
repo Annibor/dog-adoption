@@ -2,51 +2,82 @@ import { useState, useEffect, createContext, useContext, useMemo, useCallback } 
 import axios from "axios";
 import { axiosRes, axiosReq } from "../api/axiosDefaults";
 
+// Creating contexts for user, set user, and logout
 export const CurrentUserContext = createContext();
 export const SetCurrentUserContext = createContext();
 export const LogoutContext = createContext();
 
+// Custom hooks to use the contexts
 export const useCurrentUser = () => useContext(CurrentUserContext);
 export const useSetCurrentUser = () => useContext(SetCurrentUserContext);
 export const useLogout = () => useContext(LogoutContext);
 
+// Function to get a specific cookie by name
 const getCookie = (name) => {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) return parts.pop().split(';').shift();
 };
 
+// Ensuring axios sends cookies with requests
 axios.defaults.withCredentials = true;
 
 export const CurrentUserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [logoutMessage, setLogoutMessage] = useState("");
+  const [greetingMessage, setGreetingMessage] = useState("");
 
-  const handleMount = async () => {
-    try {
-      const { data } = await axiosRes.get("/dj-rest-auth/user/");
-      setCurrentUser(data);
-    } catch (err) {
-      console.error("Failed to mount user:", err.response ? err.response.data : err.message);
+ // Function to fetch and set the current user on mount
+ const handleMount = async () => {
+  try {
+    const { data } = await axiosRes.get("/dj-rest-auth/user/");
+    console.log("Mount User Data:", data);
+
+    // Check if user data contains profile_id, then fetch profile data
+    if (data && data.profile_id) {
+      const profileResponse = await axiosRes.get(`/profile/${data.profile_id}/`);
+      console.log("Profile Data on Mount:", profileResponse.data);
+      setCurrentUser({ ...data, ...profileResponse.data });
+    } else {
+      console.error("User data does not contain 'profile_id'.");
     }
-  };
+  } catch (err) {
+    console.error("Failed to mount user:", err.response ? err.response.data : err.message);
+  }
+};
 
-  useEffect(() => {
-    handleMount();
-  }, []);
+// Use effect to call handleMount on component mount
+useEffect(() => {
+  handleMount();
+}, []);
 
-  const handleLogin = async ({ username, password }) => {
-    try {
-      const response = await axios.post('/dj-rest-auth/login/', { username, password });
-      const userData = response.data.user;
-      setCurrentUser(userData);
-      return response;
-    } catch (error) {
-      console.error("Error during login:", error.response ? error.response.data : error.message);
-      throw error;
+// Function to handle user login
+const handleLogin = async ({ username, password }) => {
+  try {
+    console.log("Attempting to login...");
+    const response = await axios.post('/dj-rest-auth/login/', { username, password });
+    console.log("Full Login Response:", response.data);
+    const userData = response.data.user;
+    console.log("Logged In User Data:", userData);
+
+    // Check if user data contains profile_id, then fetch profile data
+    if (userData && userData.profile_id) {
+      const profileResponse = await axiosRes.get(`/profile/${userData.profile_id}/`);
+      console.log("Profile Data on Login:", profileResponse.data);
+      setCurrentUser({ ...userData, ...profileResponse.data });
+      // Set greeting message with username
+      setGreetingMessage(`Successfully signed in as ${currentUser.username}`);
+    } else {
+      console.error("User data does not contain 'profile_id'.");
     }
-  };
+    return response;
+  } catch (error) {
+    console.error("Error during login:", error.response ? error.response.data : error.message);
+    throw error;
+  }
+};
 
+  // Function to handle user logout
   const handleLogout = useCallback(async () => {
     try {
       await axios.post('/dj-rest-auth/logout/');
@@ -58,6 +89,7 @@ export const CurrentUserProvider = ({ children }) => {
     }
   }, []);
 
+  // useMemo to create interceptors for axios requests and responses
   useMemo(() => {
     const requestInterceptor = axiosReq.interceptors.request.use(
       async (config) => {
@@ -100,14 +132,16 @@ export const CurrentUserProvider = ({ children }) => {
       }
     );
 
+    // Clean up interceptors on unmount
     return () => {
       axiosReq.interceptors.request.eject(requestInterceptor);
       axiosRes.interceptors.response.eject(responseInterceptor);
     };
   }, [currentUser]);
 
+  // Provide context values to children components
   return (
-    <CurrentUserContext.Provider value={{ currentUser, logoutMessage, handleLogin }}>
+    <CurrentUserContext.Provider value={{ currentUser, logoutMessage, handleLogin, greetingMessage }}>
       <SetCurrentUserContext.Provider value={setCurrentUser}>
         <LogoutContext.Provider value={handleLogout}>
           {children}
