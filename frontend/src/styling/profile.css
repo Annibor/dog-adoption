@@ -6,13 +6,13 @@
 
 .profile-sidebar {
   background-color: var(--light-cyan);
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 0.3rem;
 }
 
 .profile-section {
   margin-bottom: 2rem;
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 0.5rem;
 }
 .section-header {
