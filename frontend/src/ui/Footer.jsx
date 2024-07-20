@@ -38,7 +38,8 @@ function Footer() {
             </div>
           </Col>
           <Col xs={12} md={4}>
-            <div>Tex ttext </div>
+            <div> Find your perfect furry friend and give them a loving home from
+            our website.{" "} </div>
           </Col>
         </Row>
         <p>&copy; 2024 Dog Adoption. All Rights Reserved.</p>
