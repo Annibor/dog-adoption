@@ -4,6 +4,11 @@ import { Link } from 'react-router-dom';
 import { Container, Button } from 'react-bootstrap';
 import '../styling/ProtectedRoute.module.css';
 
+/**
+ * A component that renders the protected route based on the current user's authentication status.
+ * If the user is not authenticated, it displays a welcome message and login/register buttons.
+ * If the user is authenticated, it renders the provided element.
+ */
 const ProtectedRoute = ({ element }) => {
   const { currentUser } = useCurrentUser();
 
