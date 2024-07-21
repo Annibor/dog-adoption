@@ -368,7 +368,7 @@ I tested the website manualy throughout the whole developing progress. The websi
   </thead>
   <tbody>
     <tr>
-      <th>Test adding adotpionapplication</th>
+      <th>Test adding adotpion application</th>
       <th>sucessful adding</th>
       <th>As expected</th>
       <th>Pass</th>
@@ -398,7 +398,7 @@ I tested the website manualy throughout the whole developing progress. The websi
       <th>Pass</th>
     </tr>
     <tr>
-      <td>Visitor cant view pages except home</td>
+      <td>Visitor can only view home page</td>
       <td>Get directed to login or registered</td>
       <th>As expected</th>
       <th>Pass</th>
@@ -411,7 +411,7 @@ I tested the website manualy throughout the whole developing progress. The websi
     </tr>
     <tr>
       <td>Navbar collapse</td>
-      <td>Smaller screens navbarcollapse into burger icon</td>
+      <td>On smaller screens navbar collapse into burger icon</td>
       <th>As expected</th>
       <th>Pass</th>
     </tr>
