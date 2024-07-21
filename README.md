@@ -494,16 +494,124 @@ I tested the website manualy throughout the whole developing progress. The websi
       <th>Pass</th>
     </tr>
     <tr>
-      <td>Admin can seea list of users</td>
+      <td>Admin can see a list of users</td>
       <td>A list of users shows on admin page.</td>
       <th>As expected</th>
       <th>Pass</th>
     </tr>
     <tr>
-      <td>Admin can seea list of users</td>
-      <td>A list of users shows on admin page.</td>
-      <th>As expected</th>
-      <th>Pass</th>
+      <td>Click logo to redirect to homepage</td>
+      <td>Redirection to homepage</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Homepage only shows links to other pages when logged in</td>
+      <td>Links to other pages are visible only when logged in</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Homepage only shows links to login and register when not logged in</td>
+      <td>Links to login and register are visible only when not logged in</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Footer info redirects as columns on smaller screens for better UX/UI</td>
+      <td>Footer info rearranges to columns on smaller screens</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>List of dogs change layout on smaller screens to only show one dog on each row</td>
+      <td>Only one dog is shown per row on smaller screens</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>When searching for a dog's name, only the dog with the name will show in the list</td>
+      <td>Only the dog with the searched name is shown in the list</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>When searching for dog breed, only dogs with that breed are shown in a list</td>
+      <td>Only dogs with the searched breed are shown in the list</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>When searching for age on the dogs, only dogs of that age will be shown in the list</td>
+      <td>Only dogs of the searched age are shown in the list</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Button click toggles filters visibility</td>
+      <td>Filters should be shown/hidden when button is clicked</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Change name filter</td>
+      <td>Filters should update with entered name</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Change breed filter</td>
+      <td>Filters should update with entered breed</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Change age filter</td>
+      <td>Filters should update with entered age</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Change gender filter</td>
+      <td>Filters should update with selected gender</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Change temperament filter</td>
+      <td>Filters should update with selected temperament</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Change good with children filter</td>
+      <td>Filters should update with selected good with children option</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Change good with other dogs filter</td>
+      <td>Filters should update with selected good with other dogs option</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Clear all filters</td>
+      <td>All filters should reset to default values</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Liked dogs show in carousel on profile page</td>
+      <td>Liked dogs are displayed in a carousel on the profile page</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Adoption applications show in list on profile page</td>
+      <td>Adoption applications are displayed in a list on the profile page</td>
+      <td>As expected</td>
+      <td>Pass</td>
     </tr>
   </tbody>
 </table>
