@@ -613,6 +613,12 @@ I tested the website manualy throughout the whole developing progress. The websi
       <td>As expected</td>
       <td>Pass</td>
     </tr>
+    <tr>
+      <td>Sucessful alert is shown when profile infomation is succesfully updated on profile page</td>
+      <td>Alert with successful message appears when updates user information</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
   </tbody>
 </table>
 
