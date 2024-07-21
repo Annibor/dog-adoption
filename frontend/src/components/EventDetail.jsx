@@ -3,26 +3,30 @@ import { Card, Button, Alert, Spinner } from 'react-bootstrap';
 import { axiosReq } from '../api/axiosDefaults';
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 
+// Component to display event details and handle event registration
 const EventDetail = ({ event, eventResetSignal, onReset }) => {
   const { currentUser } = useCurrentUser();
   const [applied, setApplied] = useState(false);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
-
   useEffect(() => {
     if (event) {
+      // Check if user has already applied for the event
       const appliedStatus = localStorage.getItem(`eventApplied_${event.id}_${currentUser.id}`);
       if (appliedStatus) {
-        setApplied(true);
+        setApplied(true); // If user has already applied, set applied state to true
         setSuccess('Successfully applied for the event!');
       } else {
+        // If user has not applied, set applied state to false
         setApplied(false);
+        // Clear success message
         setSuccess(null);
       }
     }
   }, [event, currentUser]);
 
+  // Function to handle event registration
   const handleApply = async () => {
     setLoading(true);
     setError(null);
@@ -33,10 +37,12 @@ const EventDetail = ({ event, eventResetSignal, onReset }) => {
         event: event.id,
         user: currentUser.profile_id,
       };
-      await axiosReq.post(`/events/registrations/${event.id}/`, requestData);
+      // Make API request to register for the event
+      await axiosReq.post(`/events/registrations/${event.id}/`, requestData); 
       setApplied(true);
       setSuccess('Successfully applied for the event!');
-      localStorage.setItem(`eventApplied_${event.id}_${currentUser.id}`, 'true');
+      // Store applied status in local storage
+      localStorage.setItem(`eventApplied_${event.id}_${currentUser.id}`, 'true'); 
       setLoading(false);
     } catch (err) {
       if (err.response && err.response.status === 400 && err.response.data.detail === "You have already registered for this event.") {
@@ -51,14 +57,15 @@ const EventDetail = ({ event, eventResetSignal, onReset }) => {
 
   useEffect(() => {
     if (eventResetSignal) {
-      setApplied(false);
-      setSuccess(null);
+      setApplied(false); 
+      setSuccess(null); 
       setError(null);
       localStorage.removeItem(`eventApplied_${event.id}_${currentUser.id}`);
       if (onReset) onReset();
     }
   }, [eventResetSignal, event, currentUser, onReset]);
 
+    // Render message if no event is selected
   if (!event) return <div>Select an event to see details</div>;
 
   return (
@@ -68,9 +75,10 @@ const EventDetail = ({ event, eventResetSignal, onReset }) => {
         <Card.Text className='mx-1 my-2'>{event.description}</Card.Text>
         <Card.Text className='mx-1 mt-3'>{new Date(event.date).toLocaleString()}</Card.Text>
         <Card.Text className="mx-1 mt-3">{event.location}</Card.Text>
+        {/* Show spinner if loading state is true */}
         {loading && <Spinner animation="border" variant="primary" />}
-        {error && <Alert variant="danger">{error}</Alert>}
-        {success && <Alert variant="success">{success}</Alert>}
+        {error && <Alert variant="danger">{error}</Alert>} 
+        {success && <Alert variant="success">{success}</Alert>} 
         <Button onClick={handleApply} disabled={loading || applied}>
           {applied ? 'Already Applied' : 'Apply'}
         </Button>

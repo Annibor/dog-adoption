@@ -2,7 +2,9 @@ import React from 'react';
 import { ListGroup } from 'react-bootstrap';
 
 const EventList = ({ events, setSelectedEvent }) => {
+  // Check if there are no events or events array is empty
   if (!events || events.length === 0) {
+     // Display a message if no events are available
     return <div>No events available.</div>;
   }
 

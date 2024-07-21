@@ -1,10 +1,14 @@
+// Import necessary dependencies
 import { useState, useEffect } from 'react';
 import { Form, Button, Col, Row, Alert, Spinner } from 'react-bootstrap';
 import { axiosReq } from '../api/axiosDefaults';
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 
+// Define the AdoptionApplicationForm component
 function AdoptionApplicationForm({ dogId, dogName, onReset, formResetSignal }) {
   const { currentUser } = useCurrentUser(); // Get current user
+
+  // Define state variables
   const [formData, setFormData] = useState({
     visit_date: '',
     first_name: '',
@@ -23,13 +27,13 @@ function AdoptionApplicationForm({ dogId, dogName, onReset, formResetSignal }) {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
+  // Fetch user profile details and prefill the form if user is logged in
   useEffect(() => {
     if (currentUser) {
       const applied = localStorage.getItem(`applied_${dogId}_${currentUser.id}`);
       if (applied) {
         setSubmitted(true);
       } else {
-        // Fetch user profile details to prefill the form
         const fetchUserProfile = async () => {
           try {
             const { data } = await axiosReq.get(`/profile/${currentUser.profile_id}/`);
@@ -55,6 +59,7 @@ function AdoptionApplicationForm({ dogId, dogName, onReset, formResetSignal }) {
     }
   }, [dogId, currentUser]);
 
+  // Handle form input changes
   const handleChange = (event) => {
     const { name, value, checked, type } = event.target;
     setFormData((prevFormData) => ({
@@ -63,6 +68,7 @@ function AdoptionApplicationForm({ dogId, dogName, onReset, formResetSignal }) {
     }));
   };
 
+  // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
@@ -84,6 +90,7 @@ function AdoptionApplicationForm({ dogId, dogName, onReset, formResetSignal }) {
     }
   };
 
+  // Reset the form when formResetSignal changes
   useEffect(() => {
     if (formResetSignal) {
       setSubmitted(false);
@@ -107,6 +114,7 @@ function AdoptionApplicationForm({ dogId, dogName, onReset, formResetSignal }) {
     }
   }, [formResetSignal, dogId, currentUser, onReset]);
 
+  // Render success message if form is submitted
   if (submitted) {
     return (
       <Alert variant="success">
@@ -115,6 +123,7 @@ function AdoptionApplicationForm({ dogId, dogName, onReset, formResetSignal }) {
     );
   }
 
+  // Render the adoption application form
   return (
     <div>
       <h1>Apply to Adopt {dogName}</h1>
@@ -123,6 +132,7 @@ function AdoptionApplicationForm({ dogId, dogName, onReset, formResetSignal }) {
         {error && <Alert variant="danger">{error}</Alert>}
         {success && <Alert variant="success">{success}</Alert>}
 
+        {/* Form fields */}
         <Row>
           <Form.Group as={Col} controlId="visit_date">
             <Form.Label>Visit Date</Form.Label>

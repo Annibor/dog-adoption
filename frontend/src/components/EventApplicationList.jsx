@@ -1,13 +1,20 @@
 import React from 'react';
 import { Card, Button, Alert, Spinner } from 'react-bootstrap';
 
+// EventApplicationList component
 const EventApplicationList = ({ eventApplications, loading, error, onUnapply }) => {
+  // If loading is true, display a spinner
   if (loading) return <Spinner animation="border" variant="primary" />;
+  
+  // If there's an error, display an alert with the error message
   if (error) return <Alert variant="danger">{error}</Alert>;
+  
+  // If there are no event applications, display an info alert
   if (!eventApplications || eventApplications.length === 0) {
     return <Alert variant="info">No event applications to display.</Alert>;
   }
 
+  // Render the list of event applications
   return (
     <div>
       <h2>Your Event Applications</h2>
