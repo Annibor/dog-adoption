@@ -45,8 +45,8 @@ function Home() {
           // Render links for logged-in users
             pages.map((page, index) => (
               <Col md={12} key={page.path} className="mb-4">
-                <div className={`d-flex flex-column flex-md-row align-items-center justify-content-between ${index % 2 !== 0 ? 'flex-md-row-reverse' : ''}`}>
-                  <p className="mb-2 mb-md-0" style={{ flexGrow: 1, textAlign: 'center', margin: '10px' }}>{page.description}</p>
+                <div className="d-flex flex-column flex-md-row align-items-center justify-content-between">
+                  <p className="mb-2 mb-md-0" style={{ flexGrow: 1, textAlign: 'right', margin: '10px' }}>{page.description}</p>
                   <Button as={Link} to={page.path} variant="primary" className="flex-shrink-0" style={{ width: '150px' }}>
                     {page.text}
                   </Button>
@@ -57,8 +57,8 @@ function Home() {
             // Render links for non-logged-in users
             authPages.map((page, index) => (
               <Col md={12} key={page.path} className="mb-4">
-                <div className={`d-flex flex-column flex-md-row align-items-center justify-content-between ${index % 2 !== 0 ? 'flex-md-row-reverse' : ''}`}>
-                  <p className="mb-2 mb-md-0" style={{ flexGrow: 1, textAlign: 'center', margin: '10px' }}>{page.description}</p>
+                <div className="d-flex flex-column flex-md-row align-items-center justify-content-between">
+                  <p className="mb-2 mb-md-0" style={{ flexGrow: 1, textAlign: 'right', margin: '10px' }}>{page.description}</p>
                   <Button as={Link} to={page.path} variant="primary" className="flex-shrink-0" style={{ width: '150px' }}>
                     {page.text}
                   </Button>
