@@ -27,7 +27,7 @@ function Home() {
           <Col md={6} className="text-center text-md-left">
             <h1 className="display-4">Welcome to Dog Adoption</h1>
             <p className="lead">
-              Find your perfect furry friend and give them a loving home.
+            Embark on a heartwarming journey to find your new best friend. Our Dog Adoption platform is dedicated to helping dogs in need find their forever homes. Browse through our extensive list of adoptable dogs, learn about their stories, and take the first step towards giving a deserving dog a loving home.
             </p>
           </Col>
           <Col md={6} className="text-center">
