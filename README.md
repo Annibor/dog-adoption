@@ -357,6 +357,8 @@ I tested the website manualy throughout the whole developing progress. The websi
 - [Back to Top](#table-of-content)
 
 #### Manual testing
+
+- Manual frontend tests
 <table>
   <thead>
     <tr>
@@ -414,92 +416,7 @@ I tested the website manualy throughout the whole developing progress. The websi
       <td>On smaller screens navbar collapse into burger icon</td>
       <th>As expected</th>
       <th>Pass</th>
-    </tr>
-    <tr>
-      <td>Admin can add new dog</td>
-      <td>A new dog gets added to the webpage</td>
-      <th>As expected</th>
-      <th>Pass</th>
-    </tr>
-    <tr>
-      <td>Admin can see adoption applicaiton</td>
-      <td>A list of adoption applications is showed on adminpage.</td>
-      <th>As expected</th>
-      <th>Pass</th>
-    </tr>
-    <tr>
-      <td>Admin can see which dog the adoption appliccation is connected to.</td>
-      <td>The list of applications shows the dogs thats conneected to the applications.</td>
-      <th>As expected</th>
-      <th>Pass</th>
-    </tr>
-    <tr>
-      <td>Admin can see wich user th athave made the application</td>
-      <td>The list of applications shows the users that made the applications.</td>
-      <th>As expected</th>
-      <th>Pass</th>
-    </tr>
-    <tr>
-      <td>Admin can create events.</td>
-      <td>Admin can create events.</td>
-      <th>As expected</th>
-      <th>Pass</th>
-    </tr>
-    <tr>
-      <td>Admin can view list of events</td>
-      <td>A list of events shows on admin page.</td>
-      <th>As expected</th>
-      <th>Pass</th>
-    </tr>
-    <tr>
-      <td>Admin can see users that have registered for events.</td>
-      <td>A list of users that have registered for events is showed on adminpage.</td>
-      <th>As expected</th>
-      <th>Pass</th>
-    </tr>
-    <tr>
-      <td>Admin can see list of liked dogs and users that have liked them.</td>
-      <td>A list of liked dogs and users that have liked them.</td>
-      <th>As expected</th>
-      <th>Pass</th>
-    </tr>
-    <tr>
-      <td>Admin can see a list of users</td>
-      <td>A list of users shows on admin page.</td>
-      <th>As expected</th>
-      <th>Pass</th>
-    </tr>
-    <tr>
-      <td>Admin can see users information</td>
-      <td>Users information like name, last name and address can be seen form admin page.</td>
-      <th>As expected</th>
-      <th>Pass</th>
-    </tr>
-    <tr>
-      <td>Admin can delete events</td>
-      <td>Events can be deleted from the webpage.</td>
-      <th>As expected</th>
-      <th>Pass</th>
-    </tr>
-    <tr>
-      <td>Admin can change a dogs adoption status</td>
-      <td>A dogs adoptions status can be changed by admin</td>
-      <th>As expected</th>
-      <th>Pass</th>
-    </tr>
-    <tr>
-      <td>Admin can change status of adoption applicaitons</td>
-      <td>Admin can change status of adoption applications.</td>
-      <th>As expected</th>
-      <th>Pass</th>
-    </tr>
-    <tr>
-      <td>Admin can see a list of users</td>
-      <td>A list of users shows on admin page.</td>
-      <th>As expected</th>
-      <th>Pass</th>
-    </tr>
-    <tr>
+    </tr><tr>
       <td>Click logo to redirect to homepage</td>
       <td>Redirection to homepage</td>
       <td>As expected</td>
@@ -618,6 +535,116 @@ I tested the website manualy throughout the whole developing progress. The websi
       <td>Alert with successful message appears when updates user information</td>
       <td>As expected</td>
       <td>Pass</td>
+    </tr>
+  </tbody>
+</table>
+
+- Manual backend tests
+<table>
+  <thead>
+    <tr>
+      <th>Testing Description</th>
+      <th>Expected Action</th>
+      <th>Actual Output</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+   <tr>
+      <td>Admin can add new dog</td>
+      <td>A new dog gets added to the webpage</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can see adoption applicaiton</td>
+      <td>A list of adoption applications is showed on adminpage.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can see which dog the adoption appliccation is connected to.</td>
+      <td>The list of applications shows the dogs thats conneected to the applications.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can see wich user th athave made the application</td>
+      <td>The list of applications shows the users that made the applications.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can create events.</td>
+      <td>Admin can create events.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can view list of events</td>
+      <td>A list of events shows on admin page.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can see users that have registered for events.</td>
+      <td>A list of users that have registered for events is showed on adminpage.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can see list of liked dogs and users that have liked them.</td>
+      <td>A list of liked dogs and users that have liked them.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can see a list of users</td>
+      <td>A list of users shows on admin page.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can see users information</td>
+      <td>Users information like name, last name and address can be seen form admin page.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can delete events</td>
+      <td>Events can be deleted from the webpage.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can change a dogs adoption status</td>
+      <td>A dogs adoptions status can be changed by admin</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can change status of adoption applicaitons</td>
+      <td>Admin can change status of adoption applications.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can see a list of users</td>
+      <td>A list of users shows on admin page.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Users username are shown in navbar when logged in</td>
+      <td>Username is shown in navbar when logged in</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Username is shown in sucess message when user logs in</td>
+      <td>Username is shown in alert when user push login button</td>
+      <th>As expected</th>
+      <th>Pass</th>
     </tr>
   </tbody>
 </table>

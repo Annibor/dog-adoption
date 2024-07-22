@@ -1,4 +1,4 @@
-import logoImage from '../images/logo.png'
+import logoImage from '../images/logo_transparent.png'
 
 function Logo() {
   return (
