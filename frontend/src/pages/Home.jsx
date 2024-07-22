@@ -46,7 +46,7 @@ function Home() {
             pages.map((page, index) => (
               <Col md={12} key={page.path} className="mb-4">
                 <div className="d-flex flex-column flex-md-row align-items-center justify-content-between">
-                  <p className="mb-2 mb-md-0" style={{ flexGrow: 1, textAlign: 'right', margin: '10px' }}>{page.description}</p>
+                  <p className="mb-2 mb-md-0" style={{ flexGrow: 1, textAlign: 'left', margin: '10px' }}>{page.description}</p>
                   <Button as={Link} to={page.path} variant="primary" className="flex-shrink-0" style={{ width: '150px' }}>
                     {page.text}
                   </Button>
@@ -58,7 +58,7 @@ function Home() {
             authPages.map((page, index) => (
               <Col md={12} key={page.path} className="mb-4">
                 <div className="d-flex flex-column flex-md-row align-items-center justify-content-between">
-                  <p className="mb-2 mb-md-0" style={{ flexGrow: 1, textAlign: 'right', margin: '10px' }}>{page.description}</p>
+                  <p className="mb-2 mb-md-0" style={{ flexGrow: 1, textAlign: 'left', margin: '10px' }}>{page.description}</p>
                   <Button as={Link} to={page.path} variant="primary" className="flex-shrink-0" style={{ width: '150px' }}>
                     {page.text}
                   </Button>
