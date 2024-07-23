@@ -29,6 +29,9 @@ function Home() {
             <p className="lead">
             Embark on a heartwarming journey to find your new best friend. Our Dog Adoption platform is dedicated to helping dogs in need find their forever homes. Browse through our extensive list of adoptable dogs, learn about their stories, and take the first step towards giving a deserving dog a loving home.
             </p>
+            <p>
+            Please login or register to see all the dogs, and to be able to apply for adoption applications and events. Join us in our mission to give every dog a loving home!
+            </p>
           </Col>
           <Col md={6} className="text-center">
             <img
