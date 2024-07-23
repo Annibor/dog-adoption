@@ -646,6 +646,12 @@ I tested the website manualy throughout the whole developing progress. The websi
       <th>As expected</th>
       <th>Pass</th>
     </tr>
+    <tr>
+      <td>Username and user info is present on the profile page.</td>
+      <td>Username is shown in the card title on profile page and other userinformation is present in the card text.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
   </tbody>
 </table>
 
