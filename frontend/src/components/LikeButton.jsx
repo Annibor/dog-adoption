@@ -11,6 +11,7 @@ const LikeButton = ({ dogId, onDogUnlike }) => {
   const [liked, setLiked] = useState(false);
 
   useEffect(() => {
+    // Fetch the like status of the dog
     const fetchLikeStatus = async () => {
       try {
         const response = await axios.get('/favorites/');
@@ -22,12 +23,14 @@ const LikeButton = ({ dogId, onDogUnlike }) => {
       }
     };
 
+    // Fetch the like status only if the user is logged in and a dogId is provided
     if (currentUser && dogId) {
       fetchLikeStatus();
     }
   }, [dogId, currentUser]);
 
   const handleLikeToggle = async () => {
+    // Check if the user is logged in
     if (!currentUser) {
       alert('You need to be logged in to like a dog.');
       return;
@@ -35,10 +38,12 @@ const LikeButton = ({ dogId, onDogUnlike }) => {
 
     try {
       if (liked) {
+        // Unlike the dog if it is already liked
         const response = await axios.delete(`/favorites/${dogId}/`);
         console.log('Dog unliked:', response.data, 'for dogId:', dogId);
         if (onDogUnlike) onDogUnlike(dogId); 
       } else {
+        // Like the dog if it is not liked
         const response = await axios.post('/favorites/', { dog: dogId });
         console.log('Dog liked:', response.data, 'for dogId:', dogId);
       }
@@ -49,6 +54,7 @@ const LikeButton = ({ dogId, onDogUnlike }) => {
   };
 
   return (
+    // Render the like button with appropriate styling and icon based on the like status
     <button className={`like-button ${liked ? 'liked' : ''}`} onClick={handleLikeToggle}>
       <FontAwesomeIcon icon={liked ? solidHeart : regularHeart} size="2x" />
     </button>

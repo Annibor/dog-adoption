@@ -5,16 +5,21 @@ import { Link } from 'react-router-dom';
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 
 function Login() {
+  // Get the logout message and login function from the CurrentUserContext
   const { logoutMessage, handleLogin } = useCurrentUser() || {};
+
+  // Set up state for form data and error messages
   const [formData, setFormData] = useState({
     username: '',
     password: '',
   });
-
   const { username, password } = formData;
   const [error, setError] = useState(null);
+
+  // Get the navigation function from react-router-dom
   const navigate = useNavigate();
 
+  // Handle form input changes
   const handleChange = (event) => {
     setFormData({
       ...formData,
@@ -22,19 +27,24 @@ function Login() {
     });
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
 
     try {
+      // Call the handleLogin function to log in the user
       const response = await handleLogin({ username, password });
 
+      // If login is successful, navigate to the home page
       if (response.status === 200) {
         navigate('/');
       } else {
+        // If login fails, display an error message
         setError('Login failed, please try again!');
       }
     } catch (err) {
+      // Handle any errors that occur during login
       if (err.response && err.response.data) {
         setError(err.response.data.detail || 'An unknown error occurred, please try again!');
       } else {

@@ -7,19 +7,26 @@ import LikeButton from './LikeButton';
 import "../styling/dogs.css";
 import "../styling/index.css";
 
+// Define the DogDetail component
 const DogDetail = ({ dog, condensed, onDogUnlike }) => {
+
   const { id } = useParams();
+
+  // Set up state variables
   const [dogData, setDogData] = useState(dog || null);
   const [loading, setLoading] = useState(!dog);
   const [error, setError] = useState(null);
   const [resetForm, setResetForm] = useState(false);
+
+  // Get the navigate function from react-router-dom
   const navigate = useNavigate();
 
+  // Fetch dog data from the server when the component mounts
   useEffect(() => {
     if (!dog) {
       const fetchDog = async () => {
         try {
-          const response = await axiosReq.get(`/dogs/${id}/`); // Use axiosReq
+          const response = await axiosReq.get(`/dogs/${id}/`);
           setDogData(response.data);
           setLoading(false);
         } catch (err) {
@@ -32,16 +39,21 @@ const DogDetail = ({ dog, condensed, onDogUnlike }) => {
     }
   }, [id, dog]);
 
-
+  // Render a loading spinner if the data is still loading
   if (loading) return <Spinner animation="border" variant="primary" />;
+
+  // Render an error message if there was an error fetching the data
   if (error) return <Alert variant="danger">{error}</Alert>;
 
+  // Get the dog information from the dogData state variable or the dog prop
   const dogInfo = dogData || dog;
 
+  // Handle form reset
   const handleFormReset = () => {
     setResetForm(!resetForm);
   };
 
+  // Render the DogDetail component
   return (
     <Container className={`py-5 ${condensed ? 'condensed' : ''}`}>
       {!condensed && (

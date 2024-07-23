@@ -11,7 +11,13 @@ import EventApplicationList from '../components/EventApplicationList';
 import { axiosReq } from '../api/axiosDefaults';
 
 
+/**
+ * Profile component displays the user's profile page.
+ * It fetches and displays the user's liked dogs, adoption applications,
+ * event applications, and provides options to update the profile.
+ */
 function Profile() {
+  // State variables
   const [likedDogs, setLikedDogs] = useState([]);
   const [applications, setApplications] = useState([]);
   const [eventApplications, setEventApplications] = useState([]);
@@ -20,11 +26,13 @@ function Profile() {
   const [formResetSignal, setFormResetSignal] = useState(false);
   const [eventResetSignal, setEventResetSignal] = useState(false);
 
+  // Show/Hide sections
   const [showLikedDogs, setShowLikedDogs] = useState(false);
   const [showApplications, setShowApplications] = useState(false);
   const [showEventApplications, setShowEventApplications] = useState(false);
   const [showProfileUpdateForm, setShowProfileUpdateForm] = useState(false);
 
+  // Fetches the user's liked dogs from the server.
   useEffect(() => {
     const fetchLikedDogs = async () => {
       try {
@@ -34,6 +42,8 @@ function Profile() {
         console.error('Error fetching liked dogs:', err);
       }
     };
+
+    // Fetches the user's adoption applications from the server.
 
     const fetchApplications = async () => {
       try {
@@ -47,6 +57,7 @@ function Profile() {
       }
     };
 
+    // Fetches the user's event applications from the server.
     const fetchEventApplications = async () => {
       try {
         const response = await axiosReq.get('/events/registrations/');
@@ -60,15 +71,18 @@ function Profile() {
       }
     };
 
+    // Fetch data on component mount
     fetchLikedDogs();
     fetchApplications();
     fetchEventApplications();
   }, []);
 
+  // Handles the unlike action for a dog.
   const handleDogUnlike = (dogId) => {
     setLikedDogs((prevLikedDogs) => prevLikedDogs.filter((favorite) => favorite.dog.id !== dogId));
   };
 
+  // Handles the unapply action for an adoption application.
   const handleUnapplyAdoption = async (applicationId, dogId, currentUser) => {
     try {
       await axiosReq.delete(`/adoption-applications/${applicationId}/`);
@@ -81,6 +95,7 @@ function Profile() {
     }
   };
 
+  // Handles the unapply action for an event application.
   const handleUnapplyEvent = async (eventApplicationId, eventId, currentUser) => {
     try {
       await axiosReq.delete(`/events/registrations/${eventApplicationId}/`);
@@ -93,14 +108,19 @@ function Profile() {
     }
   };
 
-
   return (
     <div className='profile-page'>
       <Container>
         <Row>
-          <Col md={9}>
-            <Row className='my-4 p-3 profile-section'>
+          <Col md={4} className='profile-sidebar'>
+            <div>
+              <UserInfo />
+            </div>
+          </Col>
+          <Col md={8} className='mt-3'>
+            <Row className='my-4 p-2 profile-section'>
               <Col>
+                {/* Liked Dogs section */}
                 <div className="section-header" onClick={() => setShowLikedDogs(!showLikedDogs)} aria-controls="liked-dogs-section" aria-expanded={showLikedDogs}>
                   <FaHeart size={32} className="section-icon" />
                   <span className="section-title">Liked Dogs</span>
@@ -114,44 +134,46 @@ function Profile() {
             </Row>
             <Row className='my-4 p-3 profile-section'>
               <Col>
+                {/* Adoption Applications section */}
                 <div className="section-header" onClick={() => setShowApplications(!showApplications)} aria-controls="applications-section" aria-expanded={showApplications}>
                   <FaPaw size={32} className="section-icon" />
                   <span className="section-title">Adoption Applications</span>
                 </div>
                 <Collapse in={showApplications}>
                   <div id="applications-section">
-                  <AdoptionApplicationList 
-                    applications={applications}
-                    loading={loading}
-                    error={error}
-                    onUnapply={(applicationId) => handleUnapplyAdoption(applicationId, applications.find(app => app.id === applicationId).dog, applications.find(app => app.id === applicationId).user)} 
-                    formResetSignal={formResetSignal} />
+                    <AdoptionApplicationList
+                      applications={applications}
+                      loading={loading}
+                      error={error}
+                      onUnapply={(applicationId) => handleUnapplyAdoption(applicationId, applications.find(app => app.id === applicationId).dog, applications.find(app => app.id === applicationId).user)}
+                      formResetSignal={formResetSignal} />
                   </div>
                 </Collapse>
               </Col>
             </Row>
             <Row className='my-4 p-3 profile-section'>
               <Col>
+                {/* Event Applications section */}
                 <div className="section-header" onClick={() => setShowEventApplications(!showEventApplications)} aria-controls="event-applications-section" aria-expanded={showEventApplications}>
                   <FaDog size={32} className="section-icon" />
                   <span className="section-title">Event Applications</span>
                 </div>
                 <Collapse in={showEventApplications}>
                   <div id="event-applications-section">
-                  <EventApplicationList 
-                      eventApplications={eventApplications} 
-                      loading={loading} 
-                      error={error} 
+                    <EventApplicationList
+                      eventApplications={eventApplications}
+                      loading={loading}
+                      error={error}
                       onUnapply={(applicationId) => handleUnapplyEvent(applicationId, eventApplications.find(app => app.id === applicationId).event)}
-                      eventResetSignal={eventResetSignal} 
+                      eventResetSignal={eventResetSignal}
                     />
-
                   </div>
                 </Collapse>
               </Col>
             </Row>
             <Row className='my-4 p-3 profile-section'>
               <Col>
+                {/* Profile Update section */}
                 <div className="section-header" onClick={() => setShowProfileUpdateForm(!showProfileUpdateForm)} aria-controls="profile-update-section" aria-expanded={showProfileUpdateForm}>
                   <FaUserEdit size={32} className="section-icon" />
                   <span className="section-title">Update Profile</span>
@@ -163,11 +185,6 @@ function Profile() {
                 </Collapse>
               </Col>
             </Row>
-          </Col>
-          <Col md={3} className='profile-sidebar'>
-            <div>
-              <UserInfo />
-            </div>
           </Col>
         </Row>
       </Container>

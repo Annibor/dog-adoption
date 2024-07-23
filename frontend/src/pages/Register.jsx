@@ -4,6 +4,7 @@ import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import axios from 'axios';
 
 function Register() {
+  // State to store form data
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -13,10 +14,13 @@ function Register() {
 
   const { username, email, password1, password2 } = formData;
 
+  // State to store error messages
   const [error, setError] = useState({});
 
+  // Hook to navigate to different routes
   const navigate = useNavigate();
 
+  // Function to handle form field changes
   const handleChange = (event) => {
     setFormData({
       ...formData,
@@ -24,12 +28,16 @@ function Register() {
     });
   };
 
+  // Function to handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      // Send a POST request to the server with the form data
       await axios.post("/dj-rest-auth/registration/", formData);
+      // If the request is successful, navigate to the login page
       navigate("/login");
     } catch (err) {
+      // If there is an error, set the error state with the response data
       setError(err.response?.data || {});
     }
   };

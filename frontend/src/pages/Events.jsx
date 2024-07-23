@@ -6,15 +6,18 @@ import axios from 'axios';
 import eventImage from '../images/event-page-img.jpg';
 
 const Events = () => {
+  // State variables to manage selected event, events list, and error message
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [events, setEvents] = useState([]);
   const [error, setError] = useState('');
 
   useEffect(() => {
+    // Fetch events from the server when the component mounts
     const fetchEvents = async () => {
       try {
         const response = await axios.get('/events/');
         if (Array.isArray(response.data.results)) {
+          // If the response is an array, update the events list and select the first event
           setEvents(response.data.results);
           setSelectedEvent(response.data.results[0]);
         } else {
@@ -39,7 +42,7 @@ const Events = () => {
             <div className="p-2 content-div">
               <div className="m-3">
                 <h1 className="pb-3">Events</h1>
-                <p>Join our events to meet and potentially adopt a loving dog. Here you can find all the   upcoming events. Click on an event to see more details and apply to participate.</p>
+                <p>Join our events to meet and potentially adopt a loving dog. Here you can find all the upcoming events. Click on an event to see more details and apply to participate.</p>
                 <img 
                 src={eventImage}
                 alt="A group of people and dogs at an adoption event"

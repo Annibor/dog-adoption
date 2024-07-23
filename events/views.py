@@ -65,9 +65,6 @@ class EventRegistrationListCreateDelete(APIView):
                       context={"request": request}))
         if serializer.is_valid():
             try:
-                logger.debug((f"Attempting to save registration for user
-                             {request.user.profile}
-                              with data: {serializer.validated_data}"))
                 serializer.save(user=request.user.profile, event=event)
                 logger.info("Registration saved successfully.")
                 return (Response

@@ -6,6 +6,7 @@ import { FaFilter } from 'react-icons/fa';
 import "../styling/dogs.css";
 import "../styling/index.css";
 
+// Component that displays a list of dogs
 function DogsList() {
   const [dogs, setDogs] = useState([]);
   const [error, setError] = useState('');
@@ -19,14 +20,17 @@ function DogsList() {
     good_with_children: '',
     good_with_other_dogs: '',
   });
-
+   // State to control the visibility of the filter section
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    // Fetch dogs from the server when the filters change
     const fetchDogs = async () => {
       try {
+        // Fetch dogs from the server using axios
         const response = await axiosReq.get('/dogs/', { params: filters });
         if (Array.isArray(response.data.results)) {
+           // Update the dogs state with the fetched data
           setDogs(response.data.results);
         } else {
           setError('Unexpected response format');
@@ -35,15 +39,17 @@ function DogsList() {
         setError(err.message);
       }
     };
-
+     // Fetch dogs when the filters change
     fetchDogs();
   }, [filters]);
 
   const handleSearchChange = (e) => {
+     // Update the search query state when the search input changes
     setSearchQuery(e.target.value);
   };
 
   const filteredDogs = dogs.filter(dog =>
+    // Filter dogs based on name, breed, or age
     dog.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     dog.breed.toLowerCase().includes(searchQuery.toLowerCase()) ||
     dog.age.toString().includes(searchQuery)
@@ -58,6 +64,7 @@ function DogsList() {
   };
 
   const handleClearFilters = () => {
+    // Clear all filter values
     setFilters({
       name: '',
       breed: '',
@@ -96,6 +103,7 @@ function DogsList() {
           <Collapse in={open}>
             <div>
               <h4>Filters</h4>
+              {/* Form fields for filtering dogs */}
               <Form.Group controlId="name">
                 <Form.Label>Name</Form.Label>
                 <Form.Control
@@ -182,6 +190,7 @@ function DogsList() {
             </div>
           </Collapse>
         </Col>
+        {/* Display the filtered dogs */}
         {filteredDogs.map((dog) => (
           <Col key={dog.id} md={4}>
             <Card className={`mb-4 ${dog.adoption_status === 'adopted' ? 'adopted-card' : ''}`}>

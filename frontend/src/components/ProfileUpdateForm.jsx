@@ -6,6 +6,7 @@ import { useCurrentUser } from '../contexts/CurrentUserContext';
 const ProfileUpdateForm = () => {
   const { currentUser } = useCurrentUser();
   const [formData, setFormData] = useState({
+    // Initial form data state
     first_name: '',
     last_name: '',
     username: '',
@@ -26,6 +27,7 @@ const ProfileUpdateForm = () => {
 
   useEffect(() => {
     if (currentUser) {
+      // Fetch user data when the currentUser changes
       const fetchUserData = async () => {
         try {
           const response = await axios.get(`/profile/${currentUser.profile_id}/`);
@@ -43,6 +45,7 @@ const ProfileUpdateForm = () => {
             has_pets,
           } = response.data;
           setFormData({
+            // Update form data state with fetched user data
             first_name: first_name || '',
             last_name: last_name || '',
             username: username || '',
@@ -69,6 +72,7 @@ const ProfileUpdateForm = () => {
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
+      // Update form data state when input values change
       ...formData,
       [name]: type === 'checkbox' ? checked : value,
     });
@@ -81,6 +85,7 @@ const ProfileUpdateForm = () => {
     setSuccess(null);
 
     if (formData.password !== formData.confirmPassword) {
+      // Check if passwords match
       setError('Oops, passwords must match, please try again!');
       setLoading(false);
       return;
@@ -128,7 +133,7 @@ const ProfileUpdateForm = () => {
               required
             />
           </Form.Group>
-        </Row>
+        </Row>        
         <Row>
           <Form.Group as={Col} xs={12} md={6} controlId="Username">
             <Form.Label>Username</Form.Label>

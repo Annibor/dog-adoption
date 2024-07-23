@@ -358,65 +358,300 @@ I tested the website manualy throughout the whole developing progress. The websi
 
 #### Manual testing
 
+- Manual frontend tests
 <table>
   <thead>
-   <tr>
-     <th>Testing Description</th>
-     <th>Expected Action</th>
-     <th>Actual Output</th>
-     <th>Result</th>
-   </tr>
- </thead>
+    <tr>
+      <th>Testing Description</th>
+      <th>Expected Action</th>
+      <th>Actual Output</th>
+      <th>Result</th>
+    </tr>
+  </thead>
   <tbody>
-  <tr>
-     <th>Test adding adotpionapplication</th>
-     <th>sucessful adding</th>
-     <th>As expected</th>
-     <th>Pass</th>
-   </tr>
-  <tr>
-     <td>Deleting adoption applicaiton</td>
-     <td>Application to be deleted</td>
-     <th>As expected</th>
-     <th>Pass</th>
-   </tr>
+    <tr>
+      <th>Test adding adotpion application</th>
+      <th>sucessful adding</th>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Deleting adoption applicaiton</td>
+      <td>Application to be deleted</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Applyting to events</td>
+      <td>Appling works</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Updating profile information</td>
+      <td>Profile information should be updated</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Login</td>
+      <td>Registered user can login</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Visitor can only view home page</td>
+      <td>Get directed to login or registered</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Logout</td>
+      <td>Logged in user can logut</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Navbar collapse</td>
+      <td>On smaller screens navbar collapse into burger icon</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr><tr>
+      <td>Click logo to redirect to homepage</td>
+      <td>Redirection to homepage</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Homepage only shows links to other pages when logged in</td>
+      <td>Links to other pages are visible only when logged in</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Homepage only shows links to login and register when not logged in</td>
+      <td>Links to login and register are visible only when not logged in</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Footer info redirects as columns on smaller screens for better UX/UI</td>
+      <td>Footer info rearranges to columns on smaller screens</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>List of dogs change layout on smaller screens to only show one dog on each row</td>
+      <td>Only one dog is shown per row on smaller screens</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>When searching for a dog's name, only the dog with the name will show in the list</td>
+      <td>Only the dog with the searched name is shown in the list</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>When searching for dog breed, only dogs with that breed are shown in a list</td>
+      <td>Only dogs with the searched breed are shown in the list</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>When searching for age on the dogs, only dogs of that age will be shown in the list</td>
+      <td>Only dogs of the searched age are shown in the list</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Button click toggles filters visibility</td>
+      <td>Filters should be shown/hidden when button is clicked</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Change name filter</td>
+      <td>Filters should update with entered name</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Change breed filter</td>
+      <td>Filters should update with entered breed</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Change age filter</td>
+      <td>Filters should update with entered age</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Change gender filter</td>
+      <td>Filters should update with selected gender</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Change temperament filter</td>
+      <td>Filters should update with selected temperament</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Change good with children filter</td>
+      <td>Filters should update with selected good with children option</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Change good with other dogs filter</td>
+      <td>Filters should update with selected good with other dogs option</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Clear all filters</td>
+      <td>All filters should reset to default values</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Liked dogs show in carousel on profile page</td>
+      <td>Liked dogs are displayed in a carousel on the profile page</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Adoption applications show in list on profile page</td>
+      <td>Adoption applications are displayed in a list on the profile page</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+    <tr>
+      <td>Sucessful alert is shown when profile infomation is succesfully updated on profile page</td>
+      <td>Alert with successful message appears when updates user information</td>
+      <td>As expected</td>
+      <td>Pass</td>
+    </tr>
+  </tbody>
+</table>
+
+- Manual backend tests
+<table>
+  <thead>
+    <tr>
+      <th>Testing Description</th>
+      <th>Expected Action</th>
+      <th>Actual Output</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
    <tr>
-     <td>Applyting to events</td>
-     <td>Appling works</td>
-     <th>As expected</th>
-     <th>Pass</th>
-   </tr>
-      <tr>
-     <td>Updating profile information</td>
-     <td>Profile information should be updated</td>
-     <th>As expected</th>
-     <th>Pass</th>
-   </tr>
-      <tr>
-     <td>Login</td>
-     <td>Registered user can login</td>
-     <th>As expected</th>
-     <th>Pass</th>
-   </tr>
-      <tr>
-     <td>Visitor cant view pages except home</td>
-     <td>Get directed to login or registered</td>
-     <th>As expected</th>
-     <th>Pass</th>
-   </tr>
-      <tr>
-     <td>Logout</td>
-     <td>Logged in user can logut</td>
-     <th>As expected</th>
-     <th>Pass</th>
-   </tr>
-      <tr>
-     <td>Navbar collapse</td>
-     <td>Smaller screens navbarcollapse into burger icon</td>
-     <th>As expected</th>
-     <th>Pass</th>
-   </tr>
-   
+      <td>Admin can add new dog</td>
+      <td>A new dog gets added to the webpage</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can see adoption applicaiton</td>
+      <td>A list of adoption applications is showed on adminpage.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can see which dog the adoption appliccation is connected to.</td>
+      <td>The list of applications shows the dogs thats conneected to the applications.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can see wich user th athave made the application</td>
+      <td>The list of applications shows the users that made the applications.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can create events.</td>
+      <td>Admin can create events.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can view list of events</td>
+      <td>A list of events shows on admin page.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can see users that have registered for events.</td>
+      <td>A list of users that have registered for events is showed on adminpage.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can see list of liked dogs and users that have liked them.</td>
+      <td>A list of liked dogs and users that have liked them.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can see a list of users</td>
+      <td>A list of users shows on admin page.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can see users information</td>
+      <td>Users information like name, last name and address can be seen form admin page.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can delete events</td>
+      <td>Events can be deleted from the webpage.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can change a dogs adoption status</td>
+      <td>A dogs adoptions status can be changed by admin</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can change status of adoption applicaitons</td>
+      <td>Admin can change status of adoption applications.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Admin can see a list of users</td>
+      <td>A list of users shows on admin page.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Users username are shown in navbar when logged in</td>
+      <td>Username is shown in navbar when logged in</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Username is shown in sucess message when user logs in</td>
+      <td>Username is shown in alert when user push login button</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
+    <tr>
+      <td>Username and user info is present on the profile page.</td>
+      <td>Username is shown in the card title on profile page and other userinformation is present in the card text.</td>
+      <th>As expected</th>
+      <th>Pass</th>
+    </tr>
   </tbody>
 </table>
 

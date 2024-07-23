@@ -1,12 +1,21 @@
 import { Container, Row, Button, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import homeImage from '../images/homeimage.jpg'
+import { useCurrentUser } from '../contexts/CurrentUserContext';
 
 function Home() {
+    // Get the current user from the CurrentUserContext
+    const { currentUser } = useCurrentUser();
+
+    // Define pages accessible to logged-in users
   const pages = [
-    { path: '/dogs', text: 'View Dogs', description: 'Browse our list of adorable dogs available for adoption.' },
+    { path: '/dogs', text: 'View Dogs', description: 'Browse our list of adorable dogs available for adoption, and apply for potential adoptions of the dogs.' },
     { path: '/profile', text: 'Profile', description: 'View and update your profile information.' },
     { path: '/events', text: 'Events', description: 'Check out upcoming adoption events.' },
+  ];
+
+  // Define pages accessible to non-logged-in users
+  const authPages = [
     { path: '/login', text: 'Login', description: 'Access your account by logging in.' },
     { path: '/register', text: 'Register', description: 'Create a new account to join us.' },
   ];
@@ -18,7 +27,10 @@ function Home() {
           <Col md={6} className="text-center text-md-left">
             <h1 className="display-4">Welcome to Dog Adoption</h1>
             <p className="lead">
-              Find your perfect furry friend and give them a loving home.
+            Embark on a heartwarming journey to find your new best friend. Our Dog Adoption platform is dedicated to helping dogs in need find their forever homes. Browse through our extensive list of adoptable dogs, learn about their stories, and take the first step towards giving a deserving dog a loving home.
+            </p>
+            <p>
+            Please login or register to see all the dogs, and to be able to apply for adoption applications and events. Join us in our mission to give every dog a loving home!
             </p>
           </Col>
           <Col md={6} className="text-center">
@@ -31,16 +43,31 @@ function Home() {
           </Col>
         </Row>
         <Row className="justify-content-center mt-5">
-          {pages.map((page, index) => (
-            <Col md={12} key={page.path} className="mb-4">
-              <div className={`d-flex flex-column flex-md-row align-items-center justify-content-between ${index % 2 !== 0 ? 'flex-md-row-reverse' : ''}`}>
-                <p className="mb-2 mb-md-0" style={{ flexGrow: 1, textAlign: 'center', margin: '10px' }}>{page.description}</p>
-                <Button as={Link} to={page.path} variant="primary" className="flex-shrink-0" style={{ width: '150px' }}>
-                  {page.text}
-                </Button>
-              </div>
-            </Col>
-          ))}
+        {currentUser ? (
+          // Render links for logged-in users
+            pages.map((page, index) => (
+              <Col md={12} key={page.path} className="mb-4">
+                <div className="d-flex flex-column flex-md-row align-items-center justify-content-between">
+                  <p className="mb-2 mb-md-0" style={{ flexGrow: 1, textAlign: 'left', margin: '10px' }}>{page.description}</p>
+                  <Button as={Link} to={page.path} variant="primary" className="flex-shrink-0" style={{ width: '150px' }}>
+                    {page.text}
+                  </Button>
+                </div>
+              </Col>
+            ))
+          ) : (
+            // Render links for non-logged-in users
+            authPages.map((page, index) => (
+              <Col md={12} key={page.path} className="mb-4">
+                <div className="d-flex flex-column flex-md-row align-items-center justify-content-between">
+                  <p className="mb-2 mb-md-0" style={{ flexGrow: 1, textAlign: 'left', margin: '10px' }}>{page.description}</p>
+                  <Button as={Link} to={page.path} variant="primary" className="flex-shrink-0" style={{ width: '150px' }}>
+                    {page.text}
+                  </Button>
+                </div>
+              </Col>
+            ))
+          )}
         </Row>
       </Container>
     </div>

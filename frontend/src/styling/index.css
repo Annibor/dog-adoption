@@ -42,6 +42,12 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   font-size: 1.6rem;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1; /* This makes the main content take up remaining space */
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -82,6 +88,18 @@ h3 {
 .footer {
   background-color: var(--primary-dark-blue);
   color: var(--main-bg-color);
+  position: relative;
+  margin-top: auto;
+  bottom: 0;
+  width: 100%;
+  font-size: 1.2rem;
+}
+
+.footer-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem
 }
 
 .container {
