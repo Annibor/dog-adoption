@@ -40,7 +40,7 @@ function Home() {
           </Col>
         </Row>
         <Row className="justify-content-center mt-5">
-           {/* Conditionally render pages based on whether the user is logged in */}
+         ç
         {currentUser ? (
           // Render links for logged-in users
             pages.map((page, index) => (
