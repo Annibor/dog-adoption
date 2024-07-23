@@ -40,7 +40,6 @@ function Home() {
           </Col>
         </Row>
         <Row className="justify-content-center mt-5">
-         ç
         {currentUser ? (
           // Render links for logged-in users
             pages.map((page, index) => (
