@@ -9,7 +9,7 @@ function Home() {
 
     // Define pages accessible to logged-in users
   const pages = [
-    { path: '/dogs', text: 'View Dogs', description: 'Browse our list of adorable dogs available for adoption.' },
+    { path: '/dogs', text: 'View Dogs', description: 'Browse our list of adorable dogs available for adoption, and apply for potential adoptions of the dogs.' },
     { path: '/profile', text: 'Profile', description: 'View and update your profile information.' },
     { path: '/events', text: 'Events', description: 'Check out upcoming adoption events.' },
   ];
